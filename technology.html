@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>TeachArm - 기술</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;background-color:#0A0D14;color:#E1E2EC;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}html{scroll-behavior:smooth;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-container-lowest": "#0b0e15",
+          "tertiary-container": "#ffdad8",
+          "on-tertiary-container": "#cb0028",
+          "on-tertiary": "#68000f",
+          "tertiary": "#ffffff",
+          "surface-dim": "#10131a",
+          "on-primary": "#0A0D14",
+          "text-primary": "#FFFFFF",
+          "tertiary-fixed-dim": "#ffb3b0",
+          "surface-container-highest": "#32353D",
+          "surface-container-low": "#191b23",
+          "outline-subtle": "rgba(255, 255, 255, 0.08)",
+          "on-surface-variant": "#94A3B8",
+          "background": "#0A0D14",
+          "on-error-container": "#ffdad6",
+          "primary-container": "#fde400",
+          "outline-variant": "rgba(255, 255, 255, 0.12)",
+          "inverse-primary": "#6a5f00",
+          "surface-canvas": "#0A0D14",
+          "inverse-on-surface": "#2d3038",
+          "on-primary-fixed": "#201c00",
+          "on-background": "#e1e2ec",
+          "primary-fixed": "#fde400",
+          "on-secondary-fixed": "#002022",
+          "surface-tint": "#dec800",
+          "primary": "#FFE600",
+          "fault-crimson": "#FF3344",
+          "surface-chassis": "#0F131C",
+          "laser-cyan": "#00F0FF",
+          "outline": "rgba(255, 255, 255, 0.15)",
+          "on-primary-container": "#0A0D14",
+          "secondary-container": "#00eefc",
+          "on-tertiary-fixed": "#410006",
+          "on-secondary-fixed-variant": "#004f54",
+          "surface-container-high": "#272a32",
+          "on-surface": "#e1e2ec",
+          "surface": "#10131a",
+          "inverse-surface": "#e1e2ec",
+          "surface-bright": "#363941",
+          "secondary-fixed-dim": "#00dbe9",
+          "on-secondary-container": "#00686f",
+          "secondary": "#94A3B8",
+          "tertiary-fixed": "#ffdad8",
+          "surface-variant": "#161B26",
+          "on-tertiary-fixed-variant": "#93001a",
+          "error-container": "#93000a",
+          "on-error": "#690005",
+          "on-secondary": "#00363a",
+          "primary-fixed-dim": "#dec800",
+          "error": "#FF3344",
+          "text-muted": "#94A3B8",
+          "surface-container": "#1d1f27",
+          "surface-elevated": "#161B26",
+          "on-primary-fixed-variant": "#504700",
+          "secondary-fixed": "#7df4ff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-lg": "1.5rem",
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem",
+          "gutter": "1.25rem",
+          "margin": "2rem",
+          "space-xl": "2.5rem",
+          "space-md": "1rem"
+        },
+        "fontFamily": {
+          "body-sm": ["Hanken Grotesk", "sans-serif"],
+          "body-lg": ["Hanken Grotesk", "sans-serif"],
+          "label-lg": ["JetBrains Mono", "monospace"],
+          "headline-sm": ["Space Grotesk", "sans-serif"],
+          "body-md": ["Hanken Grotesk", "sans-serif"],
+          "headline-md": ["Space Grotesk", "sans-serif"],
+          "headline-lg": ["Space Grotesk", "sans-serif"],
+          "headline-lg-mobile": ["Space Grotesk", "sans-serif"],
+          "label-md": ["JetBrains Mono", "monospace"],
+          "label-sm": ["JetBrains Mono", "monospace"],
+          "display": ["Space Grotesk", "sans-serif"],
+          "label-mono": ["JetBrains Mono", "monospace"],
+          "metric-code": ["JetBrains Mono", "monospace"],
+          "metric-display": ["JetBrains Mono", "monospace"],
+          "label-ui": ["Hanken Grotesk", "sans-serif"]
+        },
+        "fontSize": {
+          "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+          "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400" }],
+          "label-lg": ["13px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+          "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "500" }],
+          "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+          "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+          "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+          "headline-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+          "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.1em", "fontWeight": "500" }],
+          "label-sm": ["9px", { "lineHeight": "12px", "letterSpacing": "0.12em", "fontWeight": "500" }],
+          "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+          "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" }],
+          "metric-code": ["13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+          "metric-display": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+          "label-ui": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+        }
+      }
+    }
+  };
+</script></head><body class="bg-surface-canvas font-body-md text-on-surface antialiased selection:bg-primary selection:text-surface-canvas"><header class="fixed top-0 left-0 right-0 z-50 bg-[#0A0D14]/90 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.6)]"><div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between gap-4"><div class="flex items-center gap-3 shrink-0"><a class="flex items-center gap-3 group" data-path="landing" href="index.html"><img alt="TeachArm Logo" class="h-10 w-auto object-contain" src="images/teacharm-logo.webp"/><span class="font-headline-sm text-headline-sm font-bold text-text-primary tracking-tight group-hover:text-primary transition-colors">TeachArm</span></a><span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded border border-primary/40 text-[10px] font-label-mono font-semibold tracking-widest bg-primary/10 text-primary uppercase">[PHYSICAL AI]</span></div><nav class="hidden xl:flex items-center gap-1" data-active-classes="text-primary font-semibold"><div class="relative group"><button class="flex items-center gap-1 px-3 py-2 text-text-muted hover:text-primary font-label-ui text-label-ui transition-colors" type="button"><span>제품</span><span class="material-symbols-outlined text-[16px] text-text-muted group-hover:text-primary">expand_more</span></button><div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block w-56 z-50"><div class="bg-surface-elevated border border-white/[0.12] rounded-lg shadow-[0_12px_32px_rgba(0,0,0,0.8)] p-2 flex flex-col gap-1"><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="product-overview" href="#">개요</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="hardware-specs" href="#">하드웨어 사양</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="teacharm-studio" href="#">소프트웨어 (TeachArm Studio)</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="safety-systems" href="#">안전 기능</a></div></div></div><div class="relative group"><button class="flex items-center gap-1 px-3 py-2 text-text-muted hover:text-primary font-label-ui text-label-ui transition-colors" type="button"><span>작동 방식</span><span class="material-symbols-outlined text-[16px] text-text-muted group-hover:text-primary">expand_more</span></button><div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block w-52 z-50"><div class="bg-surface-elevated border border-white/[0.12] rounded-lg shadow-[0_12px_32px_rgba(0,0,0,0.8)] p-2 flex flex-col gap-1"><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="three-step-process" href="#">3단계 프로세스</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="core-technology" href="technology.html">핵심 기술</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="method-comparison" href="#">기존 방식과 비교</a></div></div></div><div class="relative group"><button class="flex items-center gap-1 px-3 py-2 text-text-muted hover:text-primary font-label-ui text-label-ui transition-colors" type="button"><span>솔루션</span><span class="material-symbols-outlined text-[16px] text-text-muted group-hover:text-primary">expand_more</span></button><div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block w-60 z-50"><div class="bg-surface-elevated border border-white/[0.12] rounded-lg shadow-[0_12px_32px_rgba(0,0,0,0.8)] p-2 flex flex-col gap-1"><div class="px-3 py-1 font-label-mono text-[10px] tracking-wider uppercase text-laser-cyan font-semibold">산업별 [SECTOR]</div><a class="px-3 py-1.5 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="solution-manufacturing" href="#">제조 및 정밀가공</a><a class="px-3 py-1.5 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="solution-logistics" href="#">물류 및 이송</a><a class="px-3 py-1.5 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="solution-food" href="#">식품 및 F&amp;B</a><a class="px-3 py-1.5 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="solution-research" href="#">연구 및 랩 오토메이션</a><div class="my-1 border-t border-white/[0.08]"></div><div class="px-3 py-1 font-label-mono text-[10px] tracking-wider uppercase text-laser-cyan font-semibold">공정별 [PROCESS]</div><a class="px-3 py-1.5 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="solution-pick-place" href="#">픽 앤 플레이스</a><a class="px-3 py-1.5 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="solution-assembly" href="#">조립 및 체결</a><a class="px-3 py-1.5 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="solution-inspection" href="#">품질 검사</a><a class="px-3 py-1.5 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="solution-packaging" href="#">패키징 및 적재</a></div></div></div><div class="relative group"><button class="flex items-center gap-1 px-3 py-2 text-text-muted hover:text-primary font-label-ui text-label-ui transition-colors" type="button"><span>고객 사례</span><span class="material-symbols-outlined text-[16px] text-text-muted group-hover:text-primary">expand_more</span></button><div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block w-48 z-50"><div class="bg-surface-elevated border border-white/[0.12] rounded-lg shadow-[0_12px_32px_rgba(0,0,0,0.8)] p-2 flex flex-col gap-1"><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="case-studies" href="#">사례 목록</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="roi-impact" href="#">도입 성과 (ROI)</a></div></div></div><div class="relative group"><button class="flex items-center gap-1 px-3 py-2 text-text-muted hover:text-primary font-label-ui text-label-ui transition-colors" type="button"><span>리소스</span><span class="material-symbols-outlined text-[16px] text-text-muted group-hover:text-primary">expand_more</span></button><div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block w-52 z-50"><div class="bg-surface-elevated border border-white/[0.12] rounded-lg shadow-[0_12px_32px_rgba(0,0,0,0.8)] p-2 flex flex-col gap-1"><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="tech-blog" href="#">블로그</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="documentation" href="#">기술 문서 (Docs)</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="video-library" href="#">영상 라이브러리</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="faq" href="#">자주 묻는 질문 (FAQ)</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="brochure-download" href="#">브로슈어 다운로드</a></div></div></div><div class="relative group"><button class="flex items-center gap-1 px-3 py-2 text-text-muted hover:text-primary font-label-ui text-label-ui transition-colors" type="button"><span>회사</span><span class="material-symbols-outlined text-[16px] text-text-muted group-hover:text-primary">expand_more</span></button><div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block w-48 z-50"><div class="bg-surface-elevated border border-white/[0.12] rounded-lg shadow-[0_12px_32px_rgba(0,0,0,0.8)] p-2 flex flex-col gap-1"><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="about-company" href="#">소개 · 비전</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="team" href="#">팀 구성원</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="careers" href="#">채용 안내</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="news" href="#">보도자료 · 뉴스</a><a class="px-3 py-2 text-text-muted hover:bg-white/[0.05] hover:text-primary rounded font-label-ui text-label-ui transition-colors" data-path="contact" href="#">연락처</a></div></div></div></nav><div class="flex items-center gap-3 shrink-0"><a class="inline-flex items-center justify-center h-10 px-4 rounded-md bg-primary text-[#0A0D14] font-label-mono text-label-sm font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(255,230,0,0.25)] hover:bg-primary-container hover:shadow-[0_0_20px_rgba(255,230,0,0.4)] transition-all active:scale-[0.98]" data-path="demo-request" href="#">데모 신청</a><div class="w-8 h-8 rounded border border-white/[0.15] bg-surface-elevated flex items-center justify-center shrink-0 text-laser-cyan"><span class="material-symbols-outlined text-[18px]">terminal</span></div></div></div></header><main class="w-full pt-20 bg-surface-canvas min-h-screen text-on-surface"><div class="flex flex-col w-full">
+<!-- TECH 1: PAGE HEADER + PIPELINE -->
+<section class="w-full bg-surface-canvas border-b border-white/[0.08] relative overflow-hidden">
+<div class="absolute inset-0 bg-[linear-gradient(to_right,#00F0FF05_1px,transparent_1px),linear-gradient(to_bottom,#00F0FF05_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+<div class="max-w-[1200px] mx-auto px-6 pt-20 pb-20 relative z-10">
+<div class="max-w-2xl mb-14">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">TECHNOLOGY // 기술</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg font-bold text-text-primary tracking-tight mt-2 mb-4">시연이 동작이 되기까지</h1>
+<p class="font-body-lg text-body-lg text-text-muted">TeachArm의 데이터는 여섯 단계를 거쳐 로봇의 동작이 됩니다.</p>
+</div>
+
+<!-- Pipeline diagram -->
+<ol class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-0 mb-12" aria-label="TeachArm 데이터 파이프라인">
+<li class="lg:flex lg:items-center">
+<div class="flex-1 h-full rounded-lg border border-white/[0.08] bg-surface-chassis px-4 py-4">
+<div class="font-label-mono text-label-md text-text-muted">01</div>
+<div class="font-label-ui text-label-ui text-on-surface mt-1">데이터 수집</div>
+</div>
+<svg class="hidden lg:block w-5 h-5 mx-1 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</li>
+<li class="lg:flex lg:items-center">
+<a href="#preprocessing" class="pipeline-link block flex-1 h-full rounded-lg border border-primary bg-primary/10 px-4 py-4 shadow-[0_0_16px_rgba(255,230,0,0.2)] hover:bg-primary/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-mono text-label-md text-primary">02</span>
+<span class="inline-flex items-center gap-0.5 font-label-mono text-[10px] tracking-wider text-primary">상세 보기<span class="material-symbols-outlined text-[14px]">arrow_downward</span></span>
+</div>
+<div class="font-label-ui text-label-ui text-primary font-semibold mt-1">전처리</div>
+</a>
+<svg class="hidden lg:block w-5 h-5 mx-1 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</li>
+<li class="lg:flex lg:items-center">
+<div class="flex-1 h-full rounded-lg border border-white/[0.08] bg-surface-chassis px-4 py-4">
+<div class="font-label-mono text-label-md text-text-muted">03</div>
+<div class="font-label-ui text-label-ui text-on-surface mt-1">학습 모델</div>
+</div>
+<svg class="hidden lg:block w-5 h-5 mx-1 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</li>
+<li class="lg:flex lg:items-center">
+<div class="flex-1 h-full rounded-lg border border-white/[0.08] bg-surface-chassis px-4 py-4">
+<div class="font-label-mono text-label-md text-text-muted">04</div>
+<div class="font-label-ui text-label-ui text-on-surface mt-1">후처리</div>
+</div>
+<svg class="hidden lg:block w-5 h-5 mx-1 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</li>
+<li class="lg:flex lg:items-center">
+<div class="flex-1 h-full rounded-lg border border-white/[0.08] bg-surface-chassis px-4 py-4">
+<div class="font-label-mono text-label-md text-text-muted">05</div>
+<div class="font-label-ui text-label-ui text-on-surface mt-1">실행</div>
+</div>
+<svg class="hidden lg:block w-5 h-5 mx-1 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</li>
+<li class="lg:flex lg:items-center">
+<div class="flex-1 h-full rounded-lg border border-white/[0.08] bg-surface-chassis px-4 py-4">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-mono text-label-md text-text-muted">06</span>
+<span class="material-symbols-outlined text-[16px] text-white/25" aria-hidden="true">replay</span>
+</div>
+<div class="font-label-ui text-label-ui text-on-surface mt-1">피드백</div>
+</div>
+</li>
+</ol>
+
+<!-- Summary cards for stages without detail content -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+<div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
+<div class="flex items-center justify-between gap-2"><span class="font-label-mono text-label-md text-text-muted">01 · 데이터 수집</span></div>
+<p class="font-body-md text-body-md text-text-muted">손으로 이끄는 시연을 영상과 관절 데이터로 함께 기록합니다.</p>
+<span class="mt-auto pt-2 font-label-mono text-[10px] tracking-wider text-white/35">상세 내용 준비 중</span>
+</div>
+<div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
+<div class="flex items-center justify-between gap-2"><span class="font-label-mono text-label-md text-text-muted">03 · 학습 모델</span></div>
+<p class="font-body-md text-body-md text-text-muted">영상과 관절 상태를 보고 다음 동작을 정하는 정책을 학습합니다.</p>
+<span class="mt-auto pt-2 font-label-mono text-[10px] tracking-wider text-white/35">상세 내용 준비 중</span>
+</div>
+<div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
+<div class="flex items-center justify-between gap-2"><span class="font-label-mono text-label-md text-text-muted">04 · 후처리</span></div>
+<p class="font-body-md text-body-md text-text-muted">모델 출력을 원래 단위의 로봇 동작 명령으로 되돌립니다.</p>
+<span class="mt-auto pt-2 font-label-mono text-[10px] tracking-wider text-white/35">상세 내용 준비 중</span>
+</div>
+<div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
+<div class="flex items-center justify-between gap-2"><span class="font-label-mono text-label-md text-text-muted">05 · 실행</span></div>
+<p class="font-body-md text-body-md text-text-muted">학습 때와 같은 설정과 통계로 실제 로봇을 가동합니다.</p>
+<span class="mt-auto pt-2 font-label-mono text-[10px] tracking-wider text-white/35">상세 내용 준비 중</span>
+</div>
+<div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
+<div class="flex items-center justify-between gap-2"><span class="font-label-mono text-label-md text-text-muted">06 · 피드백</span></div>
+<p class="font-body-md text-body-md text-text-muted">실패한 작업 단계를 기록해 추가 수집과 재학습에 반영합니다.</p>
+<span class="mt-auto pt-2 font-label-mono text-[10px] tracking-wider text-white/35">상세 내용 준비 중</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TECH 2: PREPROCESSING (MAIN CONTENT) -->
+<section id="preprocessing" class="w-full bg-[#0F131C] border-b border-white/[0.08] scroll-mt-20">
+<div class="max-w-[1200px] mx-auto px-6 py-24 flex flex-col gap-28">
+
+<!-- 2-1 Section header -->
+<div class="max-w-3xl">
+<span class="inline-flex items-center px-2.5 py-1 rounded border border-primary/40 bg-primary/10 font-label-mono text-label-mono text-primary font-semibold">02 · 전처리</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg font-bold text-text-primary tracking-tight mt-5 mb-5">많이 고치지 않고, 처음부터 바르게</h2>
+<p class="font-body-lg text-body-lg text-text-muted">좋은 로봇 정책은 화려한 데이터 보정이 아니라 일관된 데이터에서 나옵니다. TeachArm은 수집 단계에서 카메라, 제어 주기, 좌표계를 고정해 보정할 필요 자체를 줄이고, 꼭 필요한 처리만 정해진 순서대로 적용합니다.</p>
+</div>
+
+<!-- 2-2 Design principles -->
+<div>
+<div class="mb-10">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">PRINCIPLES</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2">설계 원칙</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-canvas p-7 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">P1</span>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mt-3 mb-3">수집 조건을 먼저 고정합니다</h4>
+<p class="font-body-md text-body-md text-text-muted">카메라 영상과 관절 데이터를 하나의 시계, 같은 30Hz 주기로 기록하고 노출·화이트밸런스·초점을 수동으로 고정합니다. 나중에 고치는 것보다 처음부터 맞추는 것이 확실하기 때문입니다.</p>
+</div>
+<div class="bg-surface-canvas p-7 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">P2</span>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mt-3 mb-3">명백히 나쁜 데이터만 거릅니다</h4>
+<p class="font-body-md text-body-md text-text-muted">적은 시연으로 학습하는 만큼 시연 하나하나가 소중합니다. 실패하거나 손상된 기록만 제외하고, 다시 집어서 성공한 시연처럼 회복 동작이 담긴 데이터는 남겨 로봇이 실수에서 회복하는 법을 배우게 합니다.</p>
+</div>
+<div class="bg-surface-canvas p-7 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">P3</span>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mt-3 mb-3">학습과 실행 환경을 일치시킵니다</h4>
+<p class="font-body-md text-body-md text-text-muted">해상도, 색상 형식, 정규화 통계, 로봇 캘리브레이션까지 학습할 때와 실제 가동할 때 똑같이 적용합니다. "학습은 잘 됐는데 현장에서는 안 움직이는" 문제는 대부분 여기서 생깁니다.</p>
+</div>
+</div>
+</div>
+
+<!-- 2-3 Processing steps timeline -->
+<div>
+<div class="mb-10">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">PIPELINE</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2">처리 단계</h3>
+</div>
+<ol class="relative max-w-3xl">
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">0</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">원본 무결성 점검</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">시연마다 영상 프레임 수와 관절 기록 수가 정확히 일치하는지, 비어 있거나 범위를 벗어난 값이 없는지, 영상이 정상적으로 열리는지 확인합니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">왜 이 순서인가<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">손상된 기록이 이후의 모든 통계와 선별 기준을 오염시키기 전에 가장 먼저 걸러냅니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">1</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">동기화 검증</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">실제 기록 간격과 카메라 지연을 측정합니다. 지연이 시연마다 일정하다면 데이터를 억지로 옮기지 않습니다. 실제 가동 때도 같은 지연이 존재하므로, 그대로 두는 편이 실행 환경과 일치합니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">왜 이 순서인가<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">동기화 문제를 모른 채 데이터를 다듬으면 문제가 해결되는 것이 아니라 감춰질 뿐입니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">2</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">시연 선별</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">실패한 시연, 길이가 비정상적인 시연, 프레임 손실이 많은 시연을 제외합니다. 영상과 관절 데이터 중 하나라도 문제가 있으면 해당 시연 전체를 함께 제외합니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">왜 이 순서인가<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">정규화 통계를 계산하기 전에 이상 데이터를 빼야 분포가 왜곡되지 않습니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">3</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">궤적 정제</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">서보 통신 오류로 생기는 순간적인 값 튐만 골라 제거하고 정상 신호는 건드리지 않습니다. 부드럽게 다듬는 스무딩은 실제 떨림이 확인될 때만 적용하며, 동작 전후의 정지 구간은 잘라내되 움직임 직전의 짧은 여유는 남깁니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">왜 이 순서인가<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">튐을 먼저 제거하지 않고 스무딩하면 오류 하나가 주변 프레임으로 번집니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">4</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary flex flex-wrap items-center gap-2">작업 단계 라벨링<span class="font-label-mono text-[10px] tracking-wider px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.12] text-text-muted font-normal">분석용</span></h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">그리퍼의 위치와 전류 변화로 집기·이송·놓기 구간을 자동으로 나눕니다. 그리퍼가 닫히다 멈추고 전류가 급상승하는 순간이 곧 파지 성공 시점입니다. 이 라벨은 학습 입력이 아니라 실패가 어느 단계에서 일어나는지 진단하는 데 씁니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">5</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">영상 변환</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">영상 해상도를 작업에 필요한 수준으로 줄이고 색상 형식을 통일합니다. 연산량이 약 4분의 1로 줄어 소형 컴퓨터에서도 실시간 추론이 가능해집니다. 압축으로 인한 학습·실행 간 화질 차이를 줄이기 위해 고화질로 인코딩합니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">왜 이 순서인가<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">증강보다 먼저 크기를 줄여야 연산 비용이 줄고, 잘라내는 비율의 의미도 일정하게 유지됩니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">6</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">정규화</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">관절별로 값의 평균과 분산을 맞춥니다. 통계는 선별과 정제가 끝난 학습 데이터로만 다시 계산하며, 같은 통계와 같은 캘리브레이션 파일을 실제 가동 때도 그대로 사용합니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">왜 이 순서인가<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">선별보다 먼저 정규화하면 제외된 데이터의 값이 통계에 남습니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">7</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary flex flex-wrap items-center gap-2">데이터 증강<span class="font-label-mono text-[10px] tracking-wider px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.12] text-text-muted font-normal">학습 중 적용</span></h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">상단 카메라에는 미세한 위치 이동과 색감 변화를, 손목 카메라에는 색감 변화와 작은 회전만 적용합니다. 그리퍼와 물체의 상대 위치가 핵심인 손목 시점은 형태 변형을 약하게 유지합니다.</p>
+<p class="font-body-sm text-body-sm text-white/40 mt-3">증강은 화면 속 위치 변화를 흉내 낼 뿐, 다른 위치로 팔을 뻗는 동작 자체를 만들어내지는 못합니다. 그래서 TeachArm은 작업 영역을 구역으로 나눠 위치별 시연을 고르게 수집합니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">8</span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">데이터 분할</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">프레임이 아닌 시연 단위로, 물체 위치 구역이 고르게 섞이도록 학습·검증 세트를 나눕니다. 처리 전 원본 데이터는 항상 별도로 보관합니다.</p>
+</div>
+</li>
+</ol>
+</div>
+
+<!-- 2-4 What we don't do -->
+<div>
+<div class="mb-10 max-w-3xl">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">BY DESIGN</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2 mb-3">하지 않는 것도 설계입니다</h3>
+<p class="font-body-lg text-body-lg text-text-muted">처리를 더한다고 데이터가 좋아지지는 않습니다. TeachArm이 의도적으로 하지 않는 처리들입니다.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="flex gap-4 bg-surface-canvas p-6 rounded-xl border border-white/[0.08]">
+<span class="w-7 h-7 shrink-0 rounded bg-[#272A32] border border-white/[0.1] flex items-center justify-center text-[#9CA3AF] text-[14px] leading-none" aria-hidden="true">✕</span>
+<div><h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mb-2">그리퍼 신호는 다듬지 않습니다</h4><p class="font-body-md text-body-md text-text-muted">쥐는 순간의 빠른 닫힘이 흐려지면 로봇이 "천천히 쥐는" 동작을 배워 물체를 놓칩니다.</p></div>
+</div>
+<div class="flex gap-4 bg-surface-canvas p-6 rounded-xl border border-white/[0.08]">
+<span class="w-7 h-7 shrink-0 rounded bg-[#272A32] border border-white/[0.1] flex items-center justify-center text-[#9CA3AF] text-[14px] leading-none" aria-hidden="true">✕</span>
+<div><h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mb-2">지령값과 실제값의 차이를 오류로 보지 않습니다</h4><p class="font-body-md text-body-md text-text-muted">물체를 쥐면 로봇의 그리퍼는 물체에 막혀 지령보다 덜 닫힙니다. 이 차이가 곧 "얼마나 세게 쥐는가"에 대한 정보입니다.</p></div>
+</div>
+<div class="flex gap-4 bg-surface-canvas p-6 rounded-xl border border-white/[0.08]">
+<span class="w-7 h-7 shrink-0 rounded bg-[#272A32] border border-white/[0.1] flex items-center justify-center text-[#9CA3AF] text-[14px] leading-none" aria-hidden="true">✕</span>
+<div><h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mb-2">영상을 좌우로 뒤집지 않습니다</h4><p class="font-body-md text-body-md text-text-muted">좌우 반전은 흔한 증강 기법이지만, 관절 좌표와 영상 속 공간 관계를 깨뜨립니다.</p></div>
+</div>
+<div class="flex gap-4 bg-surface-canvas p-6 rounded-xl border border-white/[0.08]">
+<span class="w-7 h-7 shrink-0 rounded bg-[#272A32] border border-white/[0.1] flex items-center justify-center text-[#9CA3AF] text-[14px] leading-none" aria-hidden="true">✕</span>
+<div><h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mb-2">렌즈 왜곡 보정과 노이즈 제거를 하지 않습니다</h4><p class="font-body-md text-body-md text-text-muted">카메라가 단단히 고정되어 있다면 일관성만으로 충분합니다. 이런 처리는 실제 가동 중 매 프레임마다 반복해야 하는 부담만 늘립니다.</p></div>
+</div>
+</div>
+</div>
+
+<!-- 2-5 Two streams, three junctions -->
+<div>
+<div class="mb-10 max-w-3xl">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">DATA FLOW</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2 mb-3">두 개의 흐름, 세 개의 접점</h3>
+<p class="font-body-lg text-body-lg text-text-muted">영상 데이터와 로봇 데이터는 각자의 경로로 처리되지만, 세 지점에서 반드시 하나로 맞춰집니다.</p>
+</div>
+<div class="overflow-x-auto rounded-xl border border-white/[0.08] bg-surface-canvas" style="overflow-x:auto">
+<svg class="block min-w-[1000px] w-full h-auto" viewBox="0 0 1200 330" role="img" aria-label="영상 데이터와 로봇 데이터의 처리 흐름과 세 개의 접점">
+<g font-family="Hanken Grotesk, sans-serif" font-size="14" text-anchor="middle">
+<!-- lane labels -->
+<text x="25" y="34" text-anchor="start" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1.2" fill="#00F0FF">영상 데이터</text>
+<text x="25" y="234" text-anchor="start" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1.2" fill="#00F0FF">로봇 데이터</text>
+<!-- tracks -->
+<line x1="165" y1="76" x2="1035" y2="76" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+<line x1="165" y1="276" x2="1035" y2="276" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+<!-- junction connectors -->
+<g stroke="#FFE600" stroke-opacity="0.55" stroke-width="1.5" stroke-dasharray="4 4">
+<line x1="196" y1="76" x2="196" y2="276"/>
+<line x1="423" y1="76" x2="423" y2="276"/>
+<line x1="776" y1="76" x2="776" y2="276"/>
+</g>
+<!-- top lane nodes -->
+<g>
+<rect x="25" y="50" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="95" y="81" fill="#E1E2EC">무결성 점검</text>
+<rect x="277" y="50" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="347" y="73" fill="#E1E2EC">품질 측정</text><text x="347" y="91" fill="#94A3B8" font-size="12">선명도·밝기</text>
+<rect x="530" y="50" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="600" y="81" fill="#E1E2EC">해상도 변환</text>
+<rect x="782" y="50" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="852" y="81" fill="#E1E2EC">정규화</text>
+<rect x="1035" y="50" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="1105" y="81" fill="#E1E2EC">증강</text>
+</g>
+<!-- bottom lane nodes -->
+<g>
+<rect x="25" y="250" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="95" y="281" fill="#E1E2EC">무결성 점검</text>
+<rect x="227" y="250" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="297" y="281" fill="#E1E2EC">지연 측정</text>
+<rect x="429" y="250" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="499" y="281" fill="#E1E2EC">튐 제거</text>
+<rect x="631" y="250" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.3)" stroke-dasharray="5 4"/><text x="701" y="273" fill="#E1E2EC">스무딩</text><text x="701" y="291" fill="#94A3B8" font-size="12">조건부</text>
+<rect x="833" y="250" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="903" y="281" fill="#E1E2EC">정지 구간 자르기</text>
+<rect x="1035" y="250" width="140" height="52" rx="6" fill="#0F131C" stroke="rgba(255,255,255,0.15)"/><text x="1105" y="281" fill="#E1E2EC">정규화</text>
+</g>
+<!-- junction markers -->
+<g font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">
+<circle cx="196" cy="176" r="16" fill="#FFE600"/><text x="196" y="181" fill="#0A0D14">1</text>
+<circle cx="423" cy="176" r="16" fill="#FFE600"/><text x="423" y="181" fill="#0A0D14">2</text>
+<circle cx="776" cy="176" r="16" fill="#FFE600"/><text x="776" y="181" fill="#0A0D14">3</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8">
+<div class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-[#0A0D14] font-label-mono text-label-mono font-bold flex items-center justify-center">1</span><p class="font-body-md text-body-md text-text-muted"><strong class="text-text-primary font-semibold">같은 시각으로 묶기:</strong> 프레임 번호를 공통 기준으로 영상과 관절 데이터가 같은 순간을 가리키는지 확인합니다.</p></div>
+<div class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-[#0A0D14] font-label-mono text-label-mono font-bold flex items-center justify-center">2</span><p class="font-body-md text-body-md text-text-muted"><strong class="text-text-primary font-semibold">함께 판정하기:</strong> 품질은 각자 측정하지만 제외 여부는 시연 단위로 함께 결정합니다.</p></div>
+<div class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-primary text-[#0A0D14] font-label-mono text-label-mono font-bold flex items-center justify-center">3</span><p class="font-body-md text-body-md text-text-muted"><strong class="text-text-primary font-semibold">같은 구간 자르기:</strong> 로봇의 움직임으로 계산한 자르기 구간을 두 카메라 영상에도 똑같이 적용합니다.</p></div>
+</div>
+</div>
+
+<!-- 2-6 Training-only vs shared -->
+<div>
+<div class="mb-10">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">TRAIN / RUN</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2">학습 때만 하는 것, 언제나 똑같이 하는 것</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-canvas p-7 rounded-xl border border-white/[0.08]">
+<div class="font-label-mono text-label-mono text-text-muted mb-5">학습 전용</div>
+<ul class="flex flex-col divide-y divide-white/[0.06] font-body-md text-body-md text-on-surface">
+<li class="py-3 first:pt-0">시연 선별</li>
+<li class="py-3">정지 구간 자르기</li>
+<li class="py-3">튐 제거와 스무딩</li>
+<li class="py-3">작업 단계 라벨링</li>
+<li class="py-3">이미지 증강</li>
+<li class="py-3 last:pb-0">데이터 분할</li>
+</ul>
+</div>
+<div class="bg-surface-canvas p-7 rounded-xl border-2 border-primary shadow-[0_0_16px_rgba(255,230,0,0.12)]">
+<div class="font-label-mono text-label-mono text-primary mb-5">학습과 실행에 동일 적용</div>
+<ul class="flex flex-col divide-y divide-white/[0.06] font-body-md text-body-md text-on-surface">
+<li class="py-3 first:pt-0">카메라 설정(해상도·노출·화이트밸런스·초점)</li>
+<li class="py-3">해상도 변환 크기와 방식</li>
+<li class="py-3">색상 채널 순서</li>
+<li class="py-3">정규화 통계</li>
+<li class="py-3">로봇 캘리브레이션</li>
+<li class="py-3 last:pb-0">카메라 이름과 시점 매핑</li>
+</ul>
+</div>
+</div>
+<p class="mt-6 font-body-md text-body-md text-on-surface flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">info</span>오른쪽 항목 중 하나라도 달라지면, 같은 자세도 로봇에게는 다른 자세로 보입니다.</p>
+</div>
+
+<!-- 2-7 Quality verification -->
+<div>
+<div class="mb-10">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">VERIFICATION</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2">처리 결과는 숫자와 그림으로 확인합니다</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08] flex flex-col">
+<svg class="w-full h-24 mb-5" viewBox="0 0 200 80" aria-hidden="true">
+<line x1="8" y1="72" x2="192" y2="72" stroke="rgba(255,255,255,0.2)"/>
+<g fill="#00F0FF" fill-opacity="0.7">
+<rect x="20" y="66" width="14" height="6"/><rect x="38" y="58" width="14" height="14"/><rect x="56" y="40" width="14" height="32"/><rect x="74" y="16" width="14" height="56"/><rect x="92" y="8" width="14" height="64"/><rect x="110" y="20" width="14" height="52"/><rect x="128" y="44" width="14" height="28"/><rect x="146" y="60" width="14" height="12"/><rect x="164" y="68" width="14" height="4"/>
+</g>
+</svg>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mb-2">동기화</h4>
+<p class="font-body-md text-body-md text-text-muted">기록 간격 분포와 시연별 지연을 확인합니다. 지연이 시연마다 일정하면 정상입니다.</p>
+</div>
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08] flex flex-col">
+<svg class="w-full h-24 mb-5" viewBox="0 0 200 80" aria-hidden="true">
+<line x1="8" y1="72" x2="192" y2="72" stroke="rgba(255,255,255,0.2)"/>
+<g fill="none" stroke-width="1.5" stroke-linecap="round">
+<path d="M10 60 C 50 58, 70 20, 110 22 S 170 50, 190 46" stroke="#00F0FF" stroke-opacity="0.5"/>
+<path d="M10 62 C 52 60, 72 24, 112 24 S 168 52, 190 48" stroke="#00F0FF" stroke-opacity="0.5"/>
+<path d="M10 58 C 48 56, 68 18, 108 20 S 172 48, 190 44" stroke="#00F0FF" stroke-opacity="0.5"/>
+<path d="M10 61 C 50 59, 74 26, 114 26 S 166 54, 190 50" stroke="#00F0FF" stroke-opacity="0.5"/>
+<path d="M10 64 C 40 62, 60 46, 96 52 S 160 14, 190 20" stroke="#FFE600" stroke-dasharray="4 3"/>
+</g>
+</svg>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mb-2">궤적 품질</h4>
+<p class="font-body-md text-body-md text-text-muted">모든 시연의 궤적을 겹쳐 그려 이상한 시연을 한눈에 찾고, 정제 전후 차이가 0.5° 이하인지 확인합니다. 이보다 크면 필터가 신호를 깎고 있다는 뜻입니다.</p>
+</div>
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08] flex flex-col">
+<svg class="w-full h-24 mb-5" viewBox="0 0 200 80" aria-hidden="true">
+<line x1="8" y1="72" x2="192" y2="72" stroke="rgba(255,255,255,0.2)"/>
+<g stroke="#00F0FF" stroke-width="1.5" fill="none">
+<line x1="50" y1="12" x2="50" y2="26"/><rect x="34" y="26" width="32" height="24" fill="#00F0FF" fill-opacity="0.15"/><line x1="34" y1="38" x2="66" y2="38"/><line x1="50" y1="50" x2="50" y2="64"/>
+<line x1="100" y1="16" x2="100" y2="28"/><rect x="84" y="28" width="32" height="20" fill="#00F0FF" fill-opacity="0.15"/><line x1="84" y1="37" x2="116" y2="37"/><line x1="100" y1="48" x2="100" y2="60"/>
+<line x1="150" y1="14" x2="150" y2="27"/><rect x="134" y="27" width="32" height="22" fill="#00F0FF" fill-opacity="0.15"/><line x1="134" y1="39" x2="166" y2="39"/><line x1="150" y1="49" x2="150" y2="62"/>
+</g>
+</svg>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mb-2">영상 품질</h4>
+<p class="font-body-md text-body-md text-text-muted">시연별 선명도와 밝기 분포를 비교합니다. 들쑥날쑥하다면 카메라 자동 설정이 켜져 있다는 신호입니다.</p>
+</div>
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08] flex flex-col">
+<svg class="w-full h-24 mb-5" viewBox="0 0 200 80" aria-hidden="true">
+<rect x="20" y="6" width="160" height="68" rx="3" fill="none" stroke="rgba(255,255,255,0.2)"/>
+<g stroke="rgba(255,255,255,0.1)"><line x1="73" y1="6" x2="73" y2="74"/><line x1="127" y1="6" x2="127" y2="74"/><line x1="20" y1="40" x2="180" y2="40"/></g>
+<rect x="127" y="40" width="53" height="34" fill="#FFE600" fill-opacity="0.08"/>
+<g fill="#00F0FF">
+<circle cx="34" cy="18" r="2.5"/><circle cx="48" cy="28" r="2.5"/><circle cx="60" cy="16" r="2.5"/><circle cx="40" cy="54" r="2.5"/><circle cx="58" cy="62" r="2.5"/><circle cx="86" cy="20" r="2.5"/><circle cx="100" cy="30" r="2.5"/><circle cx="114" cy="14" r="2.5"/><circle cx="90" cy="52" r="2.5"/><circle cx="110" cy="64" r="2.5"/><circle cx="140" cy="18" r="2.5"/><circle cx="160" cy="28" r="2.5"/><circle cx="168" cy="14" r="2.5"/>
+</g>
+</svg>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mb-2">데이터 분포</h4>
+<p class="font-body-md text-body-md text-text-muted">물체 초기 위치를 작업 영역 지도에 표시합니다. 빈 구역이 곧 추가 수집 대상입니다.</p>
+</div>
+</div>
+<div class="mt-8 rounded-xl bg-[#272A32] border border-white/[0.1] px-7 py-7 flex gap-4 items-start">
+<span class="material-symbols-outlined text-[24px] text-white shrink-0" aria-hidden="true">flag</span>
+<p class="font-body-lg text-body-lg text-white">가장 중요한 지표는 실제 로봇의 성공률입니다. TeachArm은 학습한 위치와 처음 보는 위치를 나눠 테스트하고, 집기·이송·놓기 중 어느 단계에서 실패했는지까지 기록합니다.</p>
+</div>
+</div>
+
+<!-- 2-8 Section CTA -->
+<div class="rounded-xl border border-white/[0.1] bg-surface-canvas px-7 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+<p class="font-headline-sm text-headline-sm text-text-primary">처리 단계별 세부 파라미터와 검증 기준이 궁금하신가요?</p>
+<button type="button" data-open-modal="whitepaper-modal" class="inline-flex items-center gap-2 h-12 px-6 rounded-md bg-primary text-[#0A0D14] font-label-mono text-label-mono font-bold tracking-wider shadow-[0_0_15px_rgba(255,230,0,0.25)] hover:brightness-105 transition-all active:scale-[0.98] shrink-0"><span>기술 백서 요청</span><span class="material-symbols-outlined text-[18px]">description</span></button>
+</div>
+
+</div>
+</section>
+
+<!-- WHITEPAPER MODAL -->
+<div id="whitepaper-modal" class="fixed inset-0 z-[60] hidden items-center justify-center px-4" role="dialog" aria-modal="true" aria-labelledby="whitepaper-title">
+<div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-close-modal></div>
+<div class="relative w-full max-w-md bg-surface-elevated border border-white/[0.12] rounded-xl shadow-[0_12px_32px_rgba(0,0,0,0.8)] p-7">
+<button type="button" class="absolute top-4 right-4 text-text-muted hover:text-primary" data-close-modal aria-label="닫기"><span class="material-symbols-outlined">close</span></button>
+<div class="modal-form-view">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">WHITE PAPER</span>
+<h2 id="whitepaper-title" class="font-headline-sm text-headline-sm font-bold text-text-primary mt-2 mb-5">기술 백서 요청</h2>
+<form class="flex flex-col gap-4" id="whitepaper-form">
+<label class="flex flex-col gap-1.5 font-label-ui text-label-ui text-on-surface">이름<input required name="name" type="text" class="h-10 px-3 bg-surface-chassis border border-white/[0.1] rounded text-body-md focus:outline-none focus:border-primary focus:ring-0 text-text-primary"/></label>
+<label class="flex flex-col gap-1.5 font-label-ui text-label-ui text-on-surface">회사<input required name="company" type="text" class="h-10 px-3 bg-surface-chassis border border-white/[0.1] rounded text-body-md focus:outline-none focus:border-primary focus:ring-0 text-text-primary"/></label>
+<label class="flex flex-col gap-1.5 font-label-ui text-label-ui text-on-surface">업무 이메일<input required name="email" type="email" placeholder="work-email@company.com" class="h-10 px-3 bg-surface-chassis border border-white/[0.1] rounded text-body-md focus:outline-none focus:border-primary focus:ring-0 text-text-primary placeholder:text-text-muted/60 font-mono text-[12px]"/></label>
+<button type="submit" class="h-11 mt-2 bg-primary text-[#0A0D14] rounded font-label-mono text-label-mono font-bold tracking-wider hover:brightness-105 transition-all">요청하기</button>
+</form>
+</div>
+<div class="modal-done-view hidden text-center py-6">
+<span class="material-symbols-outlined text-[40px] text-primary">check_circle</span>
+<p class="font-headline-sm text-headline-sm text-text-primary mt-3">요청이 접수되었습니다</p>
+<p class="font-body-md text-body-md text-text-muted mt-2">입력하신 이메일로 기술 백서를 보내드립니다.</p>
+</div>
+</div>
+</div>
+
+</div>
+<script>
+  (function() {
+    document.querySelectorAll('.why-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        btn.nextElementSibling.classList.toggle('hidden', open);
+        btn.querySelector('.material-symbols-outlined').classList.toggle('rotate-180', !open);
+      });
+    });
+
+    document.querySelectorAll('.pipeline-link').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    var modal = document.getElementById('whitepaper-modal');
+    function openModal() {
+      modal.querySelector('.modal-form-view').classList.remove('hidden');
+      modal.querySelector('.modal-done-view').classList.add('hidden');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      modal.querySelector('input').focus();
+    }
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+    document.querySelectorAll('[data-open-modal="whitepaper-modal"]').forEach(function(b) { b.addEventListener('click', openModal); });
+    modal.querySelectorAll('[data-close-modal]').forEach(function(b) { b.addEventListener('click', closeModal); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+    document.getElementById('whitepaper-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      modal.querySelector('.modal-form-view').classList.add('hidden');
+      modal.querySelector('.modal-done-view').classList.remove('hidden');
+    });
+  })();
+</script>
+</main><footer class="w-full bg-[#07090E] border-t border-white/[0.08]"><div class="max-w-[1200px] mx-auto px-6 py-16"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 pb-12 border-b border-white/[0.08]"><div class="lg:col-span-2 flex flex-col gap-4"><div class="flex items-center gap-3"><img alt="TeachArm Logo" class="h-9 w-auto object-contain" src="images/teacharm-logo.webp"/><span class="font-headline-sm text-headline-sm font-bold text-text-primary">TeachArm</span></div><p class="font-body-sm text-body-sm text-text-muted max-w-sm">피지컬 AI 기반의 무프로그래밍 티칭 로봇 팔. 숙련자의 미세 모션을 즉각 학습하여 정밀 제조 및 물류 라인의 무결점 자율화를 실현합니다.</p><div class="flex flex-col gap-1.5 font-label-mono text-label-sm text-text-muted pt-2"><div><span class="text-laser-cyan font-bold">TEL:</span> +82 2-0000-0000</div><div><span class="text-laser-cyan font-bold">EMAIL:</span> contact@teacharm.ai</div><div><span class="text-laser-cyan font-bold">ADDR:</span> 서울특별시 강남구 테헤란로 [00빌딩 00층]</div></div></div><div><div class="font-label-mono text-label-sm font-bold uppercase tracking-wider text-text-primary mb-3">제품 &amp; 기술</div><ul class="space-y-2 font-body-sm text-body-sm text-text-muted"><li><a class="hover:text-primary transition-colors" data-path="product-overview" href="#">제품 개요</a></li><li><a class="hover:text-primary transition-colors" data-path="hardware-specs" href="#">하드웨어 사양</a></li><li><a class="hover:text-primary transition-colors" data-path="teacharm-studio" href="#">TeachArm Studio</a></li><li><a class="hover:text-primary transition-colors" data-path="safety-systems" href="#">안전 사양 체계</a></li><li><a class="hover:text-primary transition-colors" data-path="three-step-process" href="#">3단계 프로세스</a></li><li><a class="hover:text-primary transition-colors" data-path="core-technology" href="technology.html">핵심 물리 AI 엔진</a></li></ul></div><div><div class="font-label-mono text-label-sm font-bold uppercase tracking-wider text-text-primary mb-3">산업 솔루션</div><ul class="space-y-2 font-body-sm text-body-sm text-text-muted"><li><a class="hover:text-primary transition-colors" data-path="solution-manufacturing" href="#">정밀 제조</a></li><li><a class="hover:text-primary transition-colors" data-path="solution-logistics" href="#">스마트 물류</a></li><li><a class="hover:text-primary transition-colors" data-path="solution-food" href="#">식품 자동화</a></li><li><a class="hover:text-primary transition-colors" data-path="solution-assembly" href="#">정밀 조립 공정</a></li><li><a class="hover:text-primary transition-colors" data-path="solution-inspection" href="#">비전 품질 검사</a></li><li><a class="hover:text-primary transition-colors" data-path="case-studies" href="#">고객 도입 사례</a></li></ul></div><div><div class="font-label-mono text-label-sm font-bold uppercase tracking-wider text-text-primary mb-3">기술 리소스</div><ul class="space-y-2 font-body-sm text-body-sm text-text-muted"><li><a class="hover:text-primary transition-colors" data-path="documentation" href="#">기술 문서 (API/SDK)</a></li><li><a class="hover:text-primary transition-colors" data-path="video-library" href="#">작동 영상 라이브러리</a></li><li><a class="hover:text-primary transition-colors" data-path="tech-blog" href="#">엔지니어링 블로그</a></li><li><a class="hover:text-primary transition-colors" data-path="faq" href="#">기술 FAQ</a></li><li><a class="hover:text-primary transition-colors" data-path="brochure-download" href="#">스펙 브로슈어</a></li></ul></div><div><div class="font-label-mono text-label-sm font-bold uppercase tracking-wider text-text-primary mb-3">뉴스레터 구독</div><p class="font-body-sm text-body-sm text-text-muted mb-3">산업용 AI 로보틱스 최신 동향과 분기별 펌웨어 업데이트를 받아보세요.</p><form class="flex flex-col gap-2" onsubmit="return false;"><input class="h-10 px-3 bg-surface-chassis border border-white/[0.1] rounded text-body-sm focus:outline-none focus:border-primary text-text-primary placeholder:text-text-muted/60 font-mono text-[12px]" placeholder="work-email@company.com" type="email"/><button class="h-10 bg-primary text-[#0A0D14] rounded font-label-mono text-label-sm font-bold tracking-wider uppercase hover:bg-primary-container transition-colors shadow-sm" type="button">구독하기</button></form></div></div><div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4"><div class="font-label-mono text-label-sm text-text-muted">© 2025 TeachArm Robotics Inc. All rights reserved.</div><div class="flex items-center gap-6 font-body-sm text-body-sm text-text-muted"><a class="hover:text-primary transition-colors" data-path="privacy-policy" href="#">개인정보처리방침</a><a class="hover:text-primary transition-colors" data-path="terms-of-service" href="#">이용약관</a><a class="hover:text-primary transition-colors" data-path="security" href="#">보안 인증</a></div><div class="flex items-center gap-3"><a aria-label="LinkedIn" class="w-9 h-9 rounded border border-white/[0.1] bg-surface-chassis flex items-center justify-center text-text-muted hover:text-primary hover:border-primary transition-all" href="#"><span class="material-symbols-outlined text-[18px]">share</span></a><a aria-label="YouTube" class="w-9 h-9 rounded border border-white/[0.1] bg-surface-chassis flex items-center justify-center text-text-muted hover:text-primary hover:border-primary transition-all" href="#"><span class="material-symbols-outlined text-[18px]">play_circle</span></a></div></div></div></footer></body></html>
