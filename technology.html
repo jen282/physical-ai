@@ -580,6 +580,38 @@
 </div>
 </div>
 
+<!-- OD-3b Dataset -->
+<div>
+<div class="mb-10 max-w-3xl">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">DATASET</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2 mb-3">400장이면 충분합니다</h3>
+<p class="font-body-lg text-body-lg text-text-muted">30fps 영상은 인접 프레임이 거의 같아서, 많이 뽑아도 정보는 늘지 않고 과적합만 커집니다. 그래서 작업 단계마다 고르게 뽑은 약 400장으로 데이터셋을 만듭니다.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="overflow-x-auto rounded-xl border border-white/[0.08] bg-surface-chassis">
+<table class="w-full min-w-[480px] text-left border-collapse">
+<thead class="bg-white/[0.03]"><tr><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">구성</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">수량</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">설명</th></tr></thead>
+<tbody>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">시연 프레임</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">350장</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">시연 50회 × 7장. 시작·접근·파지·이송·놓기 단계에서 고르게 뽑습니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">범위 밖 위치</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">40장</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">평가에 쓰는 학습 범위 밖 20개 위치 × 2장. 처음 보는 위치에서도 탐지가 되어야 결과를 쓸 수 있습니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">배경</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">10장</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">큐브가 없는 장면. 큐브가 없을 때 없다고 답하도록 가르칩니다.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="overflow-x-auto rounded-xl border border-white/[0.08] bg-surface-chassis">
+<table class="w-full min-w-[480px] text-left border-collapse">
+<thead class="bg-white/[0.03]"><tr><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">세트</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">구성</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">설명</th></tr></thead>
+<tbody>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">학습</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">시연 45회 + 범위 밖·배경 85%</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">동작 정책 학습에 쓴 시연과 같은 분할을 따릅니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">검증</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">시연 5회 + 범위 밖·배경 15%</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">같은 시연의 프레임이 학습과 검증에 섞이지 않게 시연 단위로 나눕니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">테스트</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">실제 평가 시도의 첫 프레임</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">정답 위치가 그리드로 정해져 있어 라벨링과 추가 촬영이 필요 없습니다.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="mt-6 font-body-md text-body-md text-on-surface flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">label</span>라벨링은 가장 비싼 단계라 자동화 효과가 가장 큽니다. 색상 마스크로 박스를 자동 생성하고, 손이나 그리퍼에 가려 색상 마스크가 실패하는 프레임은 파지 시점의 로봇 관절값으로 계산한 큐브 위치를 영상에 투영해 보완합니다.</p>
+</div>
+
 <!-- OD-4 Training at a glance -->
 <div>
 <div class="mb-10 max-w-3xl">
@@ -596,6 +628,40 @@
 <div class="p-6 bg-surface-chassis"><dt class="font-label-mono text-label-mono text-text-muted">하드웨어</dt><dd class="font-body-md text-body-md text-on-surface mt-2">클라우드 T4 GPU 1장, 혼합 정밀도와 메모리 캐시로 약 15~20분이면 끝납니다.</dd></div>
 <div class="p-6 bg-surface-chassis"><dt class="font-label-mono text-label-mono text-text-muted">데이터 판단</dt><dd class="font-body-md text-body-md text-on-surface mt-2">데이터의 25%·50%·100%로 학습해 비교합니다. 성능이 더 오르지 않으면 라벨을 늘리지 않습니다.</dd></div>
 </dl>
+</div>
+</div>
+
+<!-- OD-4b Training details -->
+<div>
+<div class="mb-10 max-w-3xl">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">TUNING</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2 mb-3">장면에 맞춰 덜어낸 설정</h3>
+<p class="font-body-lg text-body-lg text-text-muted">고정 카메라와 일정한 큐브 크기라는 조건에 맞춰, 기본 설정보다 증강은 약하게, 절차는 단순하게 조정했습니다.</p>
+</div>
+<div class="overflow-x-auto rounded-xl border border-white/[0.08] bg-surface-chassis">
+<table class="w-full min-w-[640px] text-left border-collapse">
+<thead class="bg-white/[0.03]"><tr><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">항목</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">설정</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">이유</th></tr></thead>
+<tbody>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">크기 증강</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">기본값의 절반 이하</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">상단 카메라에서 큐브 크기는 거의 일정합니다. 강하게 적용하면 현실에 없는 작은 큐브가 만들어집니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">위치·회전</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">위치 이동만 약하게</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">위치 다양성은 보강하되, 카메라가 고정이라 회전은 일어나지 않으므로 적용하지 않습니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">모자이크</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">절반만, 마지막 15에포크는 끔</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">이미지를 이어 붙이는 증강은 큐브를 작게 만듭니다. 학습 마지막은 실제 장면 그대로 마무리합니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">색상 증강</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">전처리 색상 변화와 같은 강도</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">전처리 파이프라인의 색상 보정과 강도를 맞춰 두 모델이 같은 조명 범위를 학습합니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">다중 해상도·혼합</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">사용 안 함</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">해상도가 고정이고 장면에 큐브가 하나뿐이라 연산만 늘어납니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">파인튜닝</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">전체 레이어, 한 단계</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">작은 모델과 단순한 장면에서는 2단계 학습의 이득이 작고, 절차가 한 번으로 끝나 재현이 쉽습니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">학습률 일정</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">3에포크 워밍업 → 1e-3 → 1e-5</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">워밍업은 새 출력층이 사전학습 가중치를 흔드는 것을 막고, 후반의 낮은 학습률이 박스 위치를 정밀하게 다듬습니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">연산 최적화</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">혼합 정밀도 + 메모리 캐시</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">설정 한 줄로 얻는 최적화만 씁니다. 20분이면 끝나는 규모라 분산 학습이나 경량화 변환은 하지 않습니다.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-chassis p-7 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">보완 규칙 1 · 과적합</span>
+<p class="font-body-md text-body-md text-text-muted mt-3">학습 초반 10에포크 안에 검증 성능이 떨어지기 시작하면, 사전학습된 특징 추출부를 고정하고 다시 학습합니다.</p>
+</div>
+<div class="bg-surface-chassis p-7 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">보완 규칙 2 · 합격선 미달</span>
+<p class="font-body-md text-body-md text-text-muted mt-3">25%·50%·100% 학습 곡선이 아직 오르는 중이면 라벨을 추가하고, 평탄하면 한 단계 큰 모델(YOLO26s)로 올립니다.</p>
+</div>
 </div>
 </div>
 
@@ -619,6 +685,37 @@
 </div>
 </div>
 <p class="mt-6 font-body-md text-body-md text-on-surface flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">info</span>확신도가 낮은 탐지는 판정에 쓰지 않고 "판정 보류"로 표시합니다. 장면에 큐브는 정확히 하나이므로 가장 확실한 박스 하나만 채택해 오탐을 구조적으로 막습니다. 기준에 미달하면 라벨을 보강하고, 그래도 부족할 때만 한 단계 큰 모델로 올립니다.</p>
+</div>
+
+<!-- OD-6 Confidence & measurement -->
+<div>
+<div class="mb-10 max-w-3xl">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">CONFIDENCE</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2 mb-3">용도마다 다른 확신도 기준</h3>
+<p class="font-body-lg text-body-lg text-text-muted">같은 탐지 결과라도 쓰임에 따라 실수의 비용이 다릅니다. 데이터 점검에서는 놓치는 것이, 판정 보조에서는 잘못 판정하는 것이 더 나쁘기 때문에 기준을 나눠 둡니다.</p>
+</div>
+<div class="overflow-x-auto rounded-xl border border-white/[0.08] bg-surface-chassis">
+<table class="w-full min-w-[640px] text-left border-collapse">
+<thead class="bg-white/[0.03]"><tr><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">용도</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">확신도 기준</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">처리</th></tr></thead>
+<tbody>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">성능 측정</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">0.001</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">전체 정밀도-재현율 곡선을 계산합니다. 기준을 높이면 곡선이 잘려 지표가 왜곡됩니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">위치 기록</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">검증 F1 최대 지점 (예상 0.4~0.6)</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">기준을 넘는 박스 중 가장 확실한 하나만 채택합니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">데이터 점검</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">0.25</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">놓치지 않는 것이 우선이라 기준을 낮게 둡니다.</td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">판정 보조</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">0.6</td><td class="px-5 py-4 align-top font-body-md text-body-md text-text-muted">기준에 못 미치면 "판정 보류"로 표시하고 운영자 판정만 사용합니다.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-chassis p-7 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-laser-cyan">위치 오차를 재는 법</span>
+<p class="font-body-md text-body-md text-text-muted mt-3">책상에 테이프로 표시한 4점으로 화면과 책상 좌표의 대응 관계를 구합니다. 박스 하단 중심을 책상 좌표(cm)로 바꾼 뒤 그리드 정답 좌표와 비교합니다.</p>
+</div>
+<div class="bg-surface-chassis p-7 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-laser-cyan">오차가 몰리는 곳 찾기</span>
+<p class="font-body-md text-body-md text-text-muted mt-3">오차가 큰 프레임을 작업 영역 산점도에 겹쳐 그려, 영역 모서리나 범위 밖처럼 특정 구역에 몰리는지 확인합니다. 몰리는 구역의 이미지를 우선 보강합니다.</p>
+</div>
+</div>
+<p class="mt-6 font-body-md text-body-md text-on-surface flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">info</span>mAP, Precision 같은 박스 지표는 자동으로 기록만 하고 합격 판단에는 쓰지 않습니다. 단순한 장면에서는 거의 포화되어 변별력이 낮고, 큐브가 하나뿐이라 Precision은 구조적으로 높게 나오기 때문입니다.</p>
 </div>
 
 <!-- PAGE CTA -->
