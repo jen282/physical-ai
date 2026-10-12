@@ -1,1 +1,9 @@
 .DS_Store
+# MediaPipe 모델·샘플 캐시와 결과 이미지 (스크립트 실행 시 자동 생성)
+code/mediapipe_assets/
+code/mediapipe_output/
+
+# 모델 비교 실험: 내려받은 데이터·가중치 (prepare_data.py / run_models.py 실행 시 자동 생성)
+code/model_comparison/data/
+code/model_comparison/weights/
+__pycache__/
