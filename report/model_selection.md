@@ -6,7 +6,7 @@
 | 작성      | CTO                                                                                                                             |
 | 작성일    | 2026-10-12                                                                                                                      |
 | 검토 대상 | YOLOE, DINO-X, SAM 3, SigLIP, OCR(Tesseract), MediaPipe                                                                         |
-| 근거 자료 | 실험 코드 `code/model_comparison/`, 실측 결과 `report/model_comparison/results.json`·`latency.json`, 결과 이미지 `images/model_comparison/*.jpg` |
+| 근거 자료 | 실험 코드 `code/model_comparison/`, 실측 결과 `report/model_comparison/results.json`·`latency.json`, 결과 이미지 같은 폴더 `*.jpg` |
 
 ---
 
@@ -114,7 +114,7 @@ python code/model_comparison/bench_latency.py  # 지연시간 교차 측정 → 
 
 **사용 예시**
 
-![YOLOE 결과](../images/model_comparison/yoloe.jpg)
+![YOLOE 결과](model_comparison/yoloe.jpg)
 
 `[SO-101 상단 카메라 프레임] → [YOLOE: "pink lego brick" 박스+마스크]`
 세 대상(블록·투명 상자·로봇팔)을 글로 지정했고, 기본 임계값 0.25에서는 **블록만** 점수 0.51로 찾았습니다. 투명 상자와 로봇팔은 임계값을 넘지 못했습니다.
@@ -149,7 +149,7 @@ python code/model_comparison/bench_latency.py  # 지연시간 교차 측정 → 
 
 **사용 예시 (대체 실행: Grounding DINO Tiny)**
 
-![Grounding DINO 결과](../images/model_comparison/dinox_substitute_grounding_dino.jpg)
+![Grounding DINO 결과](model_comparison/dinox_substitute_grounding_dino.jpg)
 
 `[SO-101 상단 카메라 프레임] → [Grounding DINO: 블록·투명 상자·로봇팔 박스]`
 같은 프레임, 같은 문구, 공식 데모 기본 임계값(박스 0.35)에서 **세 대상을 모두** 찾았습니다(블록 0.61, 상자 0.68, 로봇팔 0.73).
@@ -180,7 +180,7 @@ python code/model_comparison/bench_latency.py  # 지연시간 교차 측정 → 
 
 **사용 예시 (대체 실행: Grounding DINO 박스 → SAM 2.1-B)**
 
-![Grounded-SAM 2 결과](../images/model_comparison/sam3_substitute_grounded_sam2.jpg)
+![Grounded-SAM 2 결과](model_comparison/sam3_substitute_grounded_sam2.jpg)
 
 `[SO-101 상단 카메라 프레임] → [블록·상자·로봇팔의 픽셀 단위 윤곽 마스크]`
 박스보다 정밀한 윤곽을 얻습니다. 로봇팔 측면의 케이블 고리와 투명 상자의 비스듬한 사각형 윤곽까지 따라갑니다.
@@ -210,14 +210,14 @@ python code/model_comparison/bench_latency.py  # 지연시간 교차 측정 → 
 
 **사용 예시 ①: 전체 화면**
 
-![SigLIP 전체 화면](../images/model_comparison/siglip_full_frame.jpg)
+![SigLIP 전체 화면](model_comparison/siglip_full_frame.jpg)
 
 `[시연 첫/마지막 프레임] + ["책상 위 블록" / "상자 안 블록"] → [문장별 확률]`
 블록이 약 15×30픽셀(화면의 0.15%)이라 224×224로 줄이면 거의 사라집니다. 100장 중 **99장을 "책상 위"로 답했고 정확도는 49%**로, 찍는 수준입니다.
 
 **사용 예시 ②: 상자 영역만 잘라서 판정**
 
-![SigLIP 상자 영역](../images/model_comparison/siglip_box_roi.jpg)
+![SigLIP 상자 영역](model_comparison/siglip_box_roi.jpg)
 
 `[상자 영역 200×140 크롭] + ["빈 상자" / "블록이 든 상자"] → [문장별 확률]`
 카메라가 고정이라 상자 위치는 50개 시연에서 같습니다. 이 영역만 잘라 주자 **정확도 96%**(빈 상자 100%, 블록 든 상자 92%)로 올랐습니다. 틀린 4장(ep01·14·29·37의 마지막 프레임)은 블록이 상자 안에 또렷이 보이는데도 "빈 상자"로 답했습니다. 왜 틀렸는지 설명하기 어려운 오류라, 쓰더라도 사람 검수를 붙여야 합니다.
@@ -243,14 +243,14 @@ CPU 213 ms/장, 파라미터 375.2M.
 
 **사용 예시 ①: 영문 문서**
 
-![OCR 영문](../images/model_comparison/ocr_english.jpg)
+![OCR 영문](model_comparison/ocr_english.jpg)
 
 `[Tesseract 공식 테스트 문서] → [단어별 박스 + 텍스트]`
 공식 정답 텍스트와 비교해 **문자 오류율 0.0**으로 완벽하게 읽었습니다. CPU 198 ms/장.
 
 **사용 예시 ②: 한글 도로표지판 사진**
 
-![OCR 한글](../images/model_comparison/ocr_korean.jpg)
+![OCR 한글](model_comparison/ocr_korean.jpg)
 
 `[EasyOCR 공식 예제 사진] → [인식 결과 없음]`
 정답은 "서울 Seoul 56Km 평양 Pyeongyang 205Km"이지만 `kor+eng` 설정에서 **아무 글자도 출력하지 않았습니다**(문자 오류율 1.0). 흑백 반전 전처리(흰 글씨를 검은 글씨로)를 해도 문자 오류율 1.0이었습니다. Tesseract는 깨끗한 문서용 엔진이라, 배경이 복잡한 사진 속 글자(scene text)에는 약합니다.
@@ -274,7 +274,7 @@ CPU 213 ms/장, 파라미터 375.2M.
 
 **사용 예시**
 
-![MediaPipe 결과](../images/model_comparison/mediapipe.jpg)
+![MediaPipe 결과](model_comparison/mediapipe.jpg)
 
 `[MediaPipe 공식 테스트 사진] → [팔 6점 + 양손 21점×2]`
 왼쪽(주황)·오른쪽(하늘색)으로 팔과 손의 짝을 맞춰 그렸습니다.
@@ -439,7 +439,7 @@ CPU 213 ms/장, 파라미터 375.2M.
 | 파라미터 수                         | 모델별                       | `*.params_m`                                                              |
 | CPU 지연 중앙값 (범위)              | YOLOE 161 (91.0~175) · G-DINO 4,035 (3,959~4,370) · SAM 2.1 2,344 (2,137~2,409) · SigLIP 2 213 (189~232) · Tesseract 198 (185~228) · MP 손 15.3 (13.9~18.7) · MP 팔 22.1 (20.2~23.5)                | `latency.json` → `latency_ms.*.median` (`min_round`~`max_round`)          |
 
-결과 이미지는 `images/model_comparison/`의 `yoloe.jpg`, `dinox_substitute_grounding_dino.jpg`, `sam3_substitute_grounded_sam2.jpg`, `siglip_full_frame.jpg`, `siglip_box_roi.jpg`, `ocr_english.jpg`, `ocr_korean.jpg`, `mediapipe.jpg`이며, 모두 `run_models.py`가 생성합니다.
+결과 이미지는 `report/model_comparison/`의 `yoloe.jpg`, `dinox_substitute_grounding_dino.jpg`, `sam3_substitute_grounded_sam2.jpg`, `siglip_full_frame.jpg`, `siglip_box_roi.jpg`, `ocr_english.jpg`, `ocr_korean.jpg`, `mediapipe.jpg`이며, 모두 `run_models.py`가 생성합니다.
 
 ## 부록 B. 출처
 
