@@ -1,0 +1,76 @@
+{
+ "method": "3 rounds x (warmup 3 + 20 runs), round-robin, CPU, batch 1",
+ "torch_threads": 8,
+ "latency_ms": {
+  "yoloe": {
+   "median": 161.4,
+   "min_round": 91.0,
+   "max_round": 175.3,
+   "rounds": [
+    91.0,
+    175.3,
+    161.4
+   ]
+  },
+  "grounding_dino": {
+   "median": 4034.8,
+   "min_round": 3959.1,
+   "max_round": 4370.2,
+   "rounds": [
+    4370.2,
+    4034.8,
+    3959.1
+   ]
+  },
+  "sam2_1_b_box_prompt": {
+   "median": 2344.4,
+   "min_round": 2136.8,
+   "max_round": 2409.1,
+   "rounds": [
+    2136.8,
+    2344.4,
+    2409.1
+   ]
+  },
+  "siglip2": {
+   "median": 212.7,
+   "min_round": 188.6,
+   "max_round": 231.6,
+   "rounds": [
+    188.6,
+    212.7,
+    231.6
+   ]
+  },
+  "tesseract": {
+   "median": 198.2,
+   "min_round": 185.2,
+   "max_round": 227.9,
+   "rounds": [
+    198.2,
+    185.2,
+    227.9
+   ]
+  },
+  "mediapipe_hand": {
+   "median": 15.3,
+   "min_round": 13.9,
+   "max_round": 18.7,
+   "rounds": [
+    15.3,
+    13.9,
+    18.7
+   ]
+  },
+  "mediapipe_pose": {
+   "median": 22.1,
+   "min_round": 20.2,
+   "max_round": 23.5,
+   "rounds": [
+    22.1,
+    20.2,
+    23.5
+   ]
+  }
+ }
+}

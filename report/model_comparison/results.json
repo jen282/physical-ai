@@ -1,0 +1,4128 @@
+{
+ "env": {
+  "machine": "arm64",
+  "cpu": "Apple M4",
+  "python": "3.14.4",
+  "torch": "2.14.1",
+  "device": "cpu",
+  "torch_threads": 4,
+  "dataset": "lerobot/svla_so101_pickplace@f641879",
+  "episodes": 50,
+  "prompts": [
+   "pink lego brick",
+   "transparent box",
+   "robot arm"
+  ],
+  "iou_thresh": 0.5
+ },
+ "yoloe": {
+  "model": "YOLOE-26s-seg",
+  "weights": "yoloe-26s-seg.pt",
+  "run_as": "original",
+  "size_mb": 29.6,
+  "params_m": 15.3,
+  "latency_ms": 74.2,
+  "threshold": 0.25,
+  "example": "yoloe.jpg",
+  "example_detections": [
+   {
+    "label": "pink lego brick",
+    "score": 0.512003481388092,
+    "box": [
+     208.9471435546875,
+     383.3334045410156,
+     237.27777099609375,
+     421.7121887207031
+    ]
+   }
+  ],
+  "brick_detection": {
+   "frames": 50,
+   "recall_at_default_thresh": 0.58,
+   "top1_accuracy": 0.92,
+   "false_positives_at_default_thresh": 12,
+   "mean_score_of_hits": 0.421,
+   "per_frame": [
+    {
+     "frame": "ep00_start.png",
+     "gt": [
+      210,
+      384,
+      232,
+      418
+     ],
+     "top1_box": [
+      208.9,
+      383.3,
+      237.3,
+      421.7
+     ],
+     "top1_score": 0.512,
+     "top1_iou": 0.688,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep01_start.png",
+     "gt": [
+      214,
+      384,
+      234,
+      418
+     ],
+     "top1_box": [
+      212.1,
+      382.9,
+      237.8,
+      420.7
+     ],
+     "top1_score": 0.233,
+     "top1_iou": 0.702,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep02_start.png",
+     "gt": [
+      210,
+      384,
+      232,
+      418
+     ],
+     "top1_box": [
+      207.8,
+      382.5,
+      239.2,
+      421.4
+     ],
+     "top1_score": 0.68,
+     "top1_iou": 0.612,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep03_start.png",
+     "gt": [
+      214,
+      384,
+      232,
+      416
+     ],
+     "top1_box": [
+      210.9,
+      382.6,
+      239.2,
+      420.4
+     ],
+     "top1_score": 0.411,
+     "top1_iou": 0.538,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep04_start.png",
+     "gt": [
+      212,
+      386,
+      232,
+      420
+     ],
+     "top1_box": [
+      209.4,
+      384.8,
+      239.7,
+      422.8
+     ],
+     "top1_score": 0.345,
+     "top1_iou": 0.591,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep05_start.png",
+     "gt": [
+      212,
+      388,
+      234,
+      420
+     ],
+     "top1_box": [
+      210.4,
+      385.1,
+      238.3,
+      423.1
+     ],
+     "top1_score": 0.368,
+     "top1_iou": 0.663,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep06_start.png",
+     "gt": [
+      210,
+      386,
+      230,
+      420
+     ],
+     "top1_box": [
+      207.9,
+      385.0,
+      234.9,
+      423.2
+     ],
+     "top1_score": 0.539,
+     "top1_iou": 0.66,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep07_start.png",
+     "gt": [
+      214,
+      388,
+      230,
+      420
+     ],
+     "top1_box": [
+      211.5,
+      385.6,
+      232.3,
+      423.5
+     ],
+     "top1_score": 0.173,
+     "top1_iou": 0.649,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep08_start.png",
+     "gt": [
+      210,
+      384,
+      232,
+      416
+     ],
+     "top1_box": [
+      207.7,
+      381.9,
+      240.2,
+      421.0
+     ],
+     "top1_score": 0.654,
+     "top1_iou": 0.554,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep09_start.png",
+     "gt": [
+      214,
+      388,
+      232,
+      420
+     ],
+     "top1_box": [
+      211.0,
+      384.9,
+      238.6,
+      423.2
+     ],
+     "top1_score": 0.242,
+     "top1_iou": 0.546,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep10_start.png",
+     "gt": [
+      344,
+      390,
+      363,
+      424
+     ],
+     "top1_box": [
+      340.4,
+      388.2,
+      366.9,
+      427.6
+     ],
+     "top1_score": 0.314,
+     "top1_iou": 0.619,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep11_start.png",
+     "gt": [
+      342,
+      388,
+      360,
+      422
+     ],
+     "top1_box": [
+      339.9,
+      385.1,
+      367.3,
+      423.7
+     ],
+     "top1_score": 0.247,
+     "top1_iou": 0.578,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep12_start.png",
+     "gt": [
+      342,
+      386,
+      357,
+      420
+     ],
+     "top1_box": [
+      72.3,
+      159.4,
+      235.7,
+      243.9
+     ],
+     "top1_score": 0.211,
+     "top1_iou": 0.0,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep13_start.png",
+     "gt": [
+      340,
+      390,
+      358,
+      422
+     ],
+     "top1_box": [
+      337.5,
+      386.6,
+      359.4,
+      425.6
+     ],
+     "top1_score": 0.344,
+     "top1_iou": 0.675,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep14_start.png",
+     "gt": [
+      340,
+      390,
+      358,
+      424
+     ],
+     "top1_box": [
+      338.1,
+      387.3,
+      360.8,
+      426.2
+     ],
+     "top1_score": 0.234,
+     "top1_iou": 0.696,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep15_start.png",
+     "gt": [
+      340,
+      388,
+      356,
+      422
+     ],
+     "top1_box": [
+      337.1,
+      386.4,
+      358.2,
+      424.3
+     ],
+     "top1_score": 0.493,
+     "top1_iou": 0.68,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep16_start.png",
+     "gt": [
+      340,
+      388,
+      358,
+      420
+     ],
+     "top1_box": [
+      337.1,
+      385.4,
+      359.0,
+      424.0
+     ],
+     "top1_score": 0.249,
+     "top1_iou": 0.68,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep17_start.png",
+     "gt": [
+      339,
+      390,
+      358,
+      424
+     ],
+     "top1_box": [
+      336.4,
+      388.2,
+      359.6,
+      426.9
+     ],
+     "top1_score": 0.386,
+     "top1_iou": 0.717,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep18_start.png",
+     "gt": [
+      342,
+      390,
+      359,
+      422
+     ],
+     "top1_box": [
+      340.3,
+      386.3,
+      366.4,
+      425.1
+     ],
+     "top1_score": 0.266,
+     "top1_iou": 0.538,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep19_start.png",
+     "gt": [
+      340,
+      387,
+      356,
+      420
+     ],
+     "top1_box": [
+      338.2,
+      385.6,
+      358.1,
+      423.1
+     ],
+     "top1_score": 0.149,
+     "top1_iou": 0.704,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep20_start.png",
+     "gt": [
+      132,
+      292,
+      150,
+      322
+     ],
+     "top1_box": [
+      129.5,
+      289.8,
+      154.4,
+      323.9
+     ],
+     "top1_score": 0.388,
+     "top1_iou": 0.637,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep21_start.png",
+     "gt": [
+      132,
+      290,
+      152,
+      320
+     ],
+     "top1_box": [
+      130.5,
+      288.9,
+      157.3,
+      323.0
+     ],
+     "top1_score": 0.369,
+     "top1_iou": 0.658,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep22_start.png",
+     "gt": [
+      132,
+      292,
+      152,
+      322
+     ],
+     "top1_box": [
+      129.4,
+      289.7,
+      154.9,
+      323.7
+     ],
+     "top1_score": 0.488,
+     "top1_iou": 0.694,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep23_start.png",
+     "gt": [
+      130,
+      292,
+      150,
+      322
+     ],
+     "top1_box": [
+      128.3,
+      290.8,
+      151.6,
+      324.3
+     ],
+     "top1_score": 0.28,
+     "top1_iou": 0.771,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep24_start.png",
+     "gt": [
+      130,
+      288,
+      150,
+      319
+     ],
+     "top1_box": [
+      127.3,
+      287.0,
+      154.5,
+      321.3
+     ],
+     "top1_score": 0.448,
+     "top1_iou": 0.662,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep25_start.png",
+     "gt": [
+      132,
+      288,
+      152,
+      318
+     ],
+     "top1_box": [
+      130.6,
+      286.4,
+      156.3,
+      319.9
+     ],
+     "top1_score": 0.338,
+     "top1_iou": 0.697,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep26_start.png",
+     "gt": [
+      132,
+      290,
+      152,
+      320
+     ],
+     "top1_box": [
+      129.0,
+      288.1,
+      157.0,
+      321.9
+     ],
+     "top1_score": 0.531,
+     "top1_iou": 0.633,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep27_start.png",
+     "gt": [
+      132,
+      290,
+      150,
+      320
+     ],
+     "top1_box": [
+      129.4,
+      288.4,
+      154.2,
+      322.0
+     ],
+     "top1_score": 0.492,
+     "top1_iou": 0.65,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep28_start.png",
+     "gt": [
+      134,
+      288,
+      154,
+      318
+     ],
+     "top1_box": [
+      132.9,
+      286.9,
+      160.9,
+      320.7
+     ],
+     "top1_score": 0.202,
+     "top1_iou": 0.635,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep29_start.png",
+     "gt": [
+      134,
+      288,
+      152,
+      318
+     ],
+     "top1_box": [
+      131.2,
+      286.5,
+      157.5,
+      320.9
+     ],
+     "top1_score": 0.227,
+     "top1_iou": 0.597,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep30_start.png",
+     "gt": [
+      422,
+      294,
+      436,
+      324
+     ],
+     "top1_box": [
+      412.3,
+      292.5,
+      438.0,
+      326.5
+     ],
+     "top1_score": 0.06,
+     "top1_iou": 0.481,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep31_start.png",
+     "gt": [
+      420,
+      294,
+      436,
+      322
+     ],
+     "top1_box": [
+      417.3,
+      291.4,
+      438.1,
+      325.8
+     ],
+     "top1_score": 0.161,
+     "top1_iou": 0.626,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep32_start.png",
+     "gt": [
+      422,
+      296,
+      438,
+      326
+     ],
+     "top1_box": [
+      419.1,
+      292.4,
+      439.6,
+      327.7
+     ],
+     "top1_score": 0.213,
+     "top1_iou": 0.662,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep33_start.png",
+     "gt": [
+      422,
+      294,
+      437,
+      326
+     ],
+     "top1_box": [
+      420.4,
+      292.3,
+      438.8,
+      327.0
+     ],
+     "top1_score": 0.224,
+     "top1_iou": 0.75,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep34_start.png",
+     "gt": [
+      420,
+      296,
+      438,
+      326
+     ],
+     "top1_box": [
+      418.6,
+      293.0,
+      440.4,
+      328.8
+     ],
+     "top1_score": 0.585,
+     "top1_iou": 0.692,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep35_start.png",
+     "gt": [
+      422,
+      292,
+      438,
+      324
+     ],
+     "top1_box": [
+      420.5,
+      290.2,
+      438.6,
+      325.7
+     ],
+     "top1_score": 0.23,
+     "top1_iou": 0.795,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep36_start.png",
+     "gt": [
+      422,
+      296,
+      438,
+      326
+     ],
+     "top1_box": [
+      420.4,
+      292.5,
+      438.9,
+      327.5
+     ],
+     "top1_score": 0.224,
+     "top1_iou": 0.742,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep37_start.png",
+     "gt": [
+      420,
+      294,
+      436,
+      324
+     ],
+     "top1_box": [
+      418.7,
+      292.2,
+      437.7,
+      327.6
+     ],
+     "top1_score": 0.178,
+     "top1_iou": 0.712,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep38_start.png",
+     "gt": [
+      420,
+      294,
+      436,
+      324
+     ],
+     "top1_box": [
+      417.8,
+      291.5,
+      437.1,
+      327.0
+     ],
+     "top1_score": 0.3,
+     "top1_iou": 0.702,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep39_start.png",
+     "gt": [
+      422,
+      296,
+      437,
+      326
+     ],
+     "top1_box": [
+      420.2,
+      294.0,
+      438.7,
+      328.8
+     ],
+     "top1_score": 0.228,
+     "top1_iou": 0.698,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep40_start.png",
+     "gt": [
+      420,
+      212,
+      436,
+      240
+     ],
+     "top1_box": [
+      418.0,
+      209.2,
+      437.0,
+      241.1
+     ],
+     "top1_score": 0.372,
+     "top1_iou": 0.738,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep41_start.png",
+     "gt": [
+      422,
+      210,
+      436,
+      238
+     ],
+     "top1_box": [
+      419.3,
+      208.6,
+      437.4,
+      240.0
+     ],
+     "top1_score": 0.458,
+     "top1_iou": 0.688,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep42_start.png",
+     "gt": [
+      424,
+      212,
+      438,
+      240
+     ],
+     "top1_box": [
+      423.7,
+      209.3,
+      439.7,
+      240.3
+     ],
+     "top1_score": 0.331,
+     "top1_iou": 0.789,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep43_start.png",
+     "gt": [
+      420,
+      208,
+      434,
+      236
+     ],
+     "top1_box": [
+      73.5,
+      159.6,
+      235.9,
+      244.7
+     ],
+     "top1_score": 0.302,
+     "top1_iou": 0.0,
+     "kept": 1,
+     "hit": false
+    },
+    {
+     "frame": "ep44_start.png",
+     "gt": [
+      420,
+      210,
+      436,
+      240
+     ],
+     "top1_box": [
+      419.1,
+      209.8,
+      436.5,
+      241.5
+     ],
+     "top1_score": 0.327,
+     "top1_iou": 0.869,
+     "kept": 2,
+     "hit": true
+    },
+    {
+     "frame": "ep45_start.png",
+     "gt": [
+      422,
+      212,
+      436,
+      240
+     ],
+     "top1_box": [
+      419.7,
+      209.8,
+      437.2,
+      241.4
+     ],
+     "top1_score": 0.323,
+     "top1_iou": 0.707,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep46_start.png",
+     "gt": [
+      422,
+      210,
+      437,
+      238
+     ],
+     "top1_box": [
+      421.1,
+      208.1,
+      438.5,
+      239.6
+     ],
+     "top1_score": 0.235,
+     "top1_iou": 0.764,
+     "kept": 0,
+     "hit": false
+    },
+    {
+     "frame": "ep47_start.png",
+     "gt": [
+      421,
+      212,
+      437,
+      240
+     ],
+     "top1_box": [
+      419.1,
+      209.5,
+      438.4,
+      241.4
+     ],
+     "top1_score": 0.415,
+     "top1_iou": 0.726,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep48_start.png",
+     "gt": [
+      422,
+      210,
+      436,
+      240
+     ],
+     "top1_box": [
+      72.0,
+      159.7,
+      235.8,
+      244.6
+     ],
+     "top1_score": 0.365,
+     "top1_iou": 0.0,
+     "kept": 1,
+     "hit": false
+    },
+    {
+     "frame": "ep49_start.png",
+     "gt": [
+      420,
+      212,
+      436,
+      240
+     ],
+     "top1_box": [
+      417.3,
+      209.6,
+      437.3,
+      242.0
+     ],
+     "top1_score": 0.457,
+     "top1_iou": 0.692,
+     "kept": 1,
+     "hit": true
+    }
+   ]
+  }
+ },
+ "dinox": {
+  "model": "Grounding DINO Tiny (DINO-X 대체)",
+  "weights": "IDEA-Research/grounding-dino-tiny@a2bb814",
+  "run_as": "substitute",
+  "params_m": 172.3,
+  "size_mb": 657.3,
+  "latency_ms": 4121.8,
+  "threshold": 0.35,
+  "example": "dinox_substitute_grounding_dino.jpg",
+  "example_detections": [
+   {
+    "label": "robot arm",
+    "score": 0.7263742685317993,
+    "box": [
+     244.9933624267578,
+     71.97565460205078,
+     366.1405029296875,
+     328.83563232421875
+    ]
+   },
+   {
+    "label": "pink lego brick",
+    "score": 0.6118383407592773,
+    "box": [
+     207.21875,
+     381.5081787109375,
+     235.71871948242188,
+     422.53375244140625
+    ]
+   },
+   {
+    "label": "transparent box",
+    "score": 0.67592853307724,
+    "box": [
+     78.43382263183594,
+     152.27706909179688,
+     242.3915252685547,
+     244.8699188232422
+    ]
+   }
+  ],
+  "brick_detection": {
+   "frames": 50,
+   "recall_at_default_thresh": 1.0,
+   "top1_accuracy": 1.0,
+   "false_positives_at_default_thresh": 0,
+   "mean_score_of_hits": 0.634,
+   "per_frame": [
+    {
+     "frame": "ep00_start.png",
+     "gt": [
+      210,
+      384,
+      232,
+      418
+     ],
+     "top1_box": [
+      207.2,
+      381.5,
+      235.7,
+      422.5
+     ],
+     "top1_score": 0.612,
+     "top1_iou": 0.64,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep01_start.png",
+     "gt": [
+      214,
+      384,
+      234,
+      418
+     ],
+     "top1_box": [
+      210.5,
+      381.3,
+      237.6,
+      421.5
+     ],
+     "top1_score": 0.589,
+     "top1_iou": 0.623,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep02_start.png",
+     "gt": [
+      210,
+      384,
+      232,
+      418
+     ],
+     "top1_box": [
+      206.3,
+      380.5,
+      237.8,
+      422.3
+     ],
+     "top1_score": 0.618,
+     "top1_iou": 0.567,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep03_start.png",
+     "gt": [
+      214,
+      384,
+      232,
+      416
+     ],
+     "top1_box": [
+      209.3,
+      380.5,
+      236.9,
+      421.3
+     ],
+     "top1_score": 0.588,
+     "top1_iou": 0.512,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep04_start.png",
+     "gt": [
+      212,
+      386,
+      232,
+      420
+     ],
+     "top1_box": [
+      207.6,
+      382.5,
+      236.5,
+      423.5
+     ],
+     "top1_score": 0.628,
+     "top1_iou": 0.575,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep05_start.png",
+     "gt": [
+      212,
+      388,
+      234,
+      420
+     ],
+     "top1_box": [
+      208.8,
+      383.2,
+      237.4,
+      424.2
+     ],
+     "top1_score": 0.639,
+     "top1_iou": 0.599,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep06_start.png",
+     "gt": [
+      210,
+      386,
+      230,
+      420
+     ],
+     "top1_box": [
+      206.3,
+      383.1,
+      235.1,
+      423.9
+     ],
+     "top1_score": 0.629,
+     "top1_iou": 0.578,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep07_start.png",
+     "gt": [
+      214,
+      388,
+      230,
+      420
+     ],
+     "top1_box": [
+      209.8,
+      384.0,
+      234.5,
+      424.1
+     ],
+     "top1_score": 0.625,
+     "top1_iou": 0.516,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep08_start.png",
+     "gt": [
+      210,
+      384,
+      232,
+      416
+     ],
+     "top1_box": [
+      206.0,
+      379.8,
+      237.6,
+      422.0
+     ],
+     "top1_score": 0.628,
+     "top1_iou": 0.528,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep09_start.png",
+     "gt": [
+      214,
+      388,
+      232,
+      420
+     ],
+     "top1_box": [
+      209.4,
+      383.6,
+      235.7,
+      424.0
+     ],
+     "top1_score": 0.62,
+     "top1_iou": 0.543,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep10_start.png",
+     "gt": [
+      344,
+      390,
+      363,
+      424
+     ],
+     "top1_box": [
+      338.9,
+      386.6,
+      368.4,
+      428.9
+     ],
+     "top1_score": 0.644,
+     "top1_iou": 0.519,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep11_start.png",
+     "gt": [
+      342,
+      388,
+      360,
+      422
+     ],
+     "top1_box": [
+      338.6,
+      384.0,
+      363.4,
+      424.4
+     ],
+     "top1_score": 0.59,
+     "top1_iou": 0.611,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep12_start.png",
+     "gt": [
+      342,
+      386,
+      357,
+      420
+     ],
+     "top1_box": [
+      338.2,
+      382.9,
+      359.4,
+      423.4
+     ],
+     "top1_score": 0.638,
+     "top1_iou": 0.593,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep13_start.png",
+     "gt": [
+      340,
+      390,
+      358,
+      422
+     ],
+     "top1_box": [
+      336.2,
+      385.1,
+      359.9,
+      426.1
+     ],
+     "top1_score": 0.647,
+     "top1_iou": 0.593,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep14_start.png",
+     "gt": [
+      340,
+      390,
+      358,
+      424
+     ],
+     "top1_box": [
+      336.7,
+      385.9,
+      362.1,
+      427.0
+     ],
+     "top1_score": 0.623,
+     "top1_iou": 0.585,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep15_start.png",
+     "gt": [
+      340,
+      388,
+      356,
+      422
+     ],
+     "top1_box": [
+      335.7,
+      384.4,
+      358.6,
+      425.2
+     ],
+     "top1_score": 0.627,
+     "top1_iou": 0.583,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep16_start.png",
+     "gt": [
+      340,
+      388,
+      358,
+      420
+     ],
+     "top1_box": [
+      335.9,
+      383.9,
+      359.9,
+      424.9
+     ],
+     "top1_score": 0.64,
+     "top1_iou": 0.585,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep17_start.png",
+     "gt": [
+      339,
+      390,
+      358,
+      424
+     ],
+     "top1_box": [
+      334.4,
+      386.7,
+      359.7,
+      428.0
+     ],
+     "top1_score": 0.629,
+     "top1_iou": 0.617,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep18_start.png",
+     "gt": [
+      342,
+      390,
+      359,
+      422
+     ],
+     "top1_box": [
+      338.6,
+      385.3,
+      363.1,
+      425.9
+     ],
+     "top1_score": 0.641,
+     "top1_iou": 0.548,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep19_start.png",
+     "gt": [
+      340,
+      387,
+      356,
+      420
+     ],
+     "top1_box": [
+      337.4,
+      383.6,
+      358.5,
+      423.3
+     ],
+     "top1_score": 0.652,
+     "top1_iou": 0.631,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep20_start.png",
+     "gt": [
+      132,
+      292,
+      150,
+      322
+     ],
+     "top1_box": [
+      128.1,
+      288.1,
+      153.4,
+      324.1
+     ],
+     "top1_score": 0.608,
+     "top1_iou": 0.593,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep21_start.png",
+     "gt": [
+      132,
+      290,
+      152,
+      320
+     ],
+     "top1_box": [
+      129.1,
+      286.8,
+      156.4,
+      323.7
+     ],
+     "top1_score": 0.624,
+     "top1_iou": 0.596,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep22_start.png",
+     "gt": [
+      132,
+      292,
+      152,
+      322
+     ],
+     "top1_box": [
+      127.6,
+      288.0,
+      154.6,
+      324.3
+     ],
+     "top1_score": 0.635,
+     "top1_iou": 0.612,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep23_start.png",
+     "gt": [
+      130,
+      292,
+      150,
+      322
+     ],
+     "top1_box": [
+      126.4,
+      289.0,
+      152.1,
+      324.9
+     ],
+     "top1_score": 0.59,
+     "top1_iou": 0.652,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep24_start.png",
+     "gt": [
+      130,
+      288,
+      150,
+      319
+     ],
+     "top1_box": [
+      125.6,
+      285.2,
+      154.3,
+      322.2
+     ],
+     "top1_score": 0.617,
+     "top1_iou": 0.585,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep25_start.png",
+     "gt": [
+      132,
+      288,
+      152,
+      318
+     ],
+     "top1_box": [
+      129.4,
+      285.0,
+      154.5,
+      320.8
+     ],
+     "top1_score": 0.611,
+     "top1_iou": 0.665,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep26_start.png",
+     "gt": [
+      132,
+      290,
+      152,
+      320
+     ],
+     "top1_box": [
+      127.2,
+      286.1,
+      155.9,
+      322.7
+     ],
+     "top1_score": 0.638,
+     "top1_iou": 0.572,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep27_start.png",
+     "gt": [
+      132,
+      290,
+      150,
+      320
+     ],
+     "top1_box": [
+      127.7,
+      286.3,
+      154.3,
+      322.7
+     ],
+     "top1_score": 0.595,
+     "top1_iou": 0.557,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep28_start.png",
+     "gt": [
+      134,
+      288,
+      154,
+      318
+     ],
+     "top1_box": [
+      131.1,
+      285.0,
+      158.1,
+      321.2
+     ],
+     "top1_score": 0.635,
+     "top1_iou": 0.615,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep29_start.png",
+     "gt": [
+      134,
+      288,
+      152,
+      318
+     ],
+     "top1_box": [
+      129.7,
+      285.5,
+      154.7,
+      321.7
+     ],
+     "top1_score": 0.641,
+     "top1_iou": 0.596,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep30_start.png",
+     "gt": [
+      422,
+      294,
+      436,
+      324
+     ],
+     "top1_box": [
+      418.2,
+      290.6,
+      439.2,
+      326.9
+     ],
+     "top1_score": 0.648,
+     "top1_iou": 0.549,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep31_start.png",
+     "gt": [
+      420,
+      294,
+      436,
+      322
+     ],
+     "top1_box": [
+      416.4,
+      289.7,
+      439.2,
+      327.3
+     ],
+     "top1_score": 0.664,
+     "top1_iou": 0.524,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep32_start.png",
+     "gt": [
+      422,
+      296,
+      438,
+      326
+     ],
+     "top1_box": [
+      417.7,
+      290.7,
+      440.8,
+      329.0
+     ],
+     "top1_score": 0.65,
+     "top1_iou": 0.544,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep33_start.png",
+     "gt": [
+      422,
+      294,
+      437,
+      326
+     ],
+     "top1_box": [
+      419.4,
+      290.7,
+      439.8,
+      327.9
+     ],
+     "top1_score": 0.657,
+     "top1_iou": 0.635,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep34_start.png",
+     "gt": [
+      420,
+      296,
+      438,
+      326
+     ],
+     "top1_box": [
+      417.0,
+      291.2,
+      441.2,
+      329.9
+     ],
+     "top1_score": 0.652,
+     "top1_iou": 0.576,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep35_start.png",
+     "gt": [
+      422,
+      292,
+      438,
+      324
+     ],
+     "top1_box": [
+      418.7,
+      288.9,
+      440.0,
+      326.8
+     ],
+     "top1_score": 0.647,
+     "top1_iou": 0.634,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep36_start.png",
+     "gt": [
+      422,
+      296,
+      438,
+      326
+     ],
+     "top1_box": [
+      418.7,
+      290.9,
+      440.0,
+      328.4
+     ],
+     "top1_score": 0.649,
+     "top1_iou": 0.601,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep37_start.png",
+     "gt": [
+      420,
+      294,
+      436,
+      324
+     ],
+     "top1_box": [
+      417.5,
+      290.4,
+      438.8,
+      327.8
+     ],
+     "top1_score": 0.639,
+     "top1_iou": 0.605,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep38_start.png",
+     "gt": [
+      420,
+      294,
+      436,
+      324
+     ],
+     "top1_box": [
+      416.2,
+      290.3,
+      438.3,
+      328.0
+     ],
+     "top1_score": 0.636,
+     "top1_iou": 0.575,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep39_start.png",
+     "gt": [
+      422,
+      296,
+      437,
+      326
+     ],
+     "top1_box": [
+      418.7,
+      292.0,
+      439.8,
+      329.7
+     ],
+     "top1_score": 0.659,
+     "top1_iou": 0.567,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep40_start.png",
+     "gt": [
+      420,
+      212,
+      436,
+      240
+     ],
+     "top1_box": [
+      416.3,
+      207.2,
+      438.2,
+      242.0
+     ],
+     "top1_score": 0.66,
+     "top1_iou": 0.586,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep41_start.png",
+     "gt": [
+      422,
+      210,
+      436,
+      238
+     ],
+     "top1_box": [
+      417.9,
+      206.6,
+      438.5,
+      240.6
+     ],
+     "top1_score": 0.663,
+     "top1_iou": 0.557,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep42_start.png",
+     "gt": [
+      424,
+      212,
+      438,
+      240
+     ],
+     "top1_box": [
+      421.7,
+      206.9,
+      440.7,
+      241.1
+     ],
+     "top1_score": 0.625,
+     "top1_iou": 0.605,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep43_start.png",
+     "gt": [
+      420,
+      208,
+      434,
+      236
+     ],
+     "top1_box": [
+      416.5,
+      205.0,
+      436.6,
+      239.2
+     ],
+     "top1_score": 0.651,
+     "top1_iou": 0.571,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep44_start.png",
+     "gt": [
+      420,
+      210,
+      436,
+      240
+     ],
+     "top1_box": [
+      417.3,
+      207.5,
+      437.4,
+      241.8
+     ],
+     "top1_score": 0.624,
+     "top1_iou": 0.696,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep45_start.png",
+     "gt": [
+      422,
+      212,
+      436,
+      240
+     ],
+     "top1_box": [
+      418.5,
+      207.7,
+      438.1,
+      241.8
+     ],
+     "top1_score": 0.649,
+     "top1_iou": 0.587,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep46_start.png",
+     "gt": [
+      422,
+      210,
+      437,
+      238
+     ],
+     "top1_box": [
+      420.0,
+      206.5,
+      439.2,
+      240.3
+     ],
+     "top1_score": 0.661,
+     "top1_iou": 0.647,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep47_start.png",
+     "gt": [
+      421,
+      212,
+      437,
+      240
+     ],
+     "top1_box": [
+      417.4,
+      207.3,
+      439.3,
+      242.5
+     ],
+     "top1_score": 0.655,
+     "top1_iou": 0.584,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep48_start.png",
+     "gt": [
+      422,
+      210,
+      436,
+      240
+     ],
+     "top1_box": [
+      419.2,
+      207.0,
+      439.0,
+      240.9
+     ],
+     "top1_score": 0.655,
+     "top1_iou": 0.626,
+     "kept": 1,
+     "hit": true
+    },
+    {
+     "frame": "ep49_start.png",
+     "gt": [
+      420,
+      212,
+      436,
+      240
+     ],
+     "top1_box": [
+      416.2,
+      207.4,
+      438.4,
+      242.9
+     ],
+     "top1_score": 0.65,
+     "top1_iou": 0.569,
+     "kept": 1,
+     "hit": true
+    }
+   ]
+  }
+ },
+ "sam3": {
+  "model": "Grounded-SAM 2 = Grounding DINO-T + SAM 2.1-B (SAM 3 대체)",
+  "weights": "sam2.1_b.pt",
+  "run_as": "substitute",
+  "size_mb": 154.4,
+  "params_m": 80.9,
+  "latency_ms_sam_only": 2206.3,
+  "example": "sam3_substitute_grounded_sam2.jpg",
+  "example_masks": [
+   {
+    "label": "robot arm",
+    "pixels": 18469
+   },
+   {
+    "label": "pink lego brick",
+    "pixels": 839
+   },
+   {
+    "label": "transparent box",
+    "pixels": 11162
+   }
+  ],
+  "brick_mask": {
+   "frames": 50,
+   "mean_iou": 0.607,
+   "ratio_iou_ge_0.5": 1.0,
+   "per_frame": [
+    {
+     "frame": "ep00_start.png",
+     "mask_iou": 0.611
+    },
+    {
+     "frame": "ep01_start.png",
+     "mask_iou": 0.636
+    },
+    {
+     "frame": "ep02_start.png",
+     "mask_iou": 0.511
+    },
+    {
+     "frame": "ep03_start.png",
+     "mask_iou": 0.53
+    },
+    {
+     "frame": "ep04_start.png",
+     "mask_iou": 0.582
+    },
+    {
+     "frame": "ep05_start.png",
+     "mask_iou": 0.589
+    },
+    {
+     "frame": "ep06_start.png",
+     "mask_iou": 0.603
+    },
+    {
+     "frame": "ep07_start.png",
+     "mask_iou": 0.599
+    },
+    {
+     "frame": "ep08_start.png",
+     "mask_iou": 0.556
+    },
+    {
+     "frame": "ep09_start.png",
+     "mask_iou": 0.576
+    },
+    {
+     "frame": "ep10_start.png",
+     "mask_iou": 0.559
+    },
+    {
+     "frame": "ep11_start.png",
+     "mask_iou": 0.625
+    },
+    {
+     "frame": "ep12_start.png",
+     "mask_iou": 0.614
+    },
+    {
+     "frame": "ep13_start.png",
+     "mask_iou": 0.585
+    },
+    {
+     "frame": "ep14_start.png",
+     "mask_iou": 0.602
+    },
+    {
+     "frame": "ep15_start.png",
+     "mask_iou": 0.645
+    },
+    {
+     "frame": "ep16_start.png",
+     "mask_iou": 0.619
+    },
+    {
+     "frame": "ep17_start.png",
+     "mask_iou": 0.655
+    },
+    {
+     "frame": "ep18_start.png",
+     "mask_iou": 0.597
+    },
+    {
+     "frame": "ep19_start.png",
+     "mask_iou": 0.654
+    },
+    {
+     "frame": "ep20_start.png",
+     "mask_iou": 0.627
+    },
+    {
+     "frame": "ep21_start.png",
+     "mask_iou": 0.602
+    },
+    {
+     "frame": "ep22_start.png",
+     "mask_iou": 0.634
+    },
+    {
+     "frame": "ep23_start.png",
+     "mask_iou": 0.634
+    },
+    {
+     "frame": "ep24_start.png",
+     "mask_iou": 0.57
+    },
+    {
+     "frame": "ep25_start.png",
+     "mask_iou": 0.625
+    },
+    {
+     "frame": "ep26_start.png",
+     "mask_iou": 0.595
+    },
+    {
+     "frame": "ep27_start.png",
+     "mask_iou": 0.6
+    },
+    {
+     "frame": "ep28_start.png",
+     "mask_iou": 0.607
+    },
+    {
+     "frame": "ep29_start.png",
+     "mask_iou": 0.531
+    },
+    {
+     "frame": "ep30_start.png",
+     "mask_iou": 0.621
+    },
+    {
+     "frame": "ep31_start.png",
+     "mask_iou": 0.59
+    },
+    {
+     "frame": "ep32_start.png",
+     "mask_iou": 0.596
+    },
+    {
+     "frame": "ep33_start.png",
+     "mask_iou": 0.643
+    },
+    {
+     "frame": "ep34_start.png",
+     "mask_iou": 0.587
+    },
+    {
+     "frame": "ep35_start.png",
+     "mask_iou": 0.632
+    },
+    {
+     "frame": "ep36_start.png",
+     "mask_iou": 0.627
+    },
+    {
+     "frame": "ep37_start.png",
+     "mask_iou": 0.606
+    },
+    {
+     "frame": "ep38_start.png",
+     "mask_iou": 0.575
+    },
+    {
+     "frame": "ep39_start.png",
+     "mask_iou": 0.608
+    },
+    {
+     "frame": "ep40_start.png",
+     "mask_iou": 0.61
+    },
+    {
+     "frame": "ep41_start.png",
+     "mask_iou": 0.592
+    },
+    {
+     "frame": "ep42_start.png",
+     "mask_iou": 0.601
+    },
+    {
+     "frame": "ep43_start.png",
+     "mask_iou": 0.638
+    },
+    {
+     "frame": "ep44_start.png",
+     "mask_iou": 0.671
+    },
+    {
+     "frame": "ep45_start.png",
+     "mask_iou": 0.633
+    },
+    {
+     "frame": "ep46_start.png",
+     "mask_iou": 0.658
+    },
+    {
+     "frame": "ep47_start.png",
+     "mask_iou": 0.608
+    },
+    {
+     "frame": "ep48_start.png",
+     "mask_iou": 0.664
+    },
+    {
+     "frame": "ep49_start.png",
+     "mask_iou": 0.63
+    }
+   ]
+  }
+ },
+ "siglip": {
+  "model": "SigLIP 2 Base/16-224",
+  "weights": "google/siglip2-base-patch16-224@75de2d5",
+  "run_as": "original",
+  "params_m": 375.2,
+  "size_mb": 1431.3,
+  "latency_ms": 169.9,
+  "roi": [
+   60,
+   130,
+   260,
+   270
+  ],
+  "examples": [
+   "siglip_full_frame.jpg",
+   "siglip_box_roi.jpg"
+  ],
+  "full_frame": {
+   "labels": {
+    "start": "a photo of a pink lego brick lying on the white table",
+    "end": "a photo of a pink lego brick inside the transparent box"
+   },
+   "frames": 100,
+   "accuracy": 0.49,
+   "accuracy_start": 0.98,
+   "accuracy_end": 0.0,
+   "per_frame": [
+    {
+     "frame": "ep00_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep00_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep01_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep01_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep02_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep02_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep03_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep03_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep04_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep04_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep05_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep05_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep06_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep06_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep07_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep07_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep08_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep08_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep09_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep09_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep10_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep10_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep11_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep11_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep12_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep12_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep13_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep13_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep14_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep14_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep15_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep15_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep16_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep16_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep17_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep17_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep18_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep18_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep19_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      9.999999747378752e-05,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep19_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep20_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep20_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep21_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep21_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep22_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep22_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep23_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep23_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep24_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep24_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep25_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep25_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep26_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep26_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep27_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep27_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep28_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep28_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep29_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep29_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep30_start.png",
+     "truth": "start",
+     "pred": "end",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep30_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep31_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep31_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep32_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep32_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep33_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep33_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep34_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep34_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep35_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep35_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep36_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep36_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep37_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep37_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep38_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep38_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep39_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep39_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep40_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep40_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep41_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep41_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep42_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep42_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep43_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep43_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep44_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep44_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep45_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep45_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep46_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep46_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep47_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      9.999999747378752e-05,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep47_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep48_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep48_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep49_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep49_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.0,
+      0.0
+     ]
+    }
+   ]
+  },
+  "box_roi": {
+   "labels": {
+    "start": "a photo of an empty transparent box",
+    "end": "a photo of a pink lego brick inside a transparent box"
+   },
+   "frames": 100,
+   "accuracy": 0.96,
+   "accuracy_start": 1.0,
+   "accuracy_end": 0.92,
+   "per_frame": [
+    {
+     "frame": "ep00_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.11400000005960464,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep00_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.027899999171495438,
+      0.4163999855518341
+     ]
+    },
+    {
+     "frame": "ep01_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.3402000069618225,
+      0.0008999999845400453
+     ]
+    },
+    {
+     "frame": "ep01_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.3228999972343445,
+      0.04520000144839287
+     ]
+    },
+    {
+     "frame": "ep02_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.22310000658035278,
+      0.0003000000142492354
+     ]
+    },
+    {
+     "frame": "ep02_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.011800000444054604,
+      0.7608000040054321
+     ]
+    },
+    {
+     "frame": "ep03_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.6520000100135803,
+      0.00139999995008111
+     ]
+    },
+    {
+     "frame": "ep03_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.07959999889135361,
+      0.6550999879837036
+     ]
+    },
+    {
+     "frame": "ep04_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.028599999845027924,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep04_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.01119999960064888,
+      0.35989999771118164
+     ]
+    },
+    {
+     "frame": "ep05_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.22910000383853912,
+      0.00019999999494757503
+     ]
+    },
+    {
+     "frame": "ep05_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.002300000051036477,
+      0.7153000235557556
+     ]
+    },
+    {
+     "frame": "ep06_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.24899999797344208,
+      0.00019999999494757503
+     ]
+    },
+    {
+     "frame": "ep06_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.09749999642372131,
+      0.8364999890327454
+     ]
+    },
+    {
+     "frame": "ep07_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.16110000014305115,
+      0.0007999999797903001
+     ]
+    },
+    {
+     "frame": "ep07_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.05400000140070915,
+      0.7391999959945679
+     ]
+    },
+    {
+     "frame": "ep08_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.01769999973475933,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep08_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.07199999690055847,
+      0.9351000189781189
+     ]
+    },
+    {
+     "frame": "ep09_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.4489000141620636,
+      0.002300000051036477
+     ]
+    },
+    {
+     "frame": "ep09_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.2624000012874603,
+      0.29429998993873596
+     ]
+    },
+    {
+     "frame": "ep10_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.23199999332427979,
+      0.001500000013038516
+     ]
+    },
+    {
+     "frame": "ep10_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.01549999974668026,
+      0.9837999939918518
+     ]
+    },
+    {
+     "frame": "ep11_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.3668999969959259,
+      0.00419999985024333
+     ]
+    },
+    {
+     "frame": "ep11_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.0006000000284984708,
+      0.9438999891281128
+     ]
+    },
+    {
+     "frame": "ep12_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.28049999475479126,
+      0.00039999998989515007
+     ]
+    },
+    {
+     "frame": "ep12_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.002099999925121665,
+      0.2020999938249588
+     ]
+    },
+    {
+     "frame": "ep13_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.11029999703168869,
+      0.003000000026077032
+     ]
+    },
+    {
+     "frame": "ep13_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.02800000086426735,
+      0.9930999875068665
+     ]
+    },
+    {
+     "frame": "ep14_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.2004999965429306,
+      0.0007999999797903001
+     ]
+    },
+    {
+     "frame": "ep14_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.14270000159740448,
+      0.013199999928474426
+     ]
+    },
+    {
+     "frame": "ep15_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.30070000886917114,
+      0.0008999999845400453
+     ]
+    },
+    {
+     "frame": "ep15_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.02250000089406967,
+      0.8899999856948853
+     ]
+    },
+    {
+     "frame": "ep16_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.3172000050544739,
+      0.0003000000142492354
+     ]
+    },
+    {
+     "frame": "ep16_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.006800000090152025,
+      0.9779999852180481
+     ]
+    },
+    {
+     "frame": "ep17_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.44600000977516174,
+      0.0019000000320374966
+     ]
+    },
+    {
+     "frame": "ep17_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.005799999926239252,
+      0.10980000346899033
+     ]
+    },
+    {
+     "frame": "ep18_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.026200000196695328,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep18_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.03400000184774399,
+      0.06310000270605087
+     ]
+    },
+    {
+     "frame": "ep19_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.15839999914169312,
+      0.00039999998989515007
+     ]
+    },
+    {
+     "frame": "ep19_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.026399999856948853,
+      0.40880000591278076
+     ]
+    },
+    {
+     "frame": "ep20_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.22920000553131104,
+      0.0010000000474974513
+     ]
+    },
+    {
+     "frame": "ep20_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      9.999999747378752e-05,
+      0.03629999980330467
+     ]
+    },
+    {
+     "frame": "ep21_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.5356000065803528,
+      0.0017999999690800905
+     ]
+    },
+    {
+     "frame": "ep21_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.017000000923871994,
+      0.9922000169754028
+     ]
+    },
+    {
+     "frame": "ep22_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.15459999442100525,
+      0.0019000000320374966
+     ]
+    },
+    {
+     "frame": "ep22_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.035999998450279236,
+      0.8934000134468079
+     ]
+    },
+    {
+     "frame": "ep23_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.2702000141143799,
+      0.007400000002235174
+     ]
+    },
+    {
+     "frame": "ep23_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.002300000051036477,
+      0.8676999807357788
+     ]
+    },
+    {
+     "frame": "ep24_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.1396999955177307,
+      0.00039999998989515007
+     ]
+    },
+    {
+     "frame": "ep24_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.017799999564886093,
+      0.972100019454956
+     ]
+    },
+    {
+     "frame": "ep25_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.2883000075817108,
+      0.0007999999797903001
+     ]
+    },
+    {
+     "frame": "ep25_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.02979999966919422,
+      0.34279999136924744
+     ]
+    },
+    {
+     "frame": "ep26_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.41130000352859497,
+      0.002099999925121665
+     ]
+    },
+    {
+     "frame": "ep26_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.0007999999797903001,
+      0.0982000008225441
+     ]
+    },
+    {
+     "frame": "ep27_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.4869000017642975,
+      0.0017999999690800905
+     ]
+    },
+    {
+     "frame": "ep27_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.0019000000320374966,
+      0.8163999915122986
+     ]
+    },
+    {
+     "frame": "ep28_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.5493000149726868,
+      0.01940000057220459
+     ]
+    },
+    {
+     "frame": "ep28_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.04910000041127205,
+      0.6215999722480774
+     ]
+    },
+    {
+     "frame": "ep29_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.3853999972343445,
+      0.002099999925121665
+     ]
+    },
+    {
+     "frame": "ep29_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.2232999950647354,
+      0.02590000070631504
+     ]
+    },
+    {
+     "frame": "ep30_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.7590000033378601,
+      0.004000000189989805
+     ]
+    },
+    {
+     "frame": "ep30_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.023900000378489494,
+      0.9549000263214111
+     ]
+    },
+    {
+     "frame": "ep31_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.5511999726295471,
+      0.0024999999441206455
+     ]
+    },
+    {
+     "frame": "ep31_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.06109999865293503,
+      0.7914999723434448
+     ]
+    },
+    {
+     "frame": "ep32_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.10830000042915344,
+      0.000699999975040555
+     ]
+    },
+    {
+     "frame": "ep32_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.024700000882148743,
+      0.6926000118255615
+     ]
+    },
+    {
+     "frame": "ep33_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.08150000125169754,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep33_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.002099999925121665,
+      0.9549000263214111
+     ]
+    },
+    {
+     "frame": "ep34_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.06120000034570694,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep34_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.009600000455975533,
+      0.9911999702453613
+     ]
+    },
+    {
+     "frame": "ep35_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.5809000134468079,
+      0.0019000000320374966
+     ]
+    },
+    {
+     "frame": "ep35_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.008100000210106373,
+      0.7311999797821045
+     ]
+    },
+    {
+     "frame": "ep36_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.029400000348687172,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep36_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.07699999958276749,
+      0.8733000159263611
+     ]
+    },
+    {
+     "frame": "ep37_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.2721000015735626,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep37_end.png",
+     "truth": "end",
+     "pred": "start",
+     "probs": [
+      0.21889999508857727,
+      0.005200000014156103
+     ]
+    },
+    {
+     "frame": "ep38_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.2793000042438507,
+      0.000699999975040555
+     ]
+    },
+    {
+     "frame": "ep38_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.01489999983459711,
+      0.9343000054359436
+     ]
+    },
+    {
+     "frame": "ep39_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.2531000077724457,
+      0.0015999999595806003
+     ]
+    },
+    {
+     "frame": "ep39_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.01119999960064888,
+      0.9492999911308289
+     ]
+    },
+    {
+     "frame": "ep40_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.06390000134706497,
+      0.00019999999494757503
+     ]
+    },
+    {
+     "frame": "ep40_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.00139999995008111,
+      0.958299994468689
+     ]
+    },
+    {
+     "frame": "ep41_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.05779999867081642,
+      0.00039999998989515007
+     ]
+    },
+    {
+     "frame": "ep41_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.02329999953508377,
+      0.7445999979972839
+     ]
+    },
+    {
+     "frame": "ep42_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.22089999914169312,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep42_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.003700000001117587,
+      0.1979999989271164
+     ]
+    },
+    {
+     "frame": "ep43_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.053700000047683716,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep43_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.0012000000569969416,
+      0.03590000048279762
+     ]
+    },
+    {
+     "frame": "ep44_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.31470000743865967,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep44_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      9.999999747378752e-05,
+      0.9162999987602234
+     ]
+    },
+    {
+     "frame": "ep45_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.20000000298023224,
+      9.999999747378752e-05
+     ]
+    },
+    {
+     "frame": "ep45_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.008500000461935997,
+      0.8942000269889832
+     ]
+    },
+    {
+     "frame": "ep46_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.07829999923706055,
+      0.0
+     ]
+    },
+    {
+     "frame": "ep46_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.03359999880194664,
+      0.9592999815940857
+     ]
+    },
+    {
+     "frame": "ep47_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.13699999451637268,
+      0.00039999998989515007
+     ]
+    },
+    {
+     "frame": "ep47_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.004100000020116568,
+      0.5058000087738037
+     ]
+    },
+    {
+     "frame": "ep48_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.13689999282360077,
+      0.0003000000142492354
+     ]
+    },
+    {
+     "frame": "ep48_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.007000000216066837,
+      0.4032000005245209
+     ]
+    },
+    {
+     "frame": "ep49_start.png",
+     "truth": "start",
+     "pred": "start",
+     "probs": [
+      0.2590999901294708,
+      0.0005000000237487257
+     ]
+    },
+    {
+     "frame": "ep49_end.png",
+     "truth": "end",
+     "pred": "end",
+     "probs": [
+      0.0012000000569969416,
+      0.1282999962568283
+     ]
+    }
+   ]
+  }
+ },
+ "ocr": {
+  "model": "Tesseract OCR (LSTM)",
+  "version": "tesseract 5.5.2",
+  "run_as": "original",
+  "size_mb": 5.5,
+  "latency_ms": 147.4,
+  "document_english_cer": 0.0,
+  "scene_korean_cer": 1.0,
+  "scene_korean_cer_inverted": 1.0,
+  "english_text": "This is a lot of 12 point text to test the\nocr code and see if it works on all types\nof file format.\n\nThe quick brown dog jumped over the\nlazy fox. The quick brown dog jumped\nover the lazy fox. The quick brown dog\njumped over the lazy fox. The quick\nbrown dog jumped over the lazy fox.",
+  "korean_text": "",
+  "korean_text_inverted": "",
+  "korean_gold": "서울 Seoul 56Km 평양 Pyeongyang 205Km",
+  "examples": [
+   "ocr_english.jpg",
+   "ocr_korean.jpg"
+  ]
+ },
+ "mediapipe": {
+  "model": "MediaPipe Hand Landmarker + Pose Landmarker (full)",
+  "version": "1.1.0",
+  "run_as": "original",
+  "size_mb": 16.4,
+  "latency_ms_hand": 17.4,
+  "latency_ms_pose": 21.7,
+  "example": "mediapipe.jpg",
+  "hand_detection": {
+   "images": 3,
+   "visible_hands": 6,
+   "recall_full_image": 0.667,
+   "recall_with_wrist_crop": 1.0,
+   "per_image": [
+    {
+     "image": "male_full_height_hands.jpg",
+     "visible_hands": 2,
+     "hands_full_image": 2,
+     "hands_with_wrist_crop": 2,
+     "persons": 1
+    },
+    {
+     "image": "woman_hands.jpg",
+     "visible_hands": 2,
+     "hands_full_image": 2,
+     "hands_with_wrist_crop": 2,
+     "persons": 0
+    },
+    {
+     "image": "pose.jpg",
+     "visible_hands": 2,
+     "hands_full_image": 0,
+     "hands_with_wrist_crop": 2,
+     "persons": 1
+    }
+   ]
+  }
+ }
+}
