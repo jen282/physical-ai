@@ -1,0 +1,296 @@
+/* TeachArm 상담 챗봇 위젯 — 사이트 Tailwind와 충돌하지 않도록 모든 클래스에 tac- 접두사 사용 */
+.tac-root {
+  --tac-primary: #ffe600;
+  --tac-canvas: #0a0d14;
+  --tac-surface: #161b26;
+  --tac-chassis: #0f131c;
+  --tac-border: rgba(255, 255, 255, 0.12);
+  --tac-text: #e1e2ec;
+  --tac-muted: #94a3b8;
+  --tac-cyan: #00f0ff;
+  font-family: "Hanken Grotesk", "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--tac-text);
+}
+
+.tac-root *,
+.tac-root *::before,
+.tac-root *::after {
+  box-sizing: border-box;
+}
+
+/* 열기 버튼 */
+.tac-launcher {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9998;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--tac-primary);
+  color: var(--tac-canvas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(255, 230, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.tac-launcher:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(255, 230, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.tac-launcher svg {
+  width: 26px;
+  height: 26px;
+}
+.tac-root.tac-open .tac-launcher {
+  display: none;
+}
+
+/* 패널 */
+.tac-panel {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  width: 380px;
+  height: min(620px, calc(100vh - 48px));
+  display: none;
+  flex-direction: column;
+  background: var(--tac-surface);
+  border: 1px solid var(--tac-border);
+  border-radius: 14px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+.tac-root.tac-open .tac-panel {
+  display: flex;
+}
+
+.tac-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--tac-chassis);
+  border-bottom: 1px solid var(--tac-border);
+}
+.tac-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tac-cyan);
+  box-shadow: 0 0 8px var(--tac-cyan);
+  flex-shrink: 0;
+}
+.tac-title {
+  font-weight: 700;
+  color: #fff;
+  font-size: 15px;
+}
+.tac-subtitle {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--tac-muted);
+}
+.tac-close {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--tac-muted);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.tac-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+/* 메시지 */
+.tac-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: thin;
+}
+.tac-msg {
+  max-width: 88%;
+  padding: 10px 13px;
+  border-radius: 12px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.tac-msg p {
+  margin: 0 0 6px;
+}
+.tac-msg p:last-child,
+.tac-msg ul:last-child {
+  margin-bottom: 0;
+}
+.tac-msg ul {
+  margin: 0 0 6px;
+  padding-left: 18px;
+}
+.tac-msg li {
+  margin: 2px 0;
+}
+.tac-msg strong {
+  color: #fff;
+}
+.tac-user {
+  align-self: flex-end;
+  background: var(--tac-primary);
+  color: var(--tac-canvas);
+  border-bottom-right-radius: 4px;
+  white-space: pre-wrap;
+}
+.tac-bot {
+  align-self: flex-start;
+  background: var(--tac-chassis);
+  border: 1px solid var(--tac-border);
+  border-bottom-left-radius: 4px;
+}
+.tac-error {
+  border-color: rgba(255, 120, 120, 0.4);
+  color: #ffb4b4;
+}
+.tac-cite {
+  color: var(--tac-cyan);
+  font-size: 11px;
+  text-decoration: none;
+  margin-left: 1px;
+}
+.tac-cite:hover {
+  text-decoration: underline;
+}
+.tac-sources {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--tac-border);
+  font-size: 12px;
+  color: var(--tac-muted);
+}
+.tac-sources a {
+  display: block;
+  color: var(--tac-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tac-sources a:hover {
+  color: var(--tac-cyan);
+}
+.tac-typing {
+  color: var(--tac-muted);
+}
+.tac-typing::after {
+  content: "";
+  animation: tac-dots 1.2s steps(4) infinite;
+}
+@keyframes tac-dots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+}
+
+/* 빠른 질문 + 입력 */
+.tac-footer {
+  border-top: 1px solid var(--tac-border);
+  background: var(--tac-chassis);
+  padding: 10px 12px 12px;
+}
+.tac-quick {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.tac-chip {
+  border: 1px solid var(--tac-border);
+  background: var(--tac-surface);
+  color: var(--tac-text);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.tac-chip:hover:not(:disabled) {
+  border-color: var(--tac-primary);
+  color: var(--tac-primary);
+}
+.tac-form {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.tac-input {
+  flex: 1;
+  resize: none;
+  max-height: 96px;
+  min-height: 40px;
+  padding: 9px 12px;
+  border: 1px solid var(--tac-border);
+  border-radius: 8px;
+  background: var(--tac-canvas);
+  color: #fff;
+  font: inherit;
+  outline: none;
+}
+.tac-input:focus {
+  border-color: var(--tac-primary);
+  box-shadow: none;
+}
+.tac-input::placeholder {
+  color: rgba(148, 163, 184, 0.6);
+}
+.tac-send {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--tac-primary);
+  color: var(--tac-canvas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.tac-send svg {
+  width: 18px;
+  height: 18px;
+}
+.tac-root button:disabled,
+.tac-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .tac-launcher {
+    right: 16px;
+    bottom: 16px;
+  }
+  .tac-panel {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    width: auto;
+    height: min(560px, calc(100vh - 32px));
+  }
+}

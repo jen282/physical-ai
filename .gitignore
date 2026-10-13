@@ -1,4 +1,6 @@
 .DS_Store
+.env
+.mcp.json
 # MediaPipe 모델·샘플 캐시와 결과 이미지 (스크립트 실행 시 자동 생성)
 code/mediapipe_assets/
 code/mediapipe_output/
@@ -7,3 +9,5 @@ code/mediapipe_output/
 code/model_comparison/data/
 code/model_comparison/weights/
 __pycache__/
+# 챗봇 전처리 산출물 (python chatbot/ingest.py 실행 시 생성)
+chatbot/data/
