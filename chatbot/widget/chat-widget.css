@@ -181,6 +181,37 @@
   font-size: 12px;
   color: var(--tac-muted);
 }
+.tac-sources summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.tac-sources summary::-webkit-details-marker {
+  display: none;
+}
+.tac-sources summary::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.15s;
+}
+.tac-sources[open] summary::after {
+  transform: translateY(1px) rotate(-135deg);
+}
+.tac-sources summary:hover,
+.tac-sources summary:focus-visible {
+  color: var(--tac-cyan);
+  outline: none;
+}
+.tac-sources[open] summary {
+  margin-bottom: 4px;
+}
 .tac-sources a {
   display: block;
   color: var(--tac-muted);

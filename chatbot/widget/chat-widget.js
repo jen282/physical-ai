@@ -124,7 +124,10 @@
           .map((n) => `[${n}]`)
           .join("")} ${escapeHtml(label)}</a>`
     );
-    return items.length ? `<div class="tac-sources">출처${items.join("")}</div>` : "";
+    // 기본은 접어 두고, 펼칠 때만 목록을 보여 준다
+    return items.length
+      ? `<details class="tac-sources"><summary>출처 ${items.length}개</summary>${items.join("")}</details>`
+      : "";
   }
 
   function addMessage(className, html) {

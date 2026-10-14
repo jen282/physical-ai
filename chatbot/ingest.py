@@ -4,6 +4,7 @@
     python chatbot/ingest.py --dry-run       # 청킹 결과만 확인 (Gemini 호출 없음)
     python chatbot/ingest.py                 # 청킹 → 임베딩 → chunks.json 저장 → Supabase 업로드
     python chatbot/ingest.py --upload-only   # 저장된 chunks.json을 다시 업로드 (임베딩 생략)
+    python chatbot/ingest.py --only report/hardware_arm.md   # 지정한 문서만 임베딩·업로드 (chunks.json에 병합)
 
 .env: GEMINI_KEY, SUPABASE_URL, SUPABASE_KEY_SECRET
 """
@@ -26,6 +27,7 @@ SOURCES = [
     "report/checklist_arm.md",
     "report/object_detection.md",
     "report/model_selection.md",
+    "report/hardware_arm.md",
 ]
 
 MAX_CHARS = 1500  # 이보다 긴 섹션은 문단 기준으로 다시 나눔
@@ -311,14 +313,18 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true", help="임베딩 없이 청킹 결과만 출력")
     parser.add_argument("--upload-only", action="store_true", help="저장된 chunks.json을 업로드만 함")
+    parser.add_argument("--only", nargs="+", metavar="SOURCE", help="지정한 문서만 처리하고 chunks.json에 병합")
     args = parser.parse_args()
 
     if args.upload_only:
         upload(json.loads(OUT_PATH.read_text(encoding="utf-8")))
         return
 
+    if args.only and (unknown := set(args.only) - set(SOURCES)):
+        parser.error(f"SOURCES에 없는 문서: {', '.join(sorted(unknown))}")
+
     docs = []
-    for src in SOURCES:
+    for src in args.only or SOURCES:
         text = clean_text((ROOT / src).read_text(encoding="utf-8"))
         chunks = chunk_document(text)
         for i, c in enumerate(chunks):
@@ -340,8 +346,14 @@ def main():
         return
 
     embed_all(docs)
+    saved = docs
+    if args.only and OUT_PATH.exists():
+        # 나머지 문서의 기존 임베딩은 그대로 두고, 같은 source_path만 교체한다
+        new = {d["source_path"]: d for d in docs}
+        old = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        saved = [new.pop(d["source_path"], d) for d in old] + list(new.values())
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUT_PATH.write_text(json.dumps(docs, ensure_ascii=False), encoding="utf-8")
+    OUT_PATH.write_text(json.dumps(saved, ensure_ascii=False), encoding="utf-8")
     print(f"저장: {OUT_PATH.relative_to(ROOT)}")
     upload(docs)
 

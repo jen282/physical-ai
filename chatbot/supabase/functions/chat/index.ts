@@ -9,7 +9,10 @@ const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SECRET_KEYS = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}");
 const DB_KEY = SECRET_KEYS["default"] ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-const CHAT_MODEL = "gemini-3.8-flash";
+// gemini-3.8-flash는 혼잡해 답변 한 번에 90초 넘게 걸려서 lite로 바꿨다 (lite는 수 초)
+const CHAT_MODEL = "gemini-3.5-flash-lite";
+// 질문 재작성은 한 문장을 바꿔 쓰는 단순 작업이라 답변 모델과 상관없이 lite로 고정한다
+const REWRITE_MODEL = "gemini-3.5-flash-lite";
 const EMBED_MODEL = "gemini-embedding-2";
 const GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 const REPO_BLOB = "https://github.com/jen282/physical-ai/blob/main";
@@ -69,11 +72,11 @@ async function gemini(path: string, body: unknown) {
   }
 }
 
-async function generate(system: string, contents: unknown[]): Promise<string> {
-  const data = await gemini(`${CHAT_MODEL}:generateContent`, {
+async function generate(model: string, system: string, contents: unknown[]): Promise<string> {
+  const data = await gemini(`${model}:generateContent`, {
     systemInstruction: { parts: [{ text: system }] },
     contents,
-    generationConfig: { thinkingConfig: { thinkingLevel: "low" } },
+    generationConfig: { thinkingConfig: { thinkingLevel: "minimal" } },
   });
   const parts = data.candidates?.[0]?.content?.parts ?? [];
   return parts.map((p: { text?: string }) => p.text ?? "").join("").trim();
@@ -84,6 +87,7 @@ async function rewrite(question: string, history: Turn[]): Promise<string> {
   if (history.length === 0) return question;
   const log = history.map((t) => `${t.role === "user" ? "사용자" : "챗봇"}: ${t.content}`).join("\n");
   const out = await generate(
+    REWRITE_MODEL,
     "대화 기록을 참고해 마지막 질문을 앞 대화 없이도 이해되는 하나의 질문으로 바꾸세요. 바꾼 질문만 출력하세요.",
     [{ role: "user", parts: [{ text: `[대화 기록]\n${log}\n\n[마지막 질문]\n${question}` }] }],
   );
@@ -117,7 +121,7 @@ async function answer(question: string, history: Turn[], chunks: Chunk[]): Promi
     ...history.map((t) => ({ role: t.role === "user" ? "user" : "model", parts: [{ text: t.content }] })),
     { role: "user", parts: [{ text: `[근거]\n${context}\n\n[질문]\n${question}` }] },
   ];
-  return await generate(SYSTEM_PROMPT, contents);
+  return await generate(CHAT_MODEL, SYSTEM_PROMPT, contents);
 }
 
 function parseBody(body: unknown): { question: string; history: Turn[] } {
