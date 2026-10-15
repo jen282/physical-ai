@@ -162,10 +162,13 @@
 <svg class="hidden lg:block w-5 h-5 mx-1 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </li>
 <li class="lg:flex lg:items-center">
-<div class="flex-1 h-full rounded-lg border border-white/[0.08] bg-surface-chassis px-4 py-4">
-<div class="font-label-mono text-label-md text-text-muted">05</div>
-<div class="font-label-ui text-label-ui text-on-surface mt-1">실행</div>
+<a href="#execution" class="pipeline-link block flex-1 h-full rounded-lg border border-primary bg-primary/10 px-4 py-4 shadow-[0_0_16px_rgba(255,230,0,0.2)] hover:bg-primary/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-mono text-label-md text-primary">05</span>
+<span class="inline-flex items-center gap-0.5 font-label-mono text-[10px] tracking-wider text-primary">상세 보기<span class="material-symbols-outlined text-[14px]">arrow_downward</span></span>
 </div>
+<div class="font-label-ui text-label-ui text-primary font-semibold mt-1">실행</div>
+</a>
 <svg class="hidden lg:block w-5 h-5 mx-1 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </li>
 <li class="lg:flex lg:items-center">
@@ -180,7 +183,7 @@
 </ol>
 
 <!-- Summary cards for stages without detail content -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 <div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
 <div class="flex items-center justify-between gap-2"><span class="font-label-mono text-label-md text-text-muted">01 · 데이터 수집</span></div>
 <p class="font-body-md text-body-md text-text-muted">손으로 이끄는 시연을 영상과 관절 데이터로 함께 기록합니다.</p>
@@ -189,11 +192,6 @@
 <div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
 <div class="flex items-center justify-between gap-2"><span class="font-label-mono text-label-md text-text-muted">04 · 후처리</span></div>
 <p class="font-body-md text-body-md text-text-muted">모델 출력을 원래 단위의 로봇 동작 명령으로 되돌립니다.</p>
-<span class="mt-auto pt-2 font-label-mono text-[10px] tracking-wider text-white/35">상세 내용 준비 중</span>
-</div>
-<div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
-<div class="flex items-center justify-between gap-2"><span class="font-label-mono text-label-md text-text-muted">05 · 실행</span></div>
-<p class="font-body-md text-body-md text-text-muted">학습 때와 같은 설정과 통계로 실제 로봇을 가동합니다.</p>
 <span class="mt-auto pt-2 font-label-mono text-[10px] tracking-wider text-white/35">상세 내용 준비 중</span>
 </div>
 <div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 flex flex-col gap-2">
@@ -638,6 +636,155 @@
 </div>
 <p class="mt-6 font-body-md text-body-md text-text-muted flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">info</span>* DINO-X는 API 전용, SAM 3는 승인제라 같은 계열 공개 모델(Grounding DINO, SAM 2.1)로 대신 실행했습니다. 지연은 Apple M4 CPU에서 3라운드 교차 측정한 중앙값입니다.</p>
 <a href="https://github.com/jen282/physical-ai/blob/main/report/model_selection.md" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors">전체 비교 보고서 보기<span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_outward</span></a>
+</div>
+
+</div>
+</section>
+
+<!-- TECH 5: EXECUTION (INFERENCE ENGINE) -->
+<section id="execution" aria-labelledby="execution-title" class="rounded-2xl border border-primary/30 bg-[#0F131C] scroll-mt-24">
+<div class="sticky top-20 z-30 flex items-center justify-between gap-4 h-14 px-5 sm:px-8 rounded-t-2xl border-b border-white/[0.08] backdrop-blur-md bg-[#0F131C]/95">
+<div class="flex items-center gap-3 min-w-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-primary font-label-mono text-label-mono font-bold text-[#0A0D14]">05</span>
+<span class="font-label-ui text-label-ui font-semibold text-text-primary truncate">실행</span>
+<span class="hidden sm:inline font-label-mono text-label-mono text-text-muted">단계 5 / 6</span>
+</div>
+<div class="flex items-center gap-4 shrink-0"><span class="hidden sm:flex items-center gap-1" aria-hidden="true"><span class="w-4 h-1 rounded-full bg-white/15"></span><span class="w-4 h-1 rounded-full bg-white/15"></span><span class="w-4 h-1 rounded-full bg-white/15"></span><span class="w-4 h-1 rounded-full bg-white/15"></span><span class="w-4 h-1 rounded-full bg-primary"></span><span class="w-4 h-1 rounded-full bg-white/15"></span></span><a href="#pipeline" aria-label="전체 단계로 이동" class="inline-flex items-center gap-1 font-label-mono text-label-mono text-text-muted hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_upward</span><span class="hidden sm:inline">전체 단계</span></a></div>
+</div>
+<div class="px-5 sm:px-8 lg:px-12 py-16 lg:py-20 flex flex-col gap-24">
+
+<!-- 5-1 Section header -->
+<div class="max-w-3xl">
+<h2 id="execution-title" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg font-bold text-text-primary tracking-tight mb-5">같은 모델을, 노트북과 Pi 5에서 그대로</h2>
+<p class="font-body-lg text-body-lg text-text-muted">학습은 PyTorch로 하지만, 현장의 Raspberry Pi 5에서는 학습이 끝난 모델을 빠르게 실행만 하는 <span class="text-on-surface">추론 엔진</span>이 필요합니다. 엔진을 골라야 하는 모델은 동작 정책 <span class="text-on-surface">ACT 하나</span>뿐입니다.</p>
+<ul class="mt-10 flex flex-col gap-4" aria-label="모델별 실행 방식">
+<li class="flex items-center gap-2"><div class="flex-1 rounded-lg border border-white/[0.12] bg-surface-chassis px-4 py-4 font-label-ui text-label-ui text-on-surface text-center">동작 정책 · ACT</div><svg class="w-5 h-5 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="flex-1 rounded-lg border border-primary bg-primary/10 px-4 py-4 font-label-ui text-label-ui font-semibold text-primary text-center shadow-[0_0_16px_rgba(255,230,0,0.15)]">ONNX Runtime</div></li>
+<li class="flex items-center gap-2"><div class="flex-1 rounded-lg border border-white/[0.12] bg-surface-chassis px-4 py-4 font-label-ui text-label-ui text-on-surface text-center">손 추적 · MediaPipe</div><svg class="w-5 h-5 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="flex-1 rounded-lg border border-white/[0.12] px-4 py-4 font-label-ui text-label-ui text-text-muted text-center">내장 엔진 그대로</div></li>
+<li class="flex items-center gap-2"><div class="flex-1 rounded-lg border border-white/[0.12] bg-surface-chassis px-4 py-4 font-label-ui text-label-ui text-on-surface text-center">큐브 탐지 · YOLOE</div><svg class="w-5 h-5 shrink-0 text-white/25" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="flex-1 rounded-lg border border-white/[0.12] px-4 py-4 font-label-ui text-label-ui text-text-muted text-center">노트북에서 사후 처리</div></li>
+</ul>
+</div>
+
+<!-- 5-2 Selected engine -->
+<div>
+<div class="mb-10">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">SELECTED</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2">선정 엔진</h3>
+</div>
+<article class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-surface-canvas p-6 sm:p-8 rounded-xl border border-white/[0.08]">
+<figure>
+<div class="rounded-lg border border-white/[0.08] bg-surface-chassis p-5 sm:p-6 flex flex-col items-center gap-3" role="img" aria-label="PyTorch로 학습한 ACT를 .onnx 파일 하나로 변환해 노트북 GPU와 Raspberry Pi 5 CPU에서 같은 파일로 실행하는 흐름">
+<div class="w-full rounded-lg border border-white/[0.12] px-4 py-3 text-center"><div class="font-label-mono text-[10px] tracking-wider text-text-muted">학습 · Colab</div><div class="font-label-ui text-label-ui text-on-surface mt-1">ACT (PyTorch)</div></div>
+<span class="material-symbols-outlined text-[20px] text-white/25" aria-hidden="true">arrow_downward</span>
+<div class="w-full rounded-lg border border-primary bg-primary/10 px-4 py-3 text-center shadow-[0_0_16px_rgba(255,230,0,0.15)]"><div class="font-label-mono text-[10px] tracking-wider text-primary">torch.onnx.export</div><div class="font-label-ui text-label-ui font-semibold text-primary mt-1">.onnx 파일 1개</div></div>
+<span class="material-symbols-outlined text-[20px] text-white/25" aria-hidden="true">call_split</span>
+<div class="w-full grid grid-cols-2 gap-3">
+<div class="rounded-lg border border-white/[0.12] px-3 py-3 text-center"><div class="font-label-mono text-[10px] tracking-wider text-text-muted">노트북 · GPU</div><div class="font-label-ui text-label-ui text-on-surface mt-1">목표 p95 ≤ 50ms</div></div>
+<div class="rounded-lg border border-white/[0.12] px-3 py-3 text-center"><div class="font-label-mono text-[10px] tracking-wider text-text-muted">Pi 5 · ARM CPU</div><div class="font-label-ui text-label-ui text-on-surface mt-1">목표 p95 ≤ 300ms</div></div>
+</div>
+</div>
+<figcaption class="mt-3 font-label-mono text-label-mono text-text-muted">같은 파일 → 실행 장치만 바꿔서 실행</figcaption>
+</figure>
+<div>
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-primary font-label-mono text-label-mono font-bold text-[#0A0D14]">동작 정책 실행</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mt-3">ONNX Runtime</h4>
+<ul class="mt-4 flex flex-col gap-2 font-body-md text-body-md text-text-muted">
+<li class="flex gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">check</span>PyTorch 모델을 <code class="font-label-mono text-label-mono text-on-surface">torch.onnx.export</code> 한 번으로 변환합니다.</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">check</span>같은 파일을 노트북에서는 GPU(CUDA)로, Pi 5에서는 CPU로 실행합니다.</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">check</span>CNN과 Transformer가 섞인 ACT의 연산을 모두 지원합니다.</li>
+</ul>
+<dl class="mt-6 grid grid-cols-3 gap-3">
+<div class="rounded-lg bg-surface-chassis border border-white/[0.06] p-3"><dt class="font-label-mono text-[10px] tracking-wider text-text-muted">가중 점수</dt><dd class="font-headline-sm text-headline-sm font-bold text-primary mt-1">4.75</dd></div>
+<div class="rounded-lg bg-surface-chassis border border-white/[0.06] p-3"><dt class="font-label-mono text-[10px] tracking-wider text-text-muted">Pi 5 목표 (p95)</dt><dd class="font-headline-sm text-headline-sm font-bold text-primary mt-1">300ms</dd></div>
+<div class="rounded-lg bg-surface-chassis border border-white/[0.06] p-3"><dt class="font-label-mono text-[10px] tracking-wider text-text-muted">라이선스</dt><dd class="font-headline-sm text-headline-sm font-bold text-primary mt-1">무료</dd></div>
+</dl>
+<p class="mt-6 font-body-md text-body-md text-on-surface border-l-2 border-primary/60 pl-3"><span class="font-semibold text-text-primary">선정 이유</span> · 엔진 후보 4개 중 가중 점수 1위입니다. CNN만 놓고 보면 NCNN이 ARM CPU에서 더 빠를 수 있지만, ACT처럼 CNN과 Transformer가 섞인 모델을 가장 쉽게 옮길 수 있습니다. 모델 파일이 같으니 노트북과 Pi 5 비교(실험 ④)에서 장비 차이만 볼 수 있습니다.</p>
+<p class="mt-3 font-body-md text-body-md text-text-muted flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-laser-cyan" aria-hidden="true">rule</span>Pi 5에는 AI 전용 칩(NPU)이 없어 ARM CPU 4코어로 추론합니다. 300ms·50ms는 PRD 실험 ④의 목표치로, 모델 학습 후 실측으로 확인합니다.</p>
+</div>
+</article>
+</div>
+
+<!-- 5-3 Comparison of four engines -->
+<div>
+<div class="mb-10">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">COMPARISON</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2">추론 엔진 4개 비교</h3>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 overflow-x-auto rounded-xl border border-white/[0.08] bg-surface-chassis">
+<table class="w-full min-w-[480px] text-left border-collapse">
+<thead class="bg-white/[0.03]"><tr><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">엔진</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">TeachArm 기준 특징</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">판정</th></tr></thead>
+<tbody>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">ONNX Runtime</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">PyTorch에서 바로 변환 · 노트북 GPU와 Pi 5 CPU 모두 지원</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded bg-primary/15 border border-primary/40 font-label-mono text-label-mono text-primary whitespace-nowrap">채택</span></td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">NCNN</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">ARM CPU에서 CNN이 가장 빠름 · Transformer 변환이 까다롭고 노트북 GPU(CUDA) 미지원</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded border border-laser-cyan/40 bg-laser-cyan/10 font-label-mono text-label-mono text-laser-cyan whitespace-nowrap">예비</span></td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">OpenVINO</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">Intel 칩에 최적화 · ARM(Pi 5)과 NVIDIA GPU(노트북)에서는 강점이 없음</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded border border-white/[0.15] font-label-mono text-label-mono text-text-muted whitespace-nowrap">제외</span></td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-mono text-label-mono text-laser-cyan font-semibold whitespace-nowrap">TFLite (LiteRT)</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">모바일 ARM CPU에 강함 · PyTorch Transformer 변환이 가장 불안정</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded border border-white/[0.15] font-label-mono text-label-mono text-text-muted whitespace-nowrap">제외</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08] flex flex-col">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">엔진 가중 점수</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">변환 쉬움 25 · Pi 5 속도 25 · Transformer 지원 20 · 두 장비 지원 15 · 사용 난이도 15 (5점 만점)</p>
+<div class="mt-6 flex flex-col gap-5">
+<div><div class="flex justify-between font-label-mono text-label-mono"><span class="text-text-primary">ONNX Runtime</span><span class="text-primary font-bold">4.75</span></div><div class="mt-2 h-2 rounded-full bg-white/[0.06]"><div class="h-2 rounded-full bg-primary" style="width:95%"></div></div></div>
+<div><div class="flex justify-between font-label-mono text-label-mono"><span class="text-on-surface">NCNN</span><span class="text-on-surface">3.50</span></div><div class="mt-2 h-2 rounded-full bg-white/[0.06]"><div class="h-2 rounded-full bg-white/30" style="width:70%"></div></div></div>
+<div><div class="flex justify-between font-label-mono text-label-mono"><span class="text-on-surface">OpenVINO</span><span class="text-on-surface">3.45</span></div><div class="mt-2 h-2 rounded-full bg-white/[0.06]"><div class="h-2 rounded-full bg-white/30" style="width:69%"></div></div></div>
+<div><div class="flex justify-between font-label-mono text-label-mono"><span class="text-on-surface">TFLite (LiteRT)</span><span class="text-on-surface">3.25</span></div><div class="mt-2 h-2 rounded-full bg-white/[0.06]"><div class="h-2 rounded-full bg-white/30" style="width:65%"></div></div></div>
+</div>
+<p class="mt-auto pt-6 font-body-md text-body-md text-text-muted">NCNN은 Pi 5 속도가 부족할 때 CNN 부분만 맡기는 예비안으로 둡니다.</p>
+</div>
+</div>
+<p class="mt-6 font-body-md text-body-md text-text-muted flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">info</span>학습된 모델이 아직 없어, 점수는 실측이 아니라 공식 문서와 알려진 엔진 특성을 기준으로 매겼습니다. 모델 학습 후 노트북·Pi 5 지연을 측정해 갱신합니다.</p>
+<a href="https://github.com/jen282/physical-ai/blob/main/report/inference_engine_arm.md" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors">전체 선택 보고서 보기<span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_outward</span></a>
+</div>
+
+<!-- 5-4 Optimization order on Pi 5 -->
+<div>
+<div class="mb-10 max-w-3xl">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">OPTIMIZATION</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2 mb-3">Pi 5가 느리면, 쉬운 것부터</h3>
+<p class="font-body-md text-body-md text-text-muted">목표 지연을 넘으면 아래 순서대로 하나씩 적용합니다. 뒤로 갈수록 효과는 크지만 성공률에 영향을 줄 수 있습니다.</p>
+</div>
+<ol class="relative max-w-3xl">
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">1</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">그래프 최적화 · 스레드 설정</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">ONNX Runtime의 최적화 옵션을 켜고, Pi 5의 CPU 4코어를 모두 쓰도록 지정합니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">주의할 점<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">설정만 바꾸므로 정확도에 영향이 없습니다. 그래서 가장 먼저 적용합니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">2</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">입력 해상도 축소</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">카메라 영상을 640×480에서 320×240으로 줄여 계산량을 줄입니다. PRD에 이미 계획된 방법입니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">주의할 점<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">실행 때만 줄이면 안 되고, 학습 때도 같은 해상도로 다시 학습해야 합니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5 pb-10">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">3</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">INT8 양자화</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">모델의 숫자를 32비트에서 8비트로 줄여 크기를 약 1/4로 만들고 속도를 높입니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">주의할 점<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">정밀도가 낮아지므로 작업 성공률이 떨어지는지 반드시 확인합니다. 떨어지면 FP32로 되돌립니다.</p>
+</div>
+</li>
+<li class="relative flex gap-5">
+<div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">4</span></div>
+<div class="pt-1.5 flex-1">
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">추론 간격 조절</h4>
+<p class="font-body-md text-body-md text-text-muted mt-2">ACT는 한 번에 수십 스텝 분량의 동작을 출력하므로, 매 제어 주기마다 추론하지 않아도 동작이 이어집니다.</p>
+<button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">주의할 점<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
+<p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">간격을 너무 늘리면 큐브 위치 변화에 반응이 늦어집니다.</p>
+</div>
+</li>
+</ol>
+<p class="mt-8 max-w-3xl font-body-md text-body-md text-on-surface flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">info</span>최적화 후에는 지연만 보지 않고 성공률도 다시 측정합니다. 기준은 Pi 5 성공률이 노트북 대비 10%p 이내입니다.</p>
 </div>
 
 </div>
