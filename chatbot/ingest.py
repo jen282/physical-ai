@@ -29,6 +29,7 @@ SOURCES = [
     "report/model_selection.md",
     "report/hardware_arm.md",
     "report/inference_engine_arm.md",
+    "report/container_arm.md",
 ]
 
 MAX_CHARS = 1500  # 이보다 긴 섹션은 문단 기준으로 다시 나눔

@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>피지컬 AI 부품 도감</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: 헤더 + 탭 5개, 한 번에 패널 하나. 기판 실크스크린 느낌 — 얇은 선, 모노 라벨, MCU=구리 / SBC=파랑 2색 코드 */
+:root{
+  --bg:#f1f4f0; --surface:#ffffff; --ink:#18211c; --muted:#5f6d65; --line:#d3dbd5;
+  --mcu:#b5601a; --mcu-soft:#f6e7da; --sbc:#2b5ea6; --sbc-soft:#dfe8f6;
+  --ok:#2b8449; --ok-soft:#ddf1e4; --warn:#a87a0c; --warn-soft:#f8efd5; --bad:#c03838; --bad-soft:#f9e0e0;
+  --dot:rgba(24,33,28,.07);
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1411; --surface:#161f1a; --ink:#e3eae5; --muted:#93a39a; --line:#2b3732;
+  --mcu:#e38d47; --mcu-soft:#382617; --sbc:#7ba5e8; --sbc-soft:#1b2940;
+  --ok:#5fc380; --ok-soft:#163020; --warn:#e0b44a; --warn-soft:#352c12; --bad:#f07272; --bad-soft:#3c1c1c;
+  --dot:rgba(227,234,229,.06); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1411; --surface:#161f1a; --ink:#e3eae5; --muted:#93a39a; --line:#2b3732;
+  --mcu:#e38d47; --mcu-soft:#382617; --sbc:#7ba5e8; --sbc-soft:#1b2940;
+  --ok:#5fc380; --ok-soft:#163020; --warn:#e0b44a; --warn-soft:#352c12; --bad:#f07272; --bad-soft:#3c1c1c;
+  --dot:rgba(227,234,229,.06); color-scheme:dark}
+
+[hidden]{display:none!important}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  background-image:radial-gradient(var(--dot) 1px,transparent 1.2px);background-size:18px 18px}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--sbc);outline-offset:2px}
+.mono{font-family:var(--f-mono)}
+
+/* header */
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+h1{font-size:clamp(26px,4.2vw,40px);line-height:1.15;margin:6px 0 14px;text-wrap:balance;font-weight:700;letter-spacing:-.01em}
+.legend{display:flex;flex-wrap:wrap;gap:10px}
+.lg{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px}
+.lg i{width:12px;height:12px;border-radius:3px;display:block}
+.lg.mcu i{background:var(--mcu)} .lg.sbc i{background:var(--sbc)}
+
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:26px 0 18px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.tab{background:transparent;border:1px solid transparent;border-radius:8px;padding:8px 14px;color:var(--muted);font-weight:500}
+.tab b{font-family:var(--f-mono);font-size:12px;margin-right:6px;opacity:.7}
+.tab:hover{color:var(--ink);border-color:var(--line)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.panel h2{font-size:21px;margin:0 0 4px;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 18px}
+
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.seg button{border:0;background:transparent;padding:6px 12px;border-radius:7px;font-size:14px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.controls .lbl{font-size:13px;color:var(--muted)}
+
+/* 1. scale bars */
+.bars{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:8px}
+.brow{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:center}
+.brow .nm{font-family:var(--f-mono);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{display:flex;align-items:center;gap:8px;min-width:0}
+.bar{height:18px;border-radius:4px;transition:width .7s cubic-bezier(.2,.7,.2,1);min-width:4px}
+.bar.mcu{background:var(--mcu)} .bar.sbc{background:var(--sbc)}
+.val{font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.gap{display:flex;align-items:center;gap:10px;margin:6px 0;color:var(--ink)}
+.gap::before,.gap::after{content:"";flex:1;border-top:1px dashed var(--line)}
+.gap span{font-family:var(--f-mono);font-size:13px;padding:4px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
+.gap strong{font-size:16px}
+.takeaway{margin-top:14px;font-size:15px;padding:12px 14px;border-left:3px solid var(--ink);background:var(--surface);border-radius:0 8px 8px 0}
+
+/* 2. cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:left;display:flex;flex-direction:column;gap:10px;min-width:0;position:relative}
+.card:hover{border-color:var(--muted)}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.kind{font-family:var(--f-mono);font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;letter-spacing:.04em}
+.kind.mcu{background:var(--mcu-soft);color:var(--mcu)} .kind.sbc{background:var(--sbc-soft);color:var(--sbc)}
+.tag{font-size:12px;color:var(--muted)}
+.card .nm{font-weight:700;font-size:17px;line-height:1.25}
+.card .chip{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:2px}
+.meters{display:grid;gap:4px}
+.m{display:grid;grid-template-columns:52px 1fr;align-items:center;gap:8px;font-size:12px;color:var(--muted);border-radius:4px;padding:1px 3px;margin:0 -3px}
+.m.hl{background:var(--bg);color:var(--ink);font-weight:700}
+.pips{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.pips i{height:7px;border-radius:2px;background:var(--line)}
+.card.mcu .pips i.on,.sheet.mcu .pips i.on{background:var(--mcu)} .card.sbc .pips i.on,.sheet.sbc .pips i.on{background:var(--sbc)}
+.flipHint{font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+
+/* detail sheet */
+.modal{position:fixed;inset:0;z-index:60;background:rgba(10,14,12,.55);display:grid;place-items:center;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--surface);color:var(--ink);border-radius:16px;width:min(760px,100%);max-height:100%;overflow:auto;padding:22px;display:grid;gap:18px;border-top:6px solid var(--line)}
+.sheet.mcu{border-top-color:var(--mcu)} .sheet.sbc{border-top-color:var(--sbc)}
+.sh-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.sh-top .nm{font-size:26px;font-weight:700;line-height:1.2;margin-top:6px}
+.sh-top .chip{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.sh-nav{display:flex;gap:6px;flex:none}
+.icon{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--bg);font-size:16px;display:grid;place-items:center}
+.icon:hover{border-color:var(--ink)}
+.sh-meters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.sh-meters .m{grid-template-columns:1fr;gap:4px;margin:0;padding:0;font-size:12px}
+.pc-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.pc-col h3{font-size:14px;margin:0 0 8px;display:flex;align-items:center;gap:6px}
+.pc-col.pro h3{color:var(--ok)} .pc-col.con h3{color:var(--bad)}
+.pt{border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.pc-col.pro .pt{background:var(--ok-soft)} .pc-col.con .pt{background:var(--bad-soft)}
+.pt b{display:block;font-size:15px;margin-bottom:2px}
+.pt span{font-size:14px;line-height:1.5}
+.use{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+.use .ul{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-right:4px}
+.use .u{padding:3px 10px;border-radius:999px;border:1px solid var(--line)}
+.use .u.y{border-color:var(--ok);color:var(--ok)} .use .u.n{border-color:var(--bad);color:var(--bad)}
+
+/* 3. requirement tuner */
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.preset{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px}
+.preset:hover{border-color:var(--ink)}
+.preset[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tuner{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:16px;align-items:start}
+.knobs{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:20px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+.knob .kl{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;margin-bottom:6px}
+.knob .kv{font-family:var(--f-mono);font-size:12px;color:var(--sbc);font-weight:700}
+.knob input[type=range]{width:100%;accent-color:var(--ink)}
+.knob .ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-family:var(--f-mono)}
+.radios{display:flex;flex-wrap:wrap;gap:4px}
+.radios button{border:1px solid var(--line);background:transparent;border-radius:7px;padding:5px 10px;font-size:13px}
+.radios button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.rank{display:grid;gap:6px}
+.rk{display:grid;grid-template-columns:22px minmax(0,150px) minmax(0,1fr);gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.rk .no{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-align:right}
+.rk .nm{font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px;min-width:0}
+.rk .nm span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rk .nm i{width:8px;height:8px;border-radius:2px;flex:none}
+.rk.mcu .nm i{background:var(--mcu)} .rk.sbc .nm i{background:var(--sbc)}
+.rk .fit{display:flex;align-items:center;gap:8px;min-width:0}
+.rk .fbar{height:10px;border-radius:3px;background:var(--line);transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.rk.mcu .fbar{background:var(--mcu)} .rk.sbc .fbar{background:var(--sbc)}
+.rk .why{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.rk.top{border-width:2px;border-color:var(--ink)}
+.rk.low{opacity:.45}
+.verdictBox{margin-bottom:10px;padding:12px 14px;border-radius:10px;font-size:14px;background:var(--surface);border:1px solid var(--line)}
+.verdictBox b{font-size:16px}
+.verdictBox.hard{border-color:var(--warn);background:var(--warn-soft)}
+.btn{border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:9px;padding:8px 16px;font-weight:700}
+.btn.ghostbtn{background:transparent;color:var(--ink)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* 4. tree */
+.tree{display:grid;gap:14px}
+.trail{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:32px}
+.crumb{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:13px}
+.crumb b{color:var(--sbc)}
+.crumb:hover{border-color:var(--ink)}
+.arrow{color:var(--muted);font-family:var(--f-mono)}
+.qbox{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:16px}
+.qbox .q{font-size:clamp(20px,3vw,26px);font-weight:700;text-wrap:balance}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{border:1.5px solid var(--ink);background:transparent;border-radius:10px;padding:12px 22px;font-size:16px;font-weight:700;min-width:96px}
+.opt:hover{background:var(--ink);color:var(--bg)}
+.result{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.res{border-radius:12px;padding:16px;border:1.5px solid var(--line);background:var(--surface);display:grid;gap:4px}
+.res.mcu{border-color:var(--mcu)} .res.sbc{border-color:var(--sbc)}
+.res .nm{font-size:19px;font-weight:700}
+.res .sp{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+
+.foot{margin-top:40px;font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+
+@media (max-width:720px){
+  .pc-cols{grid-template-columns:minmax(0,1fr)}
+  .sh-meters{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .modal{place-items:end center}
+  .tuner{grid-template-columns:minmax(0,1fr)}
+  .knobs{position:static}
+  .rk{grid-template-columns:20px minmax(0,1fr)}
+  .rk .fit{grid-column:2}
+  .brow{grid-template-columns:104px minmax(0,1fr);gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">8_5 · 상황별 부품 선택</div>
+    <h1>피지컬 AI 부품 도감</h1>
+    <div class="legend">
+      <span class="lg mcu"><i></i>MCU · 반사신경</span>
+      <span class="lg sbc"><i></i>SBC · 두뇌</span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="단계">
+    <button class="tab" role="tab" data-tab="scale" aria-selected="true"><b>1</b>체급 비교</button>
+    <button class="tab" role="tab" data-tab="cards" aria-selected="false"><b>2</b>부품 도감</button>
+    <button class="tab" role="tab" data-tab="match" aria-selected="false"><b>3</b>조건 조절기</button>
+    <button class="tab" role="tab" data-tab="tree" aria-selected="false"><b>4</b>질문으로 고르기</button>
+  </nav>
+
+  <main>
+    <!-- 1 -->
+    <section class="panel" id="p-scale">
+      <h2>MCU와 SBC, 체급이 얼마나 다를까?</h2>
+      <p class="lead">기준을 바꿔 보세요. 막대는 로그 스케일입니다.</p>
+      <div class="controls">
+        <div class="seg" id="metricSeg">
+          <button data-m="ram" aria-pressed="true">메모리(RAM)</button>
+          <button data-m="pw" aria-pressed="false">소비전력</button>
+          <button data-m="boot" aria-pressed="false">부팅 시간</button>
+        </div>
+      </div>
+      <div class="bars" id="bars"></div>
+      <div class="takeaway" id="takeaway"></div>
+    </section>
+
+    <!-- 2 -->
+    <section class="panel" id="p-cards" hidden>
+      <h2>부품마다 특색이 있다</h2>
+      <p class="lead">정렬 기준을 눌러 1등을 찾고, 카드를 눌러 장단점과 그 이유를 확인하세요.</p>
+      <div class="controls">
+        <div class="seg" id="kindSeg">
+          <button data-k="all" aria-pressed="true">전체</button>
+          <button data-k="mcu" aria-pressed="false">MCU</button>
+          <button data-k="sbc" aria-pressed="false">SBC</button>
+        </div>
+        <span class="lbl">정렬</span>
+        <div class="seg" id="sortSeg">
+          <button data-s="-1" aria-pressed="true">기본</button>
+          <button data-s="0" aria-pressed="false">저전력</button>
+          <button data-s="1" aria-pressed="false">성능</button>
+          <button data-s="2" aria-pressed="false">무선</button>
+          <button data-s="3" aria-pressed="false">실시간</button>
+          <button data-s="4" aria-pressed="false">자료·생태계</button>
+        </div>
+      </div>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <!-- 3 -->
+    <section class="panel" id="p-match" hidden>
+      <h2>조건이 바뀌면 1등이 바뀐다</h2>
+      <p class="lead">예시 상황을 누르거나 조건을 직접 움직여 보세요.</p>
+      <div class="presets" id="presets"></div>
+      <div class="tuner">
+        <div class="knobs" id="knobs"></div>
+        <div>
+          <div class="verdictBox" id="verdict"></div>
+          <div class="rank" id="rank"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="panel" id="p-tree" hidden>
+      <h2>질문에 답하면 부품이 나온다</h2>
+      <p class="lead">지나온 답을 누르면 그 질문으로 돌아갑니다.</p>
+      <div class="tree" id="tree"></div>
+    </section>
+
+  </main>
+
+  <div class="modal" id="modal" hidden>
+    <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shName"></div>
+  </div>
+
+  <div class="foot">수치는 대표값입니다. 같은 이름이라도 모델·설정에 따라 다릅니다.</div>
+</div>
+
+<script>
+(function(){
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (s,r=document)=>r.querySelector(s);
+const el = (tag,cls,html)=>{const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e;};
+
+/* ---------- data ---------- */
+const AX=["저전력","성능","무선","실시간","자료"];
+const P=[
+ {id:"uno",k:"mcu",n:"Arduino Uno",c:"ATmega328P",t:"입문·교육",sp:"8bit · 16MHz · RAM 2KB",s:[3,1,0,4,5],y:["버튼·LED·릴레이","교육용 키트"],x:["무선 통신","MQTT·JSON 처리"]},
+ {id:"stm32",k:"mcu",n:"STM32",c:"ARM Cortex-M",t:"산업·모터 제어",sp:"M0~M7·M55 · 기본형 무선 없음",s:[4,3,1,5,4],y:["모터 정밀 제어","드론 비행 제어","CAN 통신"],x:["빠른 Wi-Fi 시제품"]},
+ {id:"pico",k:"mcu",n:"Raspberry Pi Pico",c:"RP2040 / RP2350",t:"정밀 타이밍 (PIO)",sp:"듀얼코어 · RAM 264~520KB",s:[2,2,2,5,4],y:["LED 스트립","특수 신호 생성","MicroPython 입문"],x:["배터리 장기 동작"]},
+ {id:"nrf",k:"mcu",n:"nRF52840",c:"Nordic",t:"BLE·Thread 저전력",sp:"M4F 64MHz · BLE + Thread",s:[5,2,4,4,3],y:["웨어러블","코인셀 센서","Matter 기기"],x:["Wi-Fi가 필요할 때"]},
+ {id:"esp32",k:"mcu",n:"ESP32",c:"Xtensa 듀얼코어",t:"만능 Wi-Fi",sp:"240MHz · Wi-Fi + BT Classic + BLE",s:[3,3,4,3,5],y:["Wi-Fi 센서","ESP-NOW","BT 오디오"],x:["코인셀로 수년 동작"]},
+ {id:"s3",k:"mcu",n:"ESP32-S3",c:"Xtensa LX7 듀얼",t:"카메라·AI",sp:"240MHz · AI 벡터 명령 · USB",s:[2,4,4,3,4],y:["카메라 노드","TinyML"],x:["초저가 대량 배치"]},
+ {id:"c3",k:"mcu",n:"ESP32-C3",c:"RISC-V",t:"최저가 Wi-Fi",sp:"160MHz · Wi-Fi + BLE",s:[4,2,4,3,4],y:["센서 대량 배치"],x:["카메라·AI"]},
+ {id:"c6",k:"mcu",n:"ESP32-C6",c:"RISC-V",t:"Wi-Fi 6 + Thread",sp:"Wi-Fi 6 + BLE + 802.15.4",s:[4,2,5,3,3],y:["Matter 기기","Thread 보더 라우터"],x:["고성능 연산"]},
+ {id:"h2",k:"mcu",n:"ESP32-H2",c:"RISC-V",t:"Thread 전용 저전력",sp:"BLE + 802.15.4 · Wi-Fi 없음",s:[5,1,3,3,3],y:["Thread 메시 센서"],x:["Wi-Fi·인터넷 직결"]},
+ {id:"pi5",k:"sbc",n:"Raspberry Pi 5",c:"BCM2712",t:"만능 두뇌",sp:"A76 ×4 2.4GHz · RAM 1~16GB",s:[1,4,3,1,5],y:["MQTT 브로커","게이트웨이","가벼운 비전 AI"],x:["다중 카메라 실시간 AI"]},
+ {id:"zero",k:"sbc",n:"Pi Zero 2 W",c:"RP3A0",t:"소형 리눅스",sp:"A53 ×4 · RAM 512MB",s:[2,2,3,1,4],y:["소형 게이트웨이","카메라 스트리밍"],x:["멀티 컨테이너","AI 추론"]},
+ {id:"jetson",k:"sbc",n:"Jetson Orin Nano",c:"NVIDIA",t:"비전 AI 최강",sp:"CUDA 1024코어 · 67 TOPS (희소 INT8)",s:[0,5,3,1,4],y:["다중 카메라 인식","자율주행 로봇"],x:["배터리 소형 장치","저예산"]},
+ {id:"rk",k:"sbc",n:"RK3588 보드",c:"Orange Pi 5 · Rock 5B",t:"가성비 NPU",sp:"A76×4 + A55×4 · NPU 6 TOPS",s:[1,4,2,1,2],y:["저예산 AI 가속","영상 처리"],x:["입문자 (자료 부족)"]},
+ {id:"hailo",k:"sbc",n:"Pi 5 + AI HAT+",c:"Hailo NPU",t:"Pi에 NPU 추가",sp:"PCIe NPU 13 · 26 · 40 TOPS",s:[1,4,3,1,4],y:["기존 Pi 시스템 가속"],x:["초소형 장치"]},
+ {id:"bbb",k:"sbc",n:"BeagleBone Black",c:"AM335x + PRU",t:"리눅스 + 실시간",sp:"PRU 코프로세서 ×2",s:[2,2,1,4,3],y:["리눅스 + µs 제어를 한 보드에"],x:["AI 추론"]},
+ {id:"latte",k:"sbc",n:"LattePanda",c:"Intel x86",t:"작은 PC",sp:"x86 · Windows 실행",s:[1,4,3,1,3],y:["Windows 전용 SDK"],x:["저전력·발열 민감"]}
+];
+const byId=Object.fromEntries(P.map(p=>[p.id,p]));
+
+/* ---------- tabs ---------- */
+const tabs=[...document.querySelectorAll('.tab')];
+function showTab(name){
+  tabs.forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===name)));
+  document.querySelectorAll('.panel').forEach(p=>p.hidden = p.id!=='p-'+name);
+  try{history.replaceState(null,'','#'+name)}catch(e){}
+}
+tabs.forEach(t=>t.addEventListener('click',()=>showTab(t.dataset.tab)));
+const h=(location.hash||'').slice(1);
+if(tabs.some(t=>t.dataset.tab===h)) showTab(h);
+
+function segInit(seg,attr,cb){
+  seg.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    cb(b.dataset[attr]);
+  });
+}
+
+/* ---------- 1. scale ---------- */
+const SC=[
+ {id:"uno",n:"Arduino Uno",k:"mcu",ram:2e3,pw:.25,boot:.5},
+ {id:"stm32",n:"STM32 (F4)",k:"mcu",ram:192e3,pw:.1,boot:.01},
+ {id:"nrf",n:"nRF52840",k:"mcu",ram:256e3,pw:.015,boot:.01},
+ {id:"pico",n:"Pi Pico",k:"mcu",ram:264e3,pw:.1,boot:.01},
+ {id:"esp32",n:"ESP32",k:"mcu",ram:520e3,pw:.5,boot:.3},
+ {id:"zero",n:"Pi Zero 2 W",k:"sbc",ram:512e6,pw:1,boot:25},
+ {id:"pi5",n:"Raspberry Pi 5",k:"sbc",ram:8e9,pw:5,boot:15},
+ {id:"jetson",n:"Jetson Orin Nano",k:"sbc",ram:8e9,pw:15,boot:40}
+];
+const MET={
+ ram:{fmt:v=>v>=1e9?(v/1e9)+"GB":v>=1e6?(v/1e6)+"MB":(v/1e3)+"KB",lo:1e3,hi:16e9,
+      tk:"KB 대 GB. 리눅스·도커·AI는 GB가 필요합니다."},
+ pw:{fmt:v=>v>=1?"약 "+v+"W":"약 "+Math.round(v*1000)+"mW",lo:.005,hi:30,
+      tk:"배터리로 오래 버텨야 하면 MCU. Deep Sleep에선 µW까지 내려갑니다 (8_4 듀티 사이클)."},
+ boot:{fmt:v=>v>=1?"약 "+v+"초":"약 "+Math.round(v*1000)+"ms",lo:.005,hi:60,
+      tk:"MCU는 켜자마자 동작, SBC는 OS 부팅을 기다려야 합니다. 비상정지를 MCU에 맡기는 이유입니다."}
+};
+const bars=$('#bars');
+function drawBars(m){
+  const M=MET[m], L=Math.log10;
+  const w=v=>Math.max(2,(L(v)-L(M.lo))/(L(M.hi)-L(M.lo))*100);
+  if(!bars.children.length){
+    SC.forEach((d,i)=>{
+      if(i>0 && SC[i-1].k!==d.k){ const g=el('div','gap','<span id="ratio"></span>'); bars.appendChild(g); }
+      const r=el('div','brow',`<div class="nm">${d.n}</div><div class="track"><span class="bar ${d.k}" style="width:0"></span><span class="val"></span></div>`);
+      r.dataset.id=d.id; bars.appendChild(r);
+    });
+  }
+  bars.querySelectorAll('.brow').forEach(r=>{
+    const d=SC.find(x=>x.id===r.dataset.id);
+    const bar=r.querySelector('.bar');
+    // track width leaves room for the value label
+    bar.style.width=`calc(${w(d[m])}% * 0.78)`;
+    r.querySelector('.val').textContent=M.fmt(d[m]);
+  });
+  const mcu=SC.filter(d=>d.k==="mcu").map(d=>d[m]), sbc=SC.filter(d=>d.k==="sbc").map(d=>d[m]);
+  const ratio=Math.min(...sbc)/Math.max(...mcu);
+  const nice=ratio>=100?Math.round(ratio/100)*100:Math.round(ratio);
+  $('#ratio').innerHTML=`MCU 최대 → SBC 최소 <strong>약 ${nice.toLocaleString('ko-KR')}배</strong>`;
+  $('#takeaway').textContent=M.tk;
+}
+segInit($('#metricSeg'),'m',drawBars);
+requestAnimationFrame(()=>drawBars('ram'));
+
+/* ---------- 2. cards ---------- */
+const cardsEl=$('#cards'); let sortKey=-1, kind='all';
+P.forEach(p=>{
+  const c=el('button','card '+p.k);
+  c.dataset.id=p.id; c.setAttribute('aria-haspopup','dialog');
+  c.innerHTML=`<div class="top"><span class="kind ${p.k}">${p.k.toUpperCase()}</span><span class="tag">${p.t}</span></div>
+   <div><div class="nm">${p.n}</div><div class="chip">${p.sp}</div></div>
+   <div class="meters">${meters(p)}</div>
+   <div class="flipHint">눌러서 장단점 자세히 ▸</div>`;
+  c.addEventListener('click',()=>openSheet(p.id,c));
+  cardsEl.appendChild(c);
+});
+function meters(p){return p.s.map((v,i)=>`<div class="m" data-i="${i}"><span>${AX[i]}</span><span class="pips">${[0,1,2,3,4].map(j=>`<i class="${j<v?'on':''}"></i>`).join('')}</span></div>`).join('');}
+
+/* 장단점 + 이유 */
+const D={
+ uno:{p:[["자료가 가장 많음","오랫동안 쓰인 교육 표준이라 막히는 문제 대부분의 해답이 이미 인터넷에 있습니다."],["5V 로직 · 튼튼함","5V 센서·릴레이를 레벨 변환 없이 바로 연결할 수 있고, 배선 실수에도 잘 망가지지 않습니다."],["구조가 단순","OS도 무선도 없어 작성한 코드가 곧 동작입니다. 원리를 배우기에 가장 좋습니다."]],
+      c:[["RAM 2KB","문자열·JSON·MQTT 라이브러리만 올려도 메모리가 바닥나 멈추거나 재부팅됩니다."],["무선 없음","Wi-Fi·BLE 모듈을 따로 붙여야 해서 배선과 코드가 복잡해집니다."],["16MHz 8비트","32비트 MCU보다 연산이 크게 느려 신호 처리나 AI는 불가능합니다."]]},
+ stm32:{p:[["주변장치가 강력","고급 타이머·PWM·ADC·CAN이 하드웨어로 들어 있어, CPU 부담 없이 모터를 정밀하게 제어합니다."],["라인업이 넓음","저가 M0부터 고성능 M7, NPU를 단 M55(STM32N6, 800MHz)까지 같은 도구로 개발합니다. 제품 사양이 바뀌면 칩만 바꾸면 됩니다."],["산업용 신뢰성","넓은 동작 온도와 장기 공급이 보장되어 양산 제품에 안심하고 씁니다."]],
+      c:[["무선 없음 (기본형)","Wi-Fi가 필요하면 별도 모듈을 달거나 무선 내장 시리즈(WB=BLE, WL=LoRa)를 골라야 합니다."],["진입 장벽","CubeIDE·HAL·클럭 설정 등 초기 설정이 많아 첫 동작까지 ESP32보다 오래 걸립니다."]]},
+ pico:{p:[["PIO","CPU와 따로 도는 작은 상태 머신이 정밀한 신호를 만들어 줍니다. 특수 통신 규격도 직접 구현할 수 있습니다."],["저렴 + 공식 문서 탄탄","라즈베리 파이 재단의 문서와 커뮤니티가 잘 갖춰져 있습니다."],["MicroPython 친화","파이썬으로 바로 하드웨어를 제어할 수 있어 입문 장벽이 낮습니다."]],
+      c:[["잠들어도 전류가 큼","RP2040 휴면 전류가 칩 기준 약 180µA로 ESP32 Deep Sleep(약 10µA)보다 커서, 배터리로 수년 동작시키기엔 불리합니다."],["무선은 W 모델만","기본 Pico에는 무선이 없어 Pico W / Pico 2 W를 골라야 합니다."]]},
+ nrf:{p:[["초저전력","송수신 전류가 작고 잠들면 µA 수준이라 코인셀 하나로 수년 동작합니다."],["BLE 표준의 강자","스마트워치·무선 이어폰 대부분이 Nordic 칩이라 스마트폰 호환성이 검증되어 있습니다."],["Thread · Zigbee 지원","802.15.4 무선을 내장해 Matter over Thread 기기를 만들 수 있습니다 (8_4 ②)."]],
+      c:[["Wi-Fi 없음","인터넷에 직접 붙지 못하고 스마트폰이나 보더 라우터를 거쳐야 합니다."],["개발 환경 난이도","nRF Connect SDK(Zephyr RTOS)를 배워야 해서 아두이노보다 어렵습니다."]]},
+ esp32:{p:[["무선 3종 내장","Wi-Fi + BLE + BT Classic을 칩 하나로 처리해 별도 모듈이 필요 없습니다."],["가격 대비 성능","듀얼코어 240MHz를 매우 저렴하게 쓸 수 있습니다."],["자료·예제 최다","아두이노 IDE를 지원하고 ESP-NOW(8_3)까지 예제가 풍부합니다."]],
+      c:[["Wi-Fi 전력 소모","Wi-Fi 송신 중엔 수백 mA를 씁니다. 자주 깨어나면 배터리가 금방 닳습니다 (8_4 듀티 사이클)."],["ESP-NOW는 독자 규격","Espressif 칩끼리만 통신되어 다른 제조사 기기와 섞어 쓸 수 없습니다 (8_4 ②)."]]},
+ s3:{p:[["AI 벡터 명령어","신경망 연산을 묶어서 처리하는 명령어가 있어 TinyML이 일반 ESP32보다 빠릅니다 (9단원)."],["카메라 · USB 지원","카메라 모듈과 USB 장치 기능을 지원해 카메라 노드로 쓰기 좋습니다."],["메모리 확장","외부 PSRAM을 붙여 이미지 버퍼를 담을 수 있습니다."]],
+      c:[["BT Classic 없음","BLE만 지원해 블루투스 오디오 같은 기능은 쓸 수 없습니다."],["단순 센서엔 과함","가격과 전력이 C3보다 높아 온도 센서 같은 용도엔 낭비입니다."]]},
+ c3:{p:[["가장 저렴한 Wi-Fi 칩","센서를 수십~수백 개 깔 때 개당 단가 차이가 크게 쌓입니다."],["단순한 RISC-V 싱글코어","구조가 단순해 오리지널 ESP32보다 전력이 낮은 편입니다."],["작은 모듈","소형 보드라 센서 하우징에 넣기 쉽습니다."]],
+      c:[["싱글코어 160MHz","무선 처리와 무거운 계산을 동시에 하기엔 여유가 적습니다."],["카메라 · AI 불가","카메라 인터페이스와 AI 가속 기능이 없습니다."]]},
+ c6:{p:[["Wi-Fi 6","혼잡한 환경에서 효율이 좋고, 깨어날 시간을 예약하는 TWT 기능으로 저전력에 유리합니다."],["Thread 내장","Wi-Fi와 Thread를 한 칩에 담아 Matter 기기나 Thread 보더 라우터를 만들 수 있습니다."],["ESP32 경험 그대로","기존 ESP32 개발 방식과 도구를 그대로 씁니다."]],
+      c:[["성능은 평범","싱글코어 160MHz라 고성능 연산엔 부족합니다."],["Thread 자료가 적음","Wi-Fi 예제에 비해 Thread·Matter 예제가 적어 공부할 게 많습니다."]]},
+ h2:{p:[["Wi-Fi를 뺀 저전력","전기를 가장 많이 먹는 Wi-Fi가 없어 배터리 수명에 유리합니다."],["Thread + BLE","Matter over Thread 센서 기기용으로 설계된 칩입니다."]],
+      c:[["Wi-Fi 없음","인터넷 연결은 보더 라우터(C6, 스마트홈 허브 등)를 거쳐야 합니다."],["낮은 성능","96MHz라 계산이 많은 작업엔 맞지 않습니다."]]},
+ pi5:{p:[["압도적 자료","거의 모든 문제의 해결책이 이미 인터넷에 있습니다."],["만능 인터페이스","CSI 카메라·GPIO·USB 3·PCIe를 모두 갖춰 확장이 쉽습니다."],["리눅스 · 도커","8_4처럼 멀티 컨테이너 구조를 그대로 운영할 수 있습니다."]],
+      c:[["NPU 없음","AI를 CPU로 돌려야 해서 카메라 여러 대 실시간 추론엔 한계가 있습니다 (7_4)."],["전력 · 발열","부하가 걸리면 수 W를 쓰고 쿨러가 필요해 배터리 장치엔 맞지 않습니다."],["리눅스는 멈출 수 있음","부팅에 수십 초가 걸리고 OOM·업데이트로 멈출 수 있어 비상정지를 맡기면 안 됩니다."]]},
+ zero:{p:[["손가락 크기","좁은 하우징, 드론, 카메라 단말에 넣을 수 있습니다."],["저전력 리눅스","Pi 5보다 전력이 훨씬 적어 보조 배터리로도 운용할 수 있습니다."]],
+      c:[["RAM 512MB","도커 컨테이너 여러 개나 AI 모델을 올리면 메모리가 부족합니다."],["느린 CPU","A53 1GHz라 빌드와 추론이 느립니다."]]},
+ jetson:{p:[["CUDA GPU","수많은 GPU 코어가 신경망을 병렬로 처리해 여러 카메라를 실시간으로 추론합니다."],["PC 생태계 그대로","PyTorch·TensorRT 등 서버에서 쓰던 도구를 거의 그대로 씁니다."]],
+      c:[["가격","Pi 5의 몇 배라 대량 배치엔 부담입니다."],["전력 7~25W","소형 배터리 로봇엔 부담이고 방열 설계가 필요합니다."],["까다로운 환경 구성","JetPack 버전과 라이브러리 버전을 맞추는 작업이 번거롭습니다."]]},
+ rk:{p:[["NPU 내장","별도 가속기 없이 약 6 TOPS의 AI 가속을 씁니다."],["강한 CPU","8코어(A76×4 + A55×4)라 Pi 5보다 CPU 여유가 있습니다."],["영상 처리 하드웨어","고해상도 영상 인코딩·디코딩을 하드웨어가 처리합니다."]],
+      c:[["모델 변환 필요","NPU를 쓰려면 RKNN 툴킷으로 모델을 변환해야 하고, 지원하지 않는 연산도 있습니다."],["자료 부족","Pi보다 커뮤니티가 작아 문제 해결에 시간이 걸립니다."]]},
+ hailo:{p:[["기존 Pi 그대로","코드·도구·자료는 Pi 5 것을 그대로 쓰고 AI 속도만 올립니다."],["강한 NPU","AI HAT+는 13 · 26 TOPS, AI HAT+ 2는 40 TOPS(INT4)로 Pi CPU보다 비전 추론이 훨씬 빨라집니다. AI HAT+ 2는 8GB RAM을 달아 소형 LLM도 돌립니다."]],
+      c:[["전용 형식 변환","모델을 Hailo 형식으로 컴파일해야 합니다."],["부피 · 전력 증가","HAT을 얹는 만큼 크기와 전력이 늘어납니다."]]},
+ bbb:{p:[["PRU 실시간 코프로세서","리눅스가 바빠도 PRU가 독립적으로 µs 단위 신호를 정확히 처리합니다."],["풍부한 I/O","GPIO·ADC가 많아 산업 장비 제어에 유리합니다."]],
+      c:[["오래된 CPU","1GHz 싱글코어라 AI나 무거운 작업은 어렵습니다."],["PRU 학습 비용","PRU용 프로그래밍을 따로 배워야 합니다."]]},
+ latte:{p:[["x86 호환","Windows와 x86 전용 소프트웨어·드라이버가 그대로 동작합니다."],["PC급 성능","인텔 CPU라 일반 PC 작업을 그대로 할 수 있습니다."]],
+      c:[["전력 · 발열","ARM SBC보다 전력이 크고 방열이 필요합니다."],["하드웨어 제어 자료 적음","GPIO 활용 자료가 Pi보다 적어 보조 MCU와 함께 쓰는 경우가 많습니다."]]}
+};
+const modal=$('#modal'), sheet=$('#sheet'); let curId=null, opener=null;
+function visibleIds(){return [...cardsEl.children].filter(c=>!c.hidden).map(c=>c.dataset.id);}
+function openSheet(id,from){
+  curId=id; if(from) opener=from; const p=byId[id], d=D[id];
+  sheet.className='sheet '+p.k;
+  sheet.innerHTML=`<div class="sh-top"><div><span class="kind ${p.k}">${p.k.toUpperCase()}</span> <span class="tag">${p.t}</span>
+      <div class="nm" id="shName">${p.n}</div><div class="chip">${p.c} · ${p.sp}</div></div>
+    <div class="sh-nav"><button class="icon" data-a="prev" aria-label="이전 부품">←</button><button class="icon" data-a="next" aria-label="다음 부품">→</button><button class="icon" data-a="close" aria-label="닫기">✕</button></div></div>
+   <div class="sh-meters">${meters(p)}</div>
+   <div class="pc-cols">
+     <div class="pc-col pro"><h3>✓ 장점</h3>${d.p.map(([t,w])=>`<div class="pt"><b>${t}</b><span>${w}</span></div>`).join('')}</div>
+     <div class="pc-col con"><h3>✕ 단점</h3>${d.c.map(([t,w])=>`<div class="pt"><b>${t}</b><span>${w}</span></div>`).join('')}</div>
+   </div>
+   <div class="use"><span class="ul">이럴 때</span>${p.y.map(t=>`<span class="u y">${t}</span>`).join('')}</div>
+   <div class="use"><span class="ul">피할 때</span>${p.x.map(t=>`<span class="u n">${t}</span>`).join('')}</div>`;
+  if(sortKey>=0) sheet.querySelectorAll('.m').forEach(m=>m.classList.toggle('hl',Number(m.dataset.i)===sortKey));
+  modal.hidden=false; sheet.scrollTop=0;
+  sheet.querySelector('[data-a="close"]').focus({preventScroll:true});
+}
+function closeSheet(){modal.hidden=true; if(opener) opener.focus({preventScroll:true});}
+function step(dir){const ids=visibleIds(), i=ids.indexOf(curId); const nid=ids[(i+dir+ids.length)%ids.length]; opener=cardsEl.querySelector(`[data-id="${nid}"]`); openSheet(nid);}
+sheet.addEventListener('click',e=>{const b=e.target.closest('[data-a]'); if(!b) return; ({prev:()=>step(-1),next:()=>step(1),close:closeSheet})[b.dataset.a]();});
+modal.addEventListener('click',e=>{if(e.target===modal) closeSheet();});
+document.addEventListener('keydown',e=>{ if(modal.hidden) return;
+  if(e.key==='Escape') closeSheet(); else if(e.key==='ArrowLeft') step(-1); else if(e.key==='ArrowRight') step(1); });
+function flip(container,mutate){
+  const kids=[...container.children], first=new Map(kids.map(k=>[k,k.getBoundingClientRect()]));
+  mutate();
+  if(reduce) return;
+  kids.forEach(k=>{
+    if(k.hidden) return; const f=first.get(k); if(!f.width) return;
+    const l=k.getBoundingClientRect(), dx=f.left-l.left, dy=f.top-l.top;
+    if(dx||dy) k.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:'none'}],{duration:450,easing:'cubic-bezier(.2,.7,.2,1)'});
+  });
+}
+function arrange(){
+  flip(cardsEl,()=>{
+    const list=[...cardsEl.children];
+    const order=P.map(p=>p.id);
+    list.sort((a,b)=>{
+      if(sortKey<0) return order.indexOf(a.dataset.id)-order.indexOf(b.dataset.id);
+      return byId[b.dataset.id].s[sortKey]-byId[a.dataset.id].s[sortKey] || order.indexOf(a.dataset.id)-order.indexOf(b.dataset.id);
+    }).forEach(n=>cardsEl.appendChild(n));
+    list.forEach(n=>{
+      n.hidden = kind!=='all' && byId[n.dataset.id].k!==kind;
+      n.querySelectorAll('.m').forEach(m=>m.classList.toggle('hl',Number(m.dataset.i)===sortKey));
+    });
+  });
+}
+segInit($('#kindSeg'),'k',v=>{kind=v;arrange();});
+segInit($('#sortSeg'),'s',v=>{sortKey=Number(v);arrange();});
+
+/* ---------- 3. requirement tuner ---------- */
+// 지원 무선, AI 처리 능력(0~3)
+const RADIO={uno:[],stm32:[],pico:["wifi","ble"],nrf:["ble","thread"],esp32:["wifi","ble"],s3:["wifi","ble"],c3:["wifi","ble"],c6:["wifi","ble","thread"],h2:["ble","thread"],
+  pi5:["wifi","ble"],zero:["wifi","ble"],jetson:["wifi","ble"],rk:["wifi","ble"],hailo:["wifi","ble"],bbb:[],latte:["wifi","ble"]};
+const AI={uno:0,stm32:0,pico:0,nrf:0,esp32:0,s3:1,c3:0,c6:0,h2:0,pi5:1.5,zero:.5,jetson:3,rk:2.5,hailo:2.5,bbb:0,latte:1.5};
+const KN=[
+ {id:"os",l:"리눅스·도커",t:["불필요","필요"]},
+ {id:"pw",l:"전원",t:["상시 전원","배터리 수주","배터리 수년"]},
+ {id:"ai",l:"AI 연산",t:["없음","가벼움","보통","카메라 여러 대"]},
+ {id:"rt",l:"실시간 제어",t:["필요 없음","보통","µs 정밀"]}
+];
+const RAD=[["none","무선 없음"],["wifi","Wi-Fi"],["ble","BLE"],["thread","Thread"]];
+const PRE=[
+ {n:"공장 Wi-Fi 센서",v:{os:0,pw:1,ai:0,rt:0,rd:"wifi"}},
+ {n:"피트니스 밴드",v:{os:0,pw:2,ai:0,rt:0,rd:"ble"}},
+ {n:"Matter 조명 스위치",v:{os:0,pw:1,ai:0,rt:0,rd:"thread"}},
+ {n:"MCU 카메라 사람 감지",v:{os:0,pw:1,ai:1,rt:0,rd:"wifi"}},
+ {n:"드론 비행 제어",v:{os:0,pw:0,ai:0,rt:2,rd:"none"}},
+ {n:"MQTT 게이트웨이",v:{os:1,pw:0,ai:1,rt:0,rd:"wifi"}},
+ {n:"자율주행 로봇 두뇌",v:{os:1,pw:0,ai:3,rt:0,rd:"wifi"}},
+ {n:"배터리 + 무거운 AI?",v:{os:1,pw:2,ai:3,rt:2,rd:"wifi"}}
+];
+const req={os:0,pw:1,ai:0,rt:0,rd:"wifi"};
+const knobs=$('#knobs'), rankEl=$('#rank'), presetsEl=$('#presets');
+KN.forEach(k=>{
+  const d=el('div','knob',`<div class="kl"><label for="k-${k.id}">${k.l}</label><span class="kv" id="kv-${k.id}"></span></div>
+    <input type="range" id="k-${k.id}" min="0" max="${k.t.length-1}" step="1" value="${req[k.id]}">
+    <div class="ticks">${k.t.map(t=>`<span>${t}</span>`).join('')}</div>`);
+  d.querySelector('input').addEventListener('input',e=>{req[k.id]=Number(e.target.value);clearPreset();rank();});
+  knobs.appendChild(d);
+});
+const rd=el('div','knob','<div class="kl"><span>무선</span></div>'); const rdb=el('div','radios');
+RAD.forEach(([v,l])=>{const b=el('button','',l); b.dataset.v=v; b.onclick=()=>{req.rd=v;clearPreset();rank();}; rdb.appendChild(b);});
+rd.appendChild(rdb); knobs.appendChild(rd);
+PRE.forEach((p,i)=>{const b=el('button','preset',p.n); b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{Object.assign(req,p.v); KN.forEach(k=>$('#k-'+k.id).value=req[k.id]); clearPreset(); b.setAttribute('aria-pressed','true'); rank();};
+  presetsEl.appendChild(b);});
+function clearPreset(){presetsEl.querySelectorAll('.preset').forEach(b=>b.setAttribute('aria-pressed','false'));}
+P.forEach(p=>{const r=el('div','rk '+p.k,`<span class="no"></span><span class="nm"><i></i><span>${p.n}</span></span><span class="fit"><span class="fbar"></span><span class="why"></span></span>`); r.dataset.id=p.id; rankEl.appendChild(r);});
+function fit(p){
+  const s=p.s, out=[]; let pen=0;
+  if(req.os && p.k==="mcu"){pen+=6; out.push("리눅스 불가");}
+  const needPw=[0,2.5,5][req.pw], dPw=Math.max(0,needPw-s[0]);
+  if(dPw){pen+=dPw*1.4; out.push("전력 부족");}
+  const needAi=[0,1,2.5,3][req.ai], ai=AI[p.id], dAi=Math.max(0,needAi-ai);
+  if(dAi){pen+=dAi*2.2; out.push("AI 부족");} else if(ai>needAi) pen+=(ai-needAi)*.35;
+  const needRt=[0,2.5,5][req.rt], dRt=Math.max(0,needRt-s[3]);
+  if(dRt){pen+=dRt*1.4; out.push("실시간 약함");}
+  if(req.rd!=="none" && !RADIO[p.id].includes(req.rd)){pen+=4; out.push(RAD.find(r=>r[0]===req.rd)[1]+" 없음");}
+  const score=Math.max(0,Math.min(10,10-pen+s[4]*.1));
+  return {score,why:out.length?"✕ "+out.join(" · "):"✓ 조건 충족"};
+}
+function rank(){
+  KN.forEach(k=>$('#kv-'+k.id).textContent=k.t[req[k.id]]);
+  rdb.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===req.rd)));
+  const sc=P.map(p=>({p,...fit(p)})).sort((a,b)=>b.score-a.score);
+  flip(rankEl,()=>{
+    sc.forEach((x,i)=>{
+      const r=rankEl.querySelector(`[data-id="${x.p.id}"]`);
+      r.querySelector('.no').textContent=i+1;
+      r.querySelector('.fbar').style.width=`calc(${(x.score/10.5*100).toFixed(1)}% * .55)`;
+      r.querySelector('.why').textContent=x.why;
+      r.classList.toggle('top',i<3 && x.score>=7); r.classList.toggle('low',x.score<5);
+      rankEl.appendChild(r);
+    });
+  });
+  const best=sc[0], v=$('#verdict');
+  if(best.score>=7){ v.className='verdictBox'; v.innerHTML=`추천 <b>${best.p.n}</b> · ${best.p.t}`; }
+  else { v.className='verdictBox hard'; v.innerHTML=`<b>한 부품으로는 무리</b> · SBC(판단)와 MCU(배터리·실시간)로 역할을 나눠 조합하세요`; }
+}
+rank();
+
+/* ---------- 4. tree ---------- */
+const T={
+ start:{q:"리눅스 · 도커 · AI 추론이 필요한가?",o:[["예","sAI"],["아니오","mW"]]},
+ mW:{q:"무선 통신이 필요한가?",o:[["예","mWhich"],["아니오","mMotor"]]},
+ mMotor:{q:"모터를 정밀하게 제어하나?",o:[["예",["stm32"]],["아니오",["uno","pico"]]]},
+ mWhich:{q:"어떤 무선?",o:[["Wi-Fi","mCam"],["BLE · 초저전력",["nrf"]],["Thread · Matter",["c6","h2","nrf"]]]},
+ mCam:{q:"카메라나 AI를 MCU에서 돌리나?",o:[["예",["s3"]],["아니오",["c3","esp32"]]]},
+ sAI:{q:"AI 부하가 큰가? (카메라 여러 대, 큰 모델)",o:[["예","sBudget"],["아니오","sSpecial"]]},
+ sSpecial:{q:"특수한 요구가 있나?",o:[["없음","sSpace"],["µs 실시간 제어",["bbb"]],["Windows / x86 SW",["latte"]]]},
+ sSpace:{q:"공간이나 전력 제약이 큰가?",o:[["예",["zero"]],["아니오",["pi5"]]]},
+ sBudget:{q:"무엇이 더 중요한가?",o:[["최고 성능",["jetson"]],["가성비",["rk","hailo"]]]}
+};
+const treeEl=$('#tree'); let path=[]; // [{node,label}]
+function renderTree(node,leaf){
+  treeEl.innerHTML='';
+  const trail=el('div','trail');
+  if(!path.length) trail.innerHTML='<span class="crumb" style="cursor:default">시작</span>';
+  path.forEach((st,i)=>{
+    if(i) trail.appendChild(el('span','arrow','›'));
+    const b=el('button','crumb',`${T[st.node].q.replace(/\?.*$/,'?')} <b>${st.label}</b>`);
+    b.onclick=()=>{const n=path[i].node; path=path.slice(0,i); renderTree(n);};
+    trail.appendChild(b);
+  });
+  treeEl.appendChild(trail);
+  if(leaf){
+    const box=el('div','qbox',`<div class="eyebrow">추천 부품</div>`);
+    const r=el('div','result');
+    leaf.forEach(id=>{const p=byId[id]; r.appendChild(el('div','res '+p.k,`<span class="kind ${p.k}" style="justify-self:start">${p.k.toUpperCase()}</span><div class="nm">${p.n}</div><div class="tag">${p.t}</div><div class="sp">${p.sp}</div>`));});
+    box.appendChild(r);
+    const again=el('button','btn ghostbtn','처음부터'); again.style.justifySelf='start';
+    again.onclick=()=>{path=[];renderTree('start');};
+    box.appendChild(again); treeEl.appendChild(box); return;
+  }
+  const n=T[node];
+  const box=el('div','qbox',`<div class="eyebrow">질문 ${path.length+1}</div><div class="q">${n.q}</div>`);
+  const opts=el('div','opts');
+  n.o.forEach(([label,next])=>{
+    const b=el('button','opt',label);
+    b.onclick=()=>{path.push({node,label}); Array.isArray(next)?renderTree(null,next):renderTree(next);};
+    opts.appendChild(b);
+  });
+  box.appendChild(opts); treeEl.appendChild(box);
+}
+renderTree('start');
+
+})();
+</script>
+</body>
+</html>

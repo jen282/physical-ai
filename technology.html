@@ -655,6 +655,7 @@
 
 <!-- 5-1 Section header -->
 <div class="max-w-3xl">
+<div class="flex flex-wrap items-center gap-3 mb-6"><span class="inline-flex items-center px-2 py-0.5 rounded border border-primary/40 bg-primary/10 font-label-mono text-label-mono font-bold text-primary">PART 1</span><span class="font-label-ui text-label-ui font-semibold text-text-primary">추론 엔진 · ONNX Runtime</span><a href="#containers" class="inline-flex items-center gap-1 font-label-mono text-label-mono text-text-muted hover:text-primary transition-colors">PART 2 컨테이너 구조<span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_downward</span></a></div>
 <h2 id="execution-title" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg font-bold text-text-primary tracking-tight mb-5">같은 모델을, 노트북과 Pi 5에서 그대로</h2>
 <p class="font-body-lg text-body-lg text-text-muted">학습은 PyTorch로 하지만, 현장의 Raspberry Pi 5에서는 학습이 끝난 모델을 빠르게 실행만 하는 <span class="text-on-surface">추론 엔진</span>이 필요합니다. 엔진을 골라야 하는 모델은 동작 정책 <span class="text-on-surface">ACT 하나</span>뿐입니다.</p>
 <ul class="mt-10 flex flex-col gap-4" aria-label="모델별 실행 방식">
@@ -751,7 +752,7 @@
 <div class="flex flex-col items-center"><span class="w-9 h-9 shrink-0 rounded-full border border-primary/60 bg-surface-canvas flex items-center justify-center font-label-mono text-label-mono text-primary">1</span><span class="w-px flex-1 bg-white/[0.12] mt-2"></span></div>
 <div class="pt-1.5 flex-1">
 <h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary">그래프 최적화 · 스레드 설정</h4>
-<p class="font-body-md text-body-md text-text-muted mt-2">ONNX Runtime의 최적화 옵션을 켜고, Pi 5의 CPU 4코어를 모두 쓰도록 지정합니다.</p>
+<p class="font-body-md text-body-md text-text-muted mt-2">ONNX Runtime의 최적화 옵션을 켜고, CPU 3코어를 쓰도록 지정합니다. 나머지 1코어는 팔 제어 몫입니다.</p>
 <button type="button" class="why-btn mt-3 inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors" aria-expanded="false">주의할 점<span class="material-symbols-outlined text-[16px] transition-transform">expand_more</span></button>
 <p class="why-body hidden mt-2 font-body-md text-body-md text-on-surface border-l-2 border-laser-cyan/50 pl-3">설정만 바꾸므로 정확도에 영향이 없습니다. 그래서 가장 먼저 적용합니다.</p>
 </div>
@@ -785,6 +786,94 @@
 </li>
 </ol>
 <p class="mt-8 max-w-3xl font-body-md text-body-md text-on-surface flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">info</span>최적화 후에는 지연만 보지 않고 성공률도 다시 측정합니다. 기준은 Pi 5 성공률이 노트북 대비 10%p 이내입니다.</p>
+</div>
+
+
+</div>
+
+<!-- PART 2: CONTAINER STRUCTURE -->
+<div id="containers" class="scroll-mt-40 border-t border-white/[0.1] bg-white/[0.015] rounded-b-2xl px-5 sm:px-8 lg:px-12 py-16 lg:py-20 flex flex-col gap-24">
+
+<!-- 5-5 Containers on Pi 5 -->
+<div>
+<div class="mb-10 max-w-3xl">
+<div class="flex flex-wrap items-center gap-3 mb-6"><span class="inline-flex items-center px-2 py-0.5 rounded border border-primary/40 bg-primary/10 font-label-mono text-label-mono font-bold text-primary">PART 2</span><span class="font-label-ui text-label-ui font-semibold text-text-primary">컨테이너 구조</span></div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg font-bold text-text-primary tracking-tight mb-5">Pi 5 안에서는, 다섯 개로 나눠 실행합니다</h2>
+<p class="font-body-lg text-body-lg text-text-muted">멈춰도 되는 AI와 절대 멈추면 안 되는 팔 제어를 서로 다른 컨테이너로 나눴습니다.</p>
+</div>
+<figure class="rounded-2xl border border-white/[0.1] bg-[#0F131C] overflow-hidden">
+<div class="overflow-x-auto">
+<img src="images/container_diagram_web.svg" alt="TeachArm Pi 5 컨테이너 구조도: AI 구역의 영상 수집, AI 추론, 평가 기록 컨테이너와 안전 구역의 팔 제어 컨테이너가 메시지 브로커 컨테이너를 거쳐 통신합니다. 카메라는 영상 수집에, 로봇팔과 비상정지는 팔 제어에 연결되고, 비상정지는 서보 전원을 직접 끊습니다." loading="lazy" class="block w-full min-w-[760px] h-auto" width="1600" height="944"/>
+</div>
+<figcaption class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-5 sm:px-6 py-4 border-t border-white/[0.08] font-body-sm text-body-sm text-text-muted">
+<span>모델을 받아오는 sync 컨테이너는 필요할 때만 실행해 그림에서 뺐습니다.</span>
+<a href="images/container_diagram_web.svg" target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-label-mono text-label-mono text-laser-cyan hover:text-primary transition-colors shrink-0">크게 보기<span class="material-symbols-outlined text-[16px]" aria-hidden="true">open_in_new</span></a>
+</figcaption>
+</figure>
+</div>
+
+<!-- 5-6 Four criteria -->
+<div>
+<div class="mb-10">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">CRITERIA</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2">나눈 기준 네 가지</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">01</span>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mt-3">안전성</h4>
+<ul class="mt-4 flex flex-col gap-3 font-body-md text-body-md">
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">멈추면 안 됨</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">팔 제어 · 브로커</span></li>
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">멈춰도 됨</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">영상 수집 · AI 추론 · 기록</span></li>
+</ul>
+</div>
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">02</span>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mt-3">하드웨어 권한</h4>
+<ul class="mt-4 flex flex-col gap-3 font-body-md text-body-md">
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">장치 접근</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">팔 제어 · 영상 수집만</span></li>
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">관리자 권한(privileged)</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">0개</span></li>
+</ul>
+</div>
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">03</span>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mt-3">데이터 수명</h4>
+<ul class="mt-4 flex flex-col gap-3 font-body-md text-body-md">
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">영상 (수십 ms)</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">공유 메모리</span></li>
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">명령 · 상태 (초)</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">브로커</span></li>
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">로그 · 모델 (일~주)</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">SSD</span></li>
+</ul>
+</div>
+<div class="bg-surface-canvas p-6 rounded-xl border border-white/[0.08]">
+<span class="font-label-mono text-label-md text-primary">04</span>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-text-primary mt-3">라이브러리</h4>
+<ul class="mt-4 flex flex-col gap-3 font-body-md text-body-md">
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">Pi 5</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">ONNX Runtime만</span></li>
+<li class="flex flex-wrap items-center gap-x-2 gap-y-1"><span class="text-text-primary font-semibold">PyTorch · LeRobot</span><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">arrow_forward</span><span class="text-on-surface">노트북에만</span></li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- 5-7 Fail-safe -->
+<div>
+<div class="mb-10 max-w-3xl">
+<span class="font-label-mono text-label-sm text-laser-cyan uppercase font-semibold tracking-widest">FAIL-SAFE</span>
+<h3 class="font-headline-md text-headline-md font-bold text-text-primary tracking-tight mt-2">하나가 멈추면, 팔은?</h3>
+</div>
+<div class="max-w-3xl overflow-x-auto rounded-xl border border-white/[0.08] bg-surface-chassis">
+<table class="w-full min-w-[480px] text-left border-collapse">
+<thead class="bg-white/[0.03]"><tr><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">멈춘 컨테이너</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">팔 상태</th><th scope="col" class="px-5 py-3 font-label-mono text-label-mono text-text-muted font-semibold">결과</th></tr></thead>
+<tbody>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-ui text-label-ui text-text-primary whitespace-nowrap">AI 추론</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">새 명령이 없음 → 현재 자세에서 정지</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded bg-primary/15 border border-primary/40 font-label-mono text-label-mono text-primary whitespace-nowrap">안전 정지</span></td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-ui text-label-ui text-text-primary whitespace-nowrap">영상 수집</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">AI가 추론을 건너뜀 → 현재 자세에서 정지</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded bg-primary/15 border border-primary/40 font-label-mono text-label-mono text-primary whitespace-nowrap">안전 정지</span></td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-ui text-label-ui text-text-primary whitespace-nowrap">메시지 브로커</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">팔 제어가 연결 끊김을 감지 → 정지</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded bg-primary/15 border border-primary/40 font-label-mono text-label-mono text-primary whitespace-nowrap">안전 정지</span></td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-ui text-label-ui text-text-primary whitespace-nowrap">팔 제어</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">서보가 마지막 위치 유지 → 재시작 후 정지 상태로 시작</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded bg-primary/15 border border-primary/40 font-label-mono text-label-mono text-primary whitespace-nowrap">안전 정지</span></td></tr>
+<tr class="border-t border-white/[0.06]"><th scope="row" class="px-5 py-4 align-top font-label-ui text-label-ui text-text-primary whitespace-nowrap">평가 기록</th><td class="px-5 py-4 align-top font-body-md text-body-md text-on-surface">영향 없음</td><td class="px-5 py-4 align-top"><span class="inline-flex px-2 py-0.5 rounded border border-laser-cyan/40 bg-laser-cyan/10 font-label-mono text-label-mono text-laser-cyan whitespace-nowrap">작업 계속</span></td></tr>
+</tbody>
+</table>
+</div>
+<p class="mt-6 max-w-3xl font-body-md text-body-md text-on-surface flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">info</span>멈춘 컨테이너는 자동으로 다시 켜지지만, 팔은 운영자가 시작해야 다시 움직입니다. 비상정지는 컨테이너와 상관없이 서보 전원을 직접 끊습니다.</p>
 </div>
 
 </div>

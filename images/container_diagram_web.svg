@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 944" width="1600" height="944" font-family="'Hanken Grotesk', Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <style>
+    .h1 { fill: #FFFFFF; font-size: 30px; font-weight: 700; }
+    .sub { fill: #94A3B8; font-size: 18px; }
+    .name { fill: #FFFFFF; font-size: 23px; font-weight: 700; text-anchor: middle; }
+    .id { fill: #94A3B8; font-size: 15px; text-anchor: middle; font-family: 'JetBrains Mono', Menlo, Consolas, monospace; }
+    .hw { fill: #E1E2EC; font-size: 19px; font-weight: 600; text-anchor: middle; }
+    .lbl { fill: #94A3B8; font-size: 16px; }
+    .hwbox { fill: none; stroke: rgba(255,255,255,0.28); stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .flow { stroke: #E1E2EC; stroke-width: 2.5; fill: none; }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E1E2EC"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#FF3344"/></marker>
+  </defs>
+
+  <rect width="1600" height="944" fill="#0F131C"/>
+
+  <!-- 제목 -->
+  <text x="60" y="68" class="h1">TeachArm 엣지 컨테이너 구조</text>
+  <text x="60" y="102" class="sub">멈춰도 되는 AI와 절대 멈추면 안 되는 팔 제어를 서로 다른 컨테이너로 나눴습니다.</text>
+
+  <!-- 범례 -->
+  <rect x="1052" y="128" width="24" height="15" rx="2" fill="none" stroke="#E1E2EC" stroke-width="1.6"/><line x1="1058" y1="131" x2="1058" y2="140" stroke="#E1E2EC" stroke-width="1.4"/><line x1="1064" y1="131" x2="1064" y2="140" stroke="#E1E2EC" stroke-width="1.4"/><line x1="1070" y1="131" x2="1070" y2="140" stroke="#E1E2EC" stroke-width="1.4"/>
+  <text x="1086" y="141" fill="#E1E2EC" font-size="16"><tspan font-weight="700">컨테이너</tspan><tspan fill="#94A3B8"> = 따로 실행되는 프로그램 (총 5개)</tspan></text>
+  <rect x="1052" y="154" width="24" height="15" rx="3" fill="none" stroke="rgba(255,255,255,0.5)" stroke-dasharray="4 3"/>
+  <text x="1086" y="167" fill="#E1E2EC" font-size="16"><tspan font-weight="700">구역</tspan><tspan fill="#94A3B8"> = 멈춰도 되는지에 따른 묶음</tspan></text>
+
+  <!-- 하드웨어 -->
+  <text x="195" y="252" class="lbl" text-anchor="middle">하드웨어</text>
+  <rect x="60" y="284" width="270" height="86" rx="12" class="hwbox"/>
+  <text x="195" y="334" class="hw">USB 카메라 ×2</text>
+  <rect x="60" y="677" width="270" height="86" rx="12" class="hwbox"/>
+  <text x="195" y="727" class="hw">로봇팔 (서보 6축)</text>
+  <rect x="60" y="806" width="270" height="76" rx="12" class="hwbox"/>
+  <text x="195" y="851" class="hw">비상정지 버튼</text>
+  <line x1="100" y1="806" x2="100" y2="769" stroke="#FF3344" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+  <text x="112" y="793" fill="#FF3344" font-size="15">전원 직접 차단</text>
+
+  <!-- Raspberry Pi 5 -->
+  <rect x="400" y="200" width="1140" height="714" rx="20" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+  <text x="424" y="232" fill="#94A3B8" font-size="15" font-family="'JetBrains Mono', Menlo, monospace">Raspberry Pi 5 · Docker</text>
+
+  <!-- AI 구역 -->
+  <rect x="430" y="248" width="1080" height="196" rx="16" fill="rgba(0,240,255,0.04)" stroke="rgba(0,240,255,0.45)" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <text x="456" y="278"><tspan fill="#00F0FF" font-size="18" font-weight="700">AI 구역</tspan><tspan fill="#94A3B8" font-size="16" dx="12">멈춰도 팔은 제자리에서 안전하게 멈춥니다</tspan></text>
+  
+  <g>
+    <rect x="460" y="300" width="300" height="124" rx="12" fill="#161B26" stroke="rgba(0,240,255,0.75)" stroke-width="2"/>
+    <path d="M472,300 h276 a12,12 0 0 1 12,12 v24 h-300 v-24 a12,12 0 0 1 12,-12 z" fill="rgba(0,240,255,0.14)"/>
+    <line x1="460" y1="336" x2="760" y2="336" stroke="rgba(0,240,255,0.45)" stroke-width="1"/>
+    <rect x="476" y="311" width="24" height="15" rx="2" fill="none" stroke="#00F0FF" stroke-width="1.6"/><line x1="482" y1="314" x2="482" y2="323" stroke="#00F0FF" stroke-width="1.4"/><line x1="488" y1="314" x2="488" y2="323" stroke="#00F0FF" stroke-width="1.4"/><line x1="494" y1="314" x2="494" y2="323" stroke="#00F0FF" stroke-width="1.4"/>
+    <text x="510" y="324" fill="#00F0FF" font-size="14" font-weight="700" font-family="'JetBrains Mono', Menlo, monospace" letter-spacing="0.06em">컨테이너 ③</text>
+    <text x="610.0" y="378" class="name">영상 수집</text>
+    <text x="610.0" y="406" class="id">camera-collector</text>
+  </g>
+  
+  <g>
+    <rect x="830" y="300" width="300" height="124" rx="12" fill="#161B26" stroke="rgba(0,240,255,0.75)" stroke-width="2"/>
+    <path d="M842,300 h276 a12,12 0 0 1 12,12 v24 h-300 v-24 a12,12 0 0 1 12,-12 z" fill="rgba(0,240,255,0.14)"/>
+    <line x1="830" y1="336" x2="1130" y2="336" stroke="rgba(0,240,255,0.45)" stroke-width="1"/>
+    <rect x="846" y="311" width="24" height="15" rx="2" fill="none" stroke="#00F0FF" stroke-width="1.6"/><line x1="852" y1="314" x2="852" y2="323" stroke="#00F0FF" stroke-width="1.4"/><line x1="858" y1="314" x2="858" y2="323" stroke="#00F0FF" stroke-width="1.4"/><line x1="864" y1="314" x2="864" y2="323" stroke="#00F0FF" stroke-width="1.4"/>
+    <text x="880" y="324" fill="#00F0FF" font-size="14" font-weight="700" font-family="'JetBrains Mono', Menlo, monospace" letter-spacing="0.06em">컨테이너 ④</text>
+    <text x="980.0" y="378" class="name">AI 추론 (ACT)</text>
+    <text x="980.0" y="406" class="id">ai-inference</text>
+  </g>
+  
+  <g>
+    <rect x="1200" y="300" width="280" height="124" rx="12" fill="#161B26" stroke="rgba(0,240,255,0.75)" stroke-width="2"/>
+    <path d="M1212,300 h256 a12,12 0 0 1 12,12 v24 h-280 v-24 a12,12 0 0 1 12,-12 z" fill="rgba(0,240,255,0.14)"/>
+    <line x1="1200" y1="336" x2="1480" y2="336" stroke="rgba(0,240,255,0.45)" stroke-width="1"/>
+    <rect x="1216" y="311" width="24" height="15" rx="2" fill="none" stroke="#00F0FF" stroke-width="1.6"/><line x1="1222" y1="314" x2="1222" y2="323" stroke="#00F0FF" stroke-width="1.4"/><line x1="1228" y1="314" x2="1228" y2="323" stroke="#00F0FF" stroke-width="1.4"/><line x1="1234" y1="314" x2="1234" y2="323" stroke="#00F0FF" stroke-width="1.4"/>
+    <text x="1250" y="324" fill="#00F0FF" font-size="14" font-weight="700" font-family="'JetBrains Mono', Menlo, monospace" letter-spacing="0.06em">컨테이너 ⑤</text>
+    <text x="1340.0" y="378" class="name">평가 기록</text>
+    <text x="1340.0" y="406" class="id">logger</text>
+  </g>
+  <line x1="760" y1="372" x2="824" y2="372" class="flow" marker-end="url(#a)"/>
+  <text x="792" y="360" class="lbl" text-anchor="middle">영상</text>
+
+  <!-- 브로커 -->
+  
+  <g>
+    <rect x="830" y="478" width="300" height="124" rx="12" fill="#161B26" stroke="rgba(255,255,255,0.75)" stroke-width="2"/>
+    <path d="M842,478 h276 a12,12 0 0 1 12,12 v24 h-300 v-24 a12,12 0 0 1 12,-12 z" fill="rgba(255,255,255,0.14)"/>
+    <line x1="830" y1="514" x2="1130" y2="514" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+    <rect x="846" y="489" width="24" height="15" rx="2" fill="none" stroke="#E1E2EC" stroke-width="1.6"/><line x1="852" y1="492" x2="852" y2="501" stroke="#E1E2EC" stroke-width="1.4"/><line x1="858" y1="492" x2="858" y2="501" stroke="#E1E2EC" stroke-width="1.4"/><line x1="864" y1="492" x2="864" y2="501" stroke="#E1E2EC" stroke-width="1.4"/>
+    <text x="880" y="502" fill="#E1E2EC" font-size="14" font-weight="700" font-family="'JetBrains Mono', Menlo, monospace" letter-spacing="0.06em">컨테이너 ②</text>
+    <text x="980.0" y="556" class="name">메시지 브로커</text>
+    <text x="980.0" y="584" class="id">broker</text>
+  </g>
+  <text x="460" y="530" fill="#E1E2EC" font-size="16">컨테이너끼리는 직접 연결하지 않고</text>
+  <text x="460" y="556" fill="#E1E2EC" font-size="16">브로커를 거쳐서만 주고받습니다.</text>
+  <text x="460" y="582" fill="#94A3B8" font-size="15">꺼지면 바로 자동 재시작</text>
+
+  <!-- 흐름 -->
+  <line x1="980" y1="424" x2="980" y2="472" class="flow" marker-end="url(#a)"/>
+  <text x="994" y="466" class="lbl">동작 명령</text>
+  <line x1="980" y1="602" x2="980" y2="684" class="flow" marker-end="url(#a)"/>
+  <text x="994" y="630" class="lbl">동작 명령</text>
+  <path d="M1130,540 H1340 V430" class="flow" marker-end="url(#a)"/>
+  <text x="1354" y="500" class="lbl">상태 · 결과</text>
+
+  <!-- 안전 구역 -->
+  <rect x="430" y="640" width="1080" height="256" rx="16" fill="rgba(255,230,0,0.04)" stroke="rgba(255,230,0,0.5)" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <text x="456" y="672"><tspan fill="#FFE600" font-size="18" font-weight="700">안전 구역</tspan><tspan fill="#94A3B8" font-size="16" dx="12">절대 멈추면 안 됨 · 꺼지면 바로 자동 재시작</tspan></text>
+  
+  <g>
+    <rect x="460" y="690" width="670" height="190" rx="12" fill="#161B26" stroke="rgba(255,230,0,0.75)" stroke-width="2"/>
+    <path d="M472,690 h646 a12,12 0 0 1 12,12 v24 h-670 v-24 a12,12 0 0 1 12,-12 z" fill="rgba(255,230,0,0.14)"/>
+    <line x1="460" y1="726" x2="1130" y2="726" stroke="rgba(255,230,0,0.45)" stroke-width="1"/>
+    <rect x="476" y="701" width="24" height="15" rx="2" fill="none" stroke="#FFE600" stroke-width="1.6"/><line x1="482" y1="704" x2="482" y2="713" stroke="#FFE600" stroke-width="1.4"/><line x1="488" y1="704" x2="488" y2="713" stroke="#FFE600" stroke-width="1.4"/><line x1="494" y1="704" x2="494" y2="713" stroke="#FFE600" stroke-width="1.4"/>
+    <text x="510" y="714" fill="#FFE600" font-size="14" font-weight="700" font-family="'JetBrains Mono', Menlo, monospace" letter-spacing="0.06em">컨테이너 ①</text>
+    <text x="795.0" y="768" class="name">팔 제어 · 안전</text>
+    <text x="795.0" y="796" class="id">arm-control</text>
+  </g>
+  <g font-size="17" fill="#E1E2EC" text-anchor="middle">
+    <rect x="484" y="816" width="200" height="46" rx="23" fill="none" stroke="rgba(255,230,0,0.45)"/>
+    <text x="584" y="845">30Hz 서보 제어</text>
+    <rect x="695" y="816" width="200" height="46" rx="23" fill="none" stroke="rgba(255,230,0,0.45)"/>
+    <text x="795" y="845">비상정지 감시</text>
+    <rect x="906" y="816" width="200" height="46" rx="23" fill="none" stroke="rgba(255,230,0,0.45)"/>
+    <text x="1006" y="845">이상 시 자세 유지</text>
+  </g>
+  <text x="1170" y="760" fill="#E1E2EC" font-size="17">AI가 멈추거나 명령이 늦으면</text>
+  <text x="1170" y="788" fill="#E1E2EC" font-size="17">팔은 현재 자세에서 멈춥니다.</text>
+  <text x="1170" y="836" fill="#94A3B8" font-size="16">비상정지는 소프트웨어와 상관없이</text>
+  <text x="1170" y="862" fill="#94A3B8" font-size="16">서보 전원을 직접 끊습니다.</text>
+
+  <!-- 하드웨어 연결 -->
+  <line x1="330" y1="327" x2="454" y2="327" class="flow" marker-end="url(#a)"/>
+  <text x="345" y="316" class="lbl">USB</text>
+  <line x1="460" y1="720" x2="336" y2="720" class="flow" marker-end="url(#a)"/>
+  <text x="345" y="709" class="lbl">USB</text>
+  <line x1="330" y1="844" x2="454" y2="844" class="flow" marker-end="url(#a)"/>
+  <text x="345" y="833" class="lbl">GPIO</text>
+</svg>

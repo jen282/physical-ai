@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1190" width="1600" height="1190" font-family="D2Coding, 'JetBrains Mono', Menlo, Consolas, 'Noto Sans KR', 'Apple SD Gothic Neo', monospace">
+  <style>
+    .t { fill: #c9cbff; font-size: 18px; }
+    .title { fill: #dfe1ff; font-size: 21px; font-weight: 700; }
+    .muted { fill: #8f93c9; font-size: 16px; }
+    .topic { fill: #c9cbff; font-size: 17px; }
+    .zone { fill: #e6e7ff; font-size: 21px; font-weight: 700; }
+    .box { fill: none; stroke: #9aa0d8; stroke-width: 2; }
+    .box-dash { fill: none; stroke: #9aa0d8; stroke-width: 2; stroke-dasharray: 10 7; }
+    .line { stroke: #9aa0d8; stroke-width: 2; fill: none; }
+    .shm { stroke: #9aa0d8; stroke-width: 2; fill: none; stroke-dasharray: 6 5; }
+    .band { stroke: #2c2f4a; stroke-width: 1.5; stroke-dasharray: 4 6; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9aa0d8"/>
+    </marker>
+  </defs>
+
+  <!-- 배경 · 외곽 -->
+  <rect width="1600" height="1190" fill="#161622"/>
+  <rect x="20" y="40" width="1560" height="1130" fill="none" stroke="#9aa0d8" stroke-width="2"/>
+  <rect x="410" y="26" width="780" height="30" fill="#161622"/>
+  <text x="800" y="48" class="title" text-anchor="middle">Raspberry Pi 5 (Raspberry Pi OS 64bit + Docker Engine)</text>
+
+  <!-- 하드웨어 -->
+  <text x="50" y="98" class="t">[HW] 서보 어댑터(USB 시리얼) · GPIO(비상정지 보조 접점) · UVC 카메라 ×2 · SSD · Ethernet</text>
+
+  <!-- 구역 구분선 -->
+  <line x1="40" y1="400" x2="1560" y2="400" class="band"/>
+  <line x1="40" y1="590" x2="1560" y2="590" class="band"/>
+  <line x1="40" y1="950" x2="1560" y2="950" class="band"/>
+
+  <!-- device mapping: 카메라 -->
+  <line x1="175" y1="112" x2="175" y2="644" class="line" marker-end="url(#arrow)"/>
+  <text x="190" y="150" class="muted">device mapping</text>
+  <text x="190" y="172" class="muted">(video ×2)</text>
+
+  <!-- device mapping: 서보 · GPIO -->
+  <line x1="765" y1="112" x2="765" y2="180" class="line" marker-end="url(#arrow)"/>
+  <text x="780" y="152" class="muted">device mapping (servo · gpiochip)</text>
+
+  <!-- ① arm-control -->
+  <rect x="360" y="185" width="810" height="180" class="box"/>
+  <text x="378" y="220" class="title">① arm-control</text>
+  <text x="560" y="220" class="t">Python + feetech SDK + gpiod</text>
+  <text x="378" y="254" class="t">30Hz 서보 루프 · E-Stop 감시 · 워치독(HOLD) · 명령 검증</text>
+  <text x="378" y="284" class="t">role: Subscriber/Actuator + Publisher(관절 상태)</text>
+  <text x="378" y="314" class="t">--device servo, gpiochip · cap_add SYS_NICE</text>
+  <text x="378" y="344" class="t">재시작 시 현재 위치를 목표값으로 맞추고 HOLD로 시작</text>
+
+  <!-- ① ↔ ② -->
+  <line x1="420" y1="365" x2="420" y2="450" class="line" marker-end="url(#arrow)"/>
+  <text x="432" y="420" class="topic">pub: state/joints, safety/estop</text>
+  <line x1="800" y1="455" x2="800" y2="370" class="line" marker-end="url(#arrow)"/>
+  <text x="812" y="420" class="topic">sub: cmd/action_chunk, cmd/run</text>
+
+  <!-- ② broker -->
+  <rect x="360" y="455" width="810" height="95" class="box"/>
+  <text x="378" y="490" class="title">② broker</text>
+  <text x="490" y="490" class="t">(Mosquitto MQTT)</text>
+  <text x="378" y="526" class="t">unprivileged · 내부망 전용 · 자원 거의 안 씀 · E-Stop 상태 retain</text>
+
+  <!-- ② ↔ ④, ⑤ -->
+  <line x1="430" y1="550" x2="430" y2="645" class="line" marker-end="url(#arrow)"/>
+  <text x="442" y="612" class="topic">sub: state/joints</text>
+  <line x1="740" y1="650" x2="740" y2="555" class="line" marker-end="url(#arrow)"/>
+  <text x="752" y="612" class="topic">pub: cmd/action_chunk</text>
+  <line x1="1010" y1="550" x2="1010" y2="645" class="line" marker-end="url(#arrow)"/>
+  <text x="1022" y="612" class="topic">sub: # (전체)</text>
+
+  <!-- ③ camera-collector -->
+  <rect x="50" y="650" width="250" height="230" class="box"/>
+  <text x="62" y="685" class="title" style="font-size:19px">③ camera-collector</text>
+  <text x="62" y="719" class="t">Python + OpenCV</text>
+  <text x="62" y="747" class="t">UVC ×2 → 320×240</text>
+  <text x="62" y="775" class="t">role: Publisher</text>
+  <text x="62" y="803" class="t">--device video ×2</text>
+  <text x="62" y="857" class="t">restart: always</text>
+
+  <!-- ③ → ④ 공유 메모리 -->
+  <line x1="300" y1="770" x2="374" y2="770" class="shm" marker-end="url(#arrow)"/>
+  <text x="306" y="758" class="muted">/frames</text>
+  <text x="314" y="794" class="muted">(shm)</text>
+
+  <!-- ④ ai-inference -->
+  <rect x="380" y="650" width="440" height="230" class="box"/>
+  <text x="398" y="685" class="title">④ ai-inference</text>
+  <text x="398" y="719" class="t">Python + ONNX Runtime (CPU)</text>
+  <text x="398" y="747" class="t">role: Subscriber → 추론 → Publisher</text>
+  <text x="398" y="775" class="t">장치 없음 · cpuset 0-2 · mem_limit 3g</text>
+  <text x="398" y="803" class="t">OOM으로 죽어도 ①②③⑤는 계속 동작</text>
+  <text x="398" y="857" class="t">restart: on-failure</text>
+
+  <!-- ⑤ logger -->
+  <rect x="860" y="650" width="310" height="230" class="box"/>
+  <text x="878" y="685" class="title">⑤ logger</text>
+  <text x="878" y="719" class="t">Python (표준 라이브러리)</text>
+  <text x="878" y="747" class="t">평가 로그 → SSD /data</text>
+  <text x="878" y="775" class="t">영상은 저장 안 함</text>
+  <text x="878" y="803" class="t">장치 없음</text>
+  <text x="878" y="857" class="t">restart: unless-stopped</text>
+
+  <!-- ⑥ ↔ ④, ⑤ 볼륨 -->
+  <line x1="600" y1="1000" x2="600" y2="885" class="shm" marker-end="url(#arrow)"/>
+  <text x="612" y="935" class="muted">/models (읽기 전용)</text>
+  <line x1="1010" y1="880" x2="1010" y2="995" class="shm" marker-end="url(#arrow)"/>
+  <text x="1022" y="935" class="muted">/data</text>
+
+  <!-- ⑥ sync -->
+  <rect x="360" y="1000" width="810" height="140" class="box-dash"/>
+  <text x="378" y="1035" class="title">⑥ sync</text>
+  <text x="470" y="1035" class="t">Python + huggingface_hub + rsync</text>
+  <text x="378" y="1069" class="t">모델(.onnx) 받기 → /models · 평가 로그 올리기 ← /data</text>
+  <text x="378" y="1099" class="t">유일하게 외부 네트워크(Ethernet ↔ 노트북) 사용 · 장치 없음</text>
+  <text x="378" y="1127" class="muted">docker compose run --rm sync</text>
+
+  <!-- 범례 -->
+  <line x1="50" y1="1060" x2="100" y2="1060" class="line" marker-end="url(#arrow)"/>
+  <text x="112" y="1066" class="muted">MQTT 토픽</text>
+  <line x1="50" y1="1095" x2="100" y2="1095" class="shm" marker-end="url(#arrow)"/>
+  <text x="112" y="1101" class="muted">공유 메모리·볼륨</text>
+
+  <!-- 오른쪽: 구역 설명 -->
+  <text x="1200" y="220" class="zone">🔒 안전 구역</text>
+  <text x="1200" y="252" class="t">("절대 죽으면 안 됨")</text>
+  <text x="1200" y="284" class="t">restart: always</text>
+  <text x="1200" y="314" class="t">cpuset 3 전용</text>
+  <text x="1200" y="344" class="t">oom_score_adj -1000</text>
+
+  <text x="1200" y="490" class="zone">🧱 시스템의 척추</text>
+  <text x="1200" y="526" class="t">restart: always</text>
+
+  <text x="1200" y="685" class="zone">💥 "죽어도 되는" 구역</text>
+  <text x="1200" y="719" class="t">죽으면 ①이 팔을 HOLD</text>
+  <text x="1200" y="747" class="t">mem_limit 설정</text>
+  <text x="1200" y="775" class="t">OOM 시 가장 먼저 종료</text>
+  <text x="1200" y="803" class="t">restart: 박스 안 표기</text>
+
+  <text x="1200" y="1035" class="zone">⏸ 일회성 작업</text>
+  <text x="1200" y="1069" class="t">상시 실행 안 함</text>
+  <text x="1200" y="1099" class="t">필요할 때만 수동 실행</text>
+</svg>
