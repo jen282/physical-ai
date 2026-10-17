@@ -1,0 +1,7 @@
+# Colab 학습 환경 고정 버전. code/training/colab_setup.sh가 설치합니다.
+# LeRobot 0.6.1은 Python 3.12 이상, torch 2.7 이상 2.12 미만을 요구합니다.
+# Colab 기본 torch가 이 범위를 벗어나면 pip가 호환 버전으로 다시 설치합니다(colab_setup.sh가 알려줌).
+# [training] = 데이터셋 읽기(datasets, av, torchcodec) + wandb + accelerate
+lerobot[training]==0.6.1
+onnx==1.23.2
+onnxruntime==1.31.0

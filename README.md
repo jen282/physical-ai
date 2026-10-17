@@ -23,7 +23,8 @@ physical-ai/
 ├── code/
 │   ├── preprocess_code_arm.py          ← LeRobot 시연 데이터 전처리 모듈
 │   ├── mediapipe_arm_hand_landmarks.py ← MediaPipe 팔·손 랜드마크 시각화
-│   └── model_comparison/               ← 비전 모델 비교 실험 (데이터 준비 → 실행 → 지연시간 측정)
+│   ├── model_comparison/               ← 비전 모델 비교 실험 (데이터 준비 → 실행 → 지연시간 측정)
+│   └── training/                       ← 실제 시연 데이터로 ACT 학습 (구조는 code/training/README.md)
 └── requirements.txt
 ```
 

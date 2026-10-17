@@ -18,3 +18,7 @@ chatbot/data/
 
 # ultralytics 실행 시 자동 생성되는 결과 폴더
 runs/
+
+# ACT 학습: 전처리된 데이터셋과 체크포인트·로그 (Hugging Face Hub / W&B로 버전 관리)
+code/training/data/
+code/training/outputs/
